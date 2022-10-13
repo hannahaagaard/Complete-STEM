@@ -7,6 +7,7 @@ Relevant files: [[Stats Unit 1 Lecture 1.pdf |Lecture 1]], [[Stats Unit 1 Lectur
 ## [[1 Popular Statistics & Point Estimators]]
 ### Popular Stats with normal samples
 #### Stats with $\large\chi^2$ distributions
+A chi squared distribution is...
 #### Stats with a T-distribution (Student)
 ### Point Estimators
 #### Finite-sample properties
