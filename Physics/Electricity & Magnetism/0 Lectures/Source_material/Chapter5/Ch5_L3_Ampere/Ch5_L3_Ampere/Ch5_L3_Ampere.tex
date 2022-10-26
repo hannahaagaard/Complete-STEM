@@ -1,0 +1,403 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{16.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{frcursive}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{grey}{RGB}{200, 200, 200}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 5, Lecture 4} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\bf Ampere's law}
+%\frac{1}{\text{\small\slshape\cursive r}} 
+% \frac{1}{4\pi \varepsilon_{0}}
+% \text{\small\slshape\cursive r}
+
+Ampere's law is obtained by integrating the curl equation for $\vec{B}$, and then invoking the curl theorem. 
+\begin{eqnarray*}
+\int_{S} (\vec{\nabla} \times \vec{B}) \cdot d\vec{a}  & =  & \mu_{0}\int_{S} \vec{J} \cdot d\vec{a}  \\ 
+\oint \vec{B} \cdot d\vec{l}  & = & \mu_{0}I_{enc} 
+\end{eqnarray*} 
+
+\iffalse
+\begin{equation}
+\vec{B}=\frac{\mu_{0}}{4\pi} \int \frac{ \vec{I} \times \hat{\text{\small\slshape\cursive r}} }{\text{\small\slshape\cursive r}^{2}} dl^{\prime}
+=\frac{\mu_{0}I}{4\pi} \int \frac{ d\vec{l^{\prime}} \times \hat{\text{\small\slshape\cursive r}} }{\text{\small\slshape\cursive r}^{2}} 
+\label{eq:biot_savart}
+\end{equation}
+\fi
+
+It is always possible to find a magnetostatic field $\vec{B}$ by direct integration using the Biot-Savart law and superposition.  Another method of finding the field is to use Ampere's law, although this is cumbersome unless the current distribution has one of a few convenient symmetries.  These are infinite lines or cylinders of current, infinite planar sheets of current, solenoids and toroids.  Typical solutions for the fields in these cases are as follows:
+
+\begin{eqnarray}
+\vec{B}  & = & \frac{ \mu_{0}I_{enc} }{ 2 \pi  s} \, \hat{\phi} \hspace{.8in} \longrightarrow \hspace{.3in} \mbox{$\infty$ cylinder or line} \label{eq:line} \\
+ \vec{B}  & = & \frac{ \mu_{0} \, \vec{K} }{2} \times \hat{n} \hspace{.7in} \longrightarrow \hspace{.3in} \mbox{$\infty$ sheet}  \label{eq:sheet_ampere}\\
+ \vec{B}  & = & \mu_{0}nI \, \hat{z} \hspace{.9in} \longrightarrow \hspace{.3in} \mbox{inside solenoid, axis along} \: \hat{z} \label{eq:solenold} \\
+ \vec{B}  & = & \frac{ \mu_{0}NI }{ 2 \pi  s} \, \hat{\phi} \hspace{.8in} \longrightarrow \hspace{.3in} \mbox{inside a toroid, axis along} \: \hat{\phi} \label{eq:toroid} 
+\end{eqnarray}
+
+Here for the (ideal) solenoid, $n$ specifies the number of turns per length of the coil; while for the toroid, $N$ specifies the total number of turns of the toroidal coil.  The directions are more complicated than in the electrostatic case; they are orthogonal to the current (source) direction.
+
+\subsubsection*{\bf Ampere's law - the loop integral}
+
+Solving the loop integral for $\vec{B}$ is easier for specific current distributions because they generate magnetic fields that are constant along a simple, closed path.  This path is chosen for the loop integral, since $\vec{B}$ is then parallel to path of the loop, and the dot product in the loop integral becomes a simple product:
+
+\[
+\oint \vec{B} \cdot d\vec{l} = \oint B \cos{(0)} dl = \oint B dl
+\]  
+
+Since $B$ has a constant value for any point on the chosen path, it is a constant with respect to the variable of integration and may be taken outside the integral.  So, the integral becomes a simple product of the magnitude of the field, $B$, and the total length of the path, $L$.
+
+\[
+\oint B dl = B \oint dl = BL
+\]  
+
+So, the key to using Ampere's law for a specific geometry of steady currents is to visualize the magnetic field and choose a loop that matches the geometry. 
+
+\subsubsection*{\bf Ampere's law - infinite line of current}
+
+Equation \ref{eq:line} is the result of applying Gauss' law to an infinite cylindrical distribution of charge, the simplest of which is an infinite line of current.  We have already seen that the magnetic field for an infinite wire (line of charge) circles around the wire as shown in FIg.~\ref{fig:wire}.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=1cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{B_longwires.png}
+\caption{\small Magnetic fields circulating around a wire with a steady current.}
+\label{fig:wire}
+\end{figure}
+
+Let the line of current be oriented along the $z$-axis.  A cylindrical coordinate system is suitable for this geometry.  Taking the case where the current, $I$ flows in direction $\hat{z}$, a circular Amperian loop at a radial distance $s$ in the direction $\hat{\phi}$ will always be in the direction of $\vec{B}$, with the magnitude $|B|$ the same anywhere on the loop.  The length of the loop is the circumference of the circle, $2\pi s$.  Then,
+
+\begin{equation*}
+\begin{aligned}
+& \oint \vec{B} \cdot d\vec{l} = \mu_{0} I \\
+&  B(2\pi s) = \mu_{0} I \\
+& B = \frac{\mu_{0} I}{2\pi s}
+\end{aligned}
+\end{equation*}
+
+This is the same result obtained (with more effort) using the Biot-Savart law.  Note that the radial distance chosen for the loop doesn't matter, since the field drops off as $1/s$, the result will always be correct for any loop.  Although it is beneficial to choose a circular loop since this eliminates the need to do the line integral, any shape of closed path would still yield the correct result.  A crazy loop could be broken down into portions parallel and perpendicular to a circular loop.  The parallel portions would sum to a circular loop, while the perpendicular components would make no contribution to the result, since for those segments $\vec{B} \perp d\vec{l}$. 
+\vspace{.2in}
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{jaggedloop.pdf}
+\caption{\small View of a portion of an arbitrarily shaped Amperian loop.  It may be broken down into components parallel and perpendicular to the field.  Only the components parallel to the field will contribute to the loop integral.}
+\label{fig:wiresheet}
+\end{figure}
+
+\subsubsection*{\bf One-dimensional shell theorem?  Ring theorem?}
+
+Ampere's law may be productively employed for any infinite cylindrical distribution of charge.  
+
+\[
+\oint \vec{B} \cdot d\vec{l} = \mu_{0}I_{enc} 
+\]
+
+The Amperian loop would be concentric with the central axis of the cylindrical distribution of charge, and it may or may not lie completely outside of the charge distribution.  In a similar manner to the `shell theorem' used with Gauss' law, any current {\it outside} the Amperian loop does not contribute to the value of the magnetic field at the location of the loop.  On the other hand, any current {\it inside} the loop produces a field at the loop that is the same as the field that would be produced by a current of the same magnitude flowing along the central axis.  This is why the solution for $B$ is often written in terms of $I_{enc}$, where `enc' is short for `enclosed'.   An example (space charge force) using this `1D shell theorem' is given at the end of these notes.
+
+\subsubsection*{\bf Ampere's law - Infinite sheet of current}
+
+Equation \ref{eq:sheet_ampere} is the result of applying Ampere's law to an infinite planar sheet with surface current density $\vec{K}$.  As is usual with applications of Ampere's law, the first step is to visualize the magnetic field.  The total magnetic field is a superposition of fields due to all currents.  An infinite sheet of current can be modeled as an infinite number of parallel wires all carrying current in the same direction.  The wires are uniformly spaced so that along any line parallel to the sheet and perpendicular to the wires there are $n$ wires per length.  If there is a current $I_{wire}$ in each wire, then $\vec{K}=n\vec{I}_{wire}\:$[A/m] is the current density.   Figure~\ref{fig:wiresheet} shows an infinite sheet of current that is modeled as an infinite number of parallel wires.  The magnetic field due to each wire is shown in the plane of the figure.
+\vspace{.2in}
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{Isheet.pdf}
+\caption{\small The cross-section of an infinite plane of parallel wires.  The wires lie in the $x$-$y$ plane, with the current of the wires flowing in the $\hat{x}$ direction (out of the page).}
+\label{fig:wiresheet}
+\end{figure}
+
+The current of the wires is flowing out of the page in the $\hat{x}$ direction, and the field of each wire is circling around the wire in the counterclockwise direction.  Superposing the fields from all the wires results in a field that points to the left above the plane of the wires (in the $-\hat{y}$ direction), and a field that points to the right below the plane of the wires (in the $+\hat{y}$ direction) as shown in Fig.~\ref{fig:sheetwB}.  The field between pairs of wires points in the $\pm \hat{z}$ directions, oppositely oriented for adjacent wires, and cancels.
+\vspace{.2in}
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.7\columnwidth]{IsheetwB.pdf}
+\caption{\small The cross-section of an infinite plane of parallel wires.  The wires lie in the $x$-$y$ plane, with current flowing in the $\hat{x}$ direction (out of the page).  The magnetic field resulting from superposition of the individual wire fields points to the left ($-\hat{y}$ direction) above the sheet, and to the right  ($+\hat{y}$ direction) below the sheet.  A convenient Amperian loop matching the field direction is also shown.}
+\label{fig:sheetwB}
+\end{figure}
+  
+As shown in Fig.~\ref{fig:Bdirect}, the magnetic field direction due to an infinite sheet of current is conveniently given by the direction of $\vec{K} \times \hat{n}$.  That is, for a sheet with current in the $\hat{x}$ direction (as shown in Fig.~\ref{fig:Bxsheet}) the direction of $\vec{B}$ above the sheet is $\hat{x} \times \hat{z} = -\hat{y}$, and the direction of $\vec{B}$ below the sheet is $\hat{x} \times -\hat{z} = +\hat{y}$.  While for a sheet with current in the $\hat{y}$ direction (as shown in Fig.~\ref{fig:Bysheet}) the direction $\vec{B}$ above the sheet is $\hat{y} \times \hat{z} = +\hat{x}$, and the direction of $\vec{B}$ below the sheet is $\hat{y} \times -\hat{z} = -\hat{x}$.
+
+\begin{figure}[h]
+\centering
+\subfigure[]
+{\label{fig:Bxsheet}\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=.25\columnwidth]{Bxsheet.pdf}}
+\hspace{1.6in}
+\subfigure[]
+{\label{fig:Bysheet}\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true,width=.15\columnwidth]{Bysheet.pdf}}
+\caption{\small Left: Magnetic field above and below an Infinite sheet with current in the $\hat{x}$ direction (out of the page).  Right: Magnetic field above and below an infinite sheet with current in the $\hat{y}$ direction (in the plane of the page, pointing right).}
+\label{fig:Bdirect}
+\end{figure}
+
+Now that the field direction is in hand, the magnitude of the field can be found with Ampere's law.  An appropriate Amperian loop for an infinite current sheet is shown in Fig.~\ref{fig:sheetwB}.  The loop integral for this rectangular loop would be broken into four integrals, one for each side.  It was shown that the field is purely parallel to the plane of the sheet, and besides, we can make the perpendicular sides ($\pm \hat{z}$) very short.  So, however you want to argue it, the contribution from the perpendicular sides is zero.  If the loop has parallel sides of length $L$, then evaluating the loop integral yields,
+
+\[
+\oint \vec{B} \cdot d\vec{l} = \int_{top} \vec{B} \cdot d\vec{l} + \int_{bottom} \vec{B} \cdot d\vec{l}  = BL+BL = 2BL
+\]
+
+Since $I_{enc}=KL$, Ampere's law for this case gives the following result for B:
+
+\begin{equation*}
+\begin{aligned}
+& 2BL = \mu_{0}KL \\
+& B = \frac{\mu_{0}K}{2}
+\end{aligned}
+\end{equation*}
+
+Continuing with superposition, suppose there are two parallel infinite sheets of current, with the current in one sheet oppositely directed to the current of the other sheet, as shown in Fig.~\ref{fig:2sheet}.
+\vspace{.2in}
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.5\columnwidth]{twosheets.pdf}
+\caption{\small The cross-section of two parallel infinite planes of current.  The wires of the top sheet carry the current out of the page, while the wires on the bottom sheet carry the current into the page.  The magnetic fields from the two sheets are additive between the sheets, but cancel in the outer regions.}
+\label{fig:2sheet}
+\end{figure}
+
+The field between two infinite sheets of current will be additive; the field from the top sheet points in the same direction as the field from the bottom sheet in this region.  On the other hand, above the top sheet and below the bottom sheet the fields sum to zero.  In these regions the fields from the infinite current sheets are oppositely directed and cancel.  So, $B=0$ except in the region between the sheets.  For the infinite current sheets shown in Fig.~\ref{fig:2sheet}, the field in between the sheets is
+
+\begin{equation*}
+\begin{aligned}
+ \vec{B}_{total} & = \vec{B}_{bottom} + \vec{B}_{top} \\
+ & =\mu_{0} \frac{\vec{K}_{bottom}}{2} \times \hat{n}_{bottom} + \mu_{0}\frac{\vec{K}_{top}}{2} \times \hat{n}_{top} \\
+&  =\frac{\mu_{0}K}{2} \left[ (\hat{-x} \times \hat{z}) + (\hat{x} \times \hat{-z}) \right] \\
+& =\mu_{0}K  \hat{y} 
+\end{aligned}
+\end{equation*}
+
+Or, in general for any orientation,
+
+\begin{equation*}
+\begin{aligned}
+& \vec{B} =\mu_{0}\vec{K}  \times \hat{n} \\
+& |B| = \mu_{0}K
+\end{aligned}
+\end{equation*}
+
+\subsubsection*{\bf Ampere's law - Infinite solenoid}
+
+One way to imagine the geometry of an infinite solenoid is to bend an infinite current sheet around into a cylinder, with the current flowing azimuthally.  Figure ~\ref{fig:solenoid} shows a cross-sectional view of a solenoid in the $s$-$z$ plane (except the arc portion of the indicated wires, which are azimuthal).
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.5\columnwidth]{solenoid.pdf}
+\caption{\small The infinite solenoid has a constant uniform $B$ field inside, and no field outside.}
+\label{fig:solenoid}
+\end{figure}
+
+The symmetry of the solenoid together with visualization of the field of a current sheet provide some intuition about the field geometry.   The field of an infinite solenoid will be constant and uniform inside the solenoid and zero outside.  An Amperian loop along the field direction is shown in Fig.~\ref{fig:solenoid}.  Two of the (very short) sides are perpendicular to the field direction and do not contribute to the loop integral.  The long side of the loop that lies outside the solenoid also does not contribute, since the field is zero there.  Applying Ampere's law using a loop of length $L$,
+
+\[
+\oint \vec{B} \cdot d\vec{l} = \int_{inside} \vec{B} \cdot d\vec{l} = BL = \mu_{0}nI_{wire}L
+\]
+where $n$ here is the number of wires per length (along the cylinder), and $I_{wire}$ is the current flowing in the wire.  When the $z$-axis is the axis of symmetry, then the field for the solenoid in Fig.~\ref{fig:solenoid} (with $+\hat{z}$ pointing to the right) is given by,
+
+\[
+\vec{B} = \mu_{0}nI \,\hat{z}
+\]
+
+Note that an infinite solenoid is a magnetic analog to a capacitor with infinite plates; the field is uniform inside and zero outside.  An inductor is typically represented as having a solenoidal geometry, and stores energy in the form of magnetic field energy.
+
+\subsubsection*{\bf Ampere's law - Toroid}
+
+One way to imagine the geometry of a toroid is as a solenoid that has been bent into a circle, closing on itself.  A cartoon representation of a toroid is shown in Fig.~\ref{fig:toroid}.  
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.5\columnwidth]{toroid.pdf}
+\caption{\small Left: Cross-sectional view of a toroid.  Right: Top view of a toroid.  The dashed circular lines represent magnetic field lines.}
+\label{fig:toroid}
+\end{figure}
+
+The field is almost as you would expect, zero outside the toroid and directed along (now azimuthal) lines inside the coil.  However, now the field is not uniform, but varies radially.  The specific number of turns of wire of the toroid will be more tightly packed at the inner radius of a circular toroid, and less tightly packed on the outer radius, causing the radial variation in the strength of the field.
+
+An Amperian loop would be a circular loop at a specific radius $s$ inside the toroid, so as to follow a magnetic field line of constant magnitude.  The length of the loop is the circumference of the circular loop, $2\pi s$.  The enclosed current is given by the total number of turns $N$ multiplied by the current in the wire, since every turn passes through the plane of the Amperian loop.  So,
+
+\[
+\oint \vec{B} \cdot d\vec{l} = B2\pi s = \mu_{0}NI_{wire}
+\]
+
+Solving for $B$, and using the knowledge that $\vec{B}$ is the in the $\hat{\phi}$ direction,
+
+\[
+\vec{B} = \frac{\mu_{0}NI}{2\pi s} \,\hat{\phi}
+\]
+
+\vspace{.2in}
+{\color{grey} \hrulefill}\\
+{\color{myblue} Example: Space charge force in a uniform particle beam} \\
+\vspace{.2in}
+
+The electric field within a longitudinally uniform charged particle beam is not the same at all particle locations in the beam.  A particle along the central axis feels no net field, whereas a particle at the edge of the beam experiences a field that pushes it away from the central axis.  At low energy, a distribution of particles with the same charge tends to blow itself apart due to the mutual repulsion of the charges.  This force on a particle in the beam from the other particles in the beam is called the `space charge' force.  Any particle within a beam experiences a Lorentz force from the fields due to the other particles in the beam; the electric force (space charge force) is repulsive, whereas the magnetic force pushes the particles toward each other.  The magnetic force increases as the beam energy increases, and at high enough energies balances the repulsive force of the electric field.  So, space charge forces are more of a problem at lower beam energies.
+
+A longitudinally uniform beam may be modeled as an infinite cylindrical distribution of charge/current.  Gauss' law may be used to calculate the net electric field acting on a particle within the beam due to the other particles.   Ampere's law may be used to calculate the net magnetic field acting on a particle within the beam due to the other particles.  Plugging these fields into the Lorentz force equation gives a description of how the space charge force scales with beam energy.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{glaw_beam.pdf}
+\caption{Cartoon of a Gaussian surface of radius $s$ inside a uniform, unbunched beam of radius $a$ with line charge density $\lambda_{0}$.}
+\label{fig:gauss}
+\end{figure}
+
+Suppose the infinitely long cylindrical beam has radius $a$, and a charge per length of $\lambda_{0}$.  Use Gauss' law to find the electric field at a particle location within the beam at $s<a$.  Recall, $\oint \: \vec{E}\cdot d\vec{a} = \frac{q_{enc}}{\varepsilon_{0}}$.  Choose a Gaussian surface at the particle location, and matched to the cylindrical geometry.  Such surface is shown in Fig.~\ref{fig:gauss}; it is a cylinder coaxial with the central beam axis, with length $L$ and radius $s$. 
+
+We know that the ends of the cylinder do not contribute to the flux integral, since the field from a line of charge is radially directed, $\vec{E} \rightarrow E\,\hat{s}$.  Further, using the shell theorem, we know that the charge inside the Gaussian surface produces the same field as would a line of charge (length $L$) along the central axis of the cylinder.  Since the charge of the beam is uniformly distributed, the ratio of any two volumes of the beam will equal the ratio of the charges enclosed by those volumes:
+
+\[
+\frac{V^{`}}{V}=\frac{q^{`}}{q}
+\]
+
+The total charge in a section of the beam of length $L$ is given by $q_{0} = \lambda_{0} \: L$.  Only some of that charge is enclosed by the Gaussian cylinder, $q_{enc} = \lambda_{enc} \: L$.  It is possible to find $\lambda_{enc}$ in terms of known parameters by setting the ratio of volumes (Gaussian cylinder/Total beam cylinder) equal to the ratio of enclosed charges:
+
+\[
+\frac{V_{GS}}{V_{Beam}}=\frac{\pi s^{2}L}{\pi a^{2} L} = \left(\frac{s}{a}\right)^{2} =\frac{q_{enc}}{q_{0}} = 
+\frac{ \lambda_{enc} \: L}{ \lambda_{0} \: L}  
+= \frac{ \lambda_{enc} }{\lambda_{0}} 
+\]
+Then,
+\[
+\lambda_{enc} = \left(\frac{s}{a}\right)^{2}\lambda_{0}
+\]
+
+Now that the enclosed charge is in hand, let's calculate the flux integral.  The electric field is directed radially outward, in the $\hat{s}$ direction, and the field has constant magnitude over the barrel (tube) of the cylinder by symmetry.  The contribution from the end caps of the cylindrical Gaussian surface is zero, since there $\hat{n}=\pm \hat{z}$.  The direction of the cylindrical barrel surface is $\hat{n}=\hat{s}$, so the total flux is given by:
+
+\[
+\oint \: \vec{E}\cdot d\vec{a} = \int_{barrel} \: E\hat{s}\cdot \hat{s}da =\int_{barrel} \: Eda = E \int_{barrel} \: da = E (2\pi sL)
+\]
+
+Then, setting the flux through the surface equal to the charge enclosed by the surface (multiplied by $\frac{1}{\varepsilon_{0} }$), the result is:
+\begin{eqnarray}
+E (2\pi sL) & = & \left(\frac{s}{a}\right)^{2}\frac{\lambda_{0}L}{\varepsilon_{0}} \nonumber \\
+\vec{E}  & = & \frac{\lambda_{0}s}{ 2\pi \varepsilon_{0} a^{2} } \, \hat{s} \label{eq:beam_efield}
+\end{eqnarray}
+
+
+Next find the magnetic field at the particle location $s<a$ using Ampere's law.  Recall, $\oint \: \vec{B}\cdot d\vec{l} = \mu_{0}I_{enclosed}$.  Choose a circular loop in a plane perpendicular to the $z$-axis that passes through the location of the charge (at $s<a$).  By symmetry there is a constant magnitude of the magnetic field everywhere along the loop.  Such a loop is shown in Fig.~\ref{fig:ampere}; it is coaxial with the central beam axis, with radius $s$. 
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{amplaw_beam.pdf}
+\caption{Cartoon of an Amperian loop of radius $s$ inside a uniform, unbunched beam of radius $a$ with line charge density $\lambda_{0}$.}
+\label{fig:ampere}
+\end{figure}
+
+Using the `1D shell theorem', we know that only current passing through the loop contributes to the field, and that this current produces the same field as would be produced by a single line of current of the same magnitude flowing along the $z$-axis.   Since the beam current is uniformly distributed across the beam cross-section, the ratio of any two cross-sectional areas will equal the ratio of the currents enclosed by those areas.
+
+\[
+\frac{A^{`}}{A}=\frac{I^{`}}{I}
+\]
+
+The beam current is given by $I_{0} = \lambda_{0} v$ [C/s].  The current enclosed by the Amperian loop is $I_{enc} = \lambda_{enc} v$ [C/s].  Find $\lambda_{enc}$ in terms of known parameters by setting the ratio of areas (beam cross-section/loop cross-section) to the ratio of currents:
+
+\[
+\frac{A_{AL}}{A_{Beam}}=\frac{\pi s^{2}}{\pi a^{2}} = \left(\frac{s}{a}\right)^{2} =\frac{I_{enc}}{I_{0}} = 
+\frac{ \lambda_{enc} v}{ \lambda_{0} v}  
+= \frac{ \lambda_{enc} }{\lambda_{0}} 
+\]
+Then,
+\begin{equation*}
+\begin{aligned}
+& \lambda_{enc} = \left(\frac{s}{a}\right)^{2}\lambda_{0} \\
+& I_{enc} = \left(\frac{s}{a}\right)^{2}\lambda_{0} \,v
+\end{aligned}
+\end{equation*}
+
+Now that $I_{enc}$ is in hand, let's calculate the loop integral.  The magnetic field is directed azimuthally along the loop direction (the $\hat{\phi}$ direction).  Then,
+
+\[
+\oint_{loop} \: \vec{B}\cdot d\vec{l} = \oint_{loop} \: B\hat{\phi}\cdot \hat{\phi}dl =\oint \: Bdl = B \oint \: dl = B (2\pi s)
+\]
+
+Setting the result of the loop integral equal to the enclosed current (multiplied by $\mu_{0}$) results in a solution for the $B$ field,
+
+\begin{eqnarray}
+B (2\pi s) & = & \mu_{0}\left(\frac{s}{a}\right)^{2}\lambda_{0} \, v \nonumber \\
+\vec{B}  & = & \frac{\mu_{0}\lambda_{0}sv}{ 2\pi a^{2} } \, \hat{\phi} \label{eq:beam_bfield}
+\end{eqnarray}
+
+Substitute the solution for $\vec{E}$ (Eq.~\ref{eq:beam_efield}) and $\vec{B}$ (Eq.~\ref{eq:beam_bfield}) at the particle location into the Lorentz force law ($\vec{F}=q[\vec{E}+\vec{v}\times \vec{B}]$) to find the force on the particle.
+
+First, consider the directions.  The force from the electric field is in the same direction as the electric field which is pointing radially outward, $\vec{F}=q\vec{E}=qE\hat{s}$.  The magnetic force, on the other hand, is pointing radially inward, since it is in the direction of the cross product of the velocity with the magnetic field, $\vec{F}=v\hat{z} \times B\hat{\phi}$.  By the right-hand rule,
+\[
+\hat{z} \times \hat{\phi} =-\hat{s}
+\]
+Substituting the derived fields into the Lorentz force equation,
+
+\begin{equation*}
+\begin{aligned}
+F\hat{s} & =qE\hat{s}-qvB\hat{s} \\
+F\hat{s} & =q\left(\frac{\lambda_{0}s}{ 2\pi \varepsilon_{0} a^{2} }\right)\hat{s}-qv\left(\frac{\mu_{0}\lambda_{0}sv}{ 2\pi a^{2} }\right) \hat{s} \\
+F\hat{s} & =q\left(\frac{\lambda_{0}s}{ 2\pi \varepsilon_{0} a^{2} }\right)\left[1-v^{2}\mu_{0}\varepsilon_{0} \right] \hat{s}
+\end{aligned}
+\end{equation*}
+
+Using the relation $\mu_{0}\varepsilon_{0}=\frac{1}{c^{2}}$, where $c$ is the speed of light, this is:
+\begin{equation*}
+\begin{aligned}
+F\hat{s} & = \left( \frac{q\lambda_{0}s}{ 2\pi \varepsilon_{0} a^{2} } \right) \left[ 1-\frac{ v^{2} }{ c^{2} } \right] \hat{s}\\
+F\hat{s} & = \frac{1}{\gamma^{2}}\left( \frac{q\lambda_{0}s}{ 2\pi \varepsilon_{0} a^{2} } \right) \hat{s}\\
+\end{aligned}
+\end{equation*}
+
+The $\gamma$ factor is defined as,
+\[
+\gamma \equiv \frac{1}{\sqrt{1-\left(\frac{v}{c}\right)^{2}}}
+\]
+
+A higher particle energy results in a larger $\gamma$ factor.  The total energy of a particle is given by $E_{total}=\gamma m_{0}c^{2}$, where $m_{0}$ is the rest mass of the particle and $c$ is the speed of light.  So, the total energy is directly proportional to the $\gamma$ factor.\\
+\vspace{.2in}
+At very low energies the velocity of the particle is far from the speed of light, $v<<c$.  For the low energy case:
+\[
+\frac{v}{c} \approx 0 \hspace{.5in} \longrightarrow \hspace{.5in} \gamma = \frac{1}{\sqrt{1-\left(\frac{v}{c}\right)^{2}}} \approx 1
+\]
+
+
+At very high energies, $v\rightarrow c$.  For the high energy case:
+\[
+\frac{v}{c} \approx 1 \hspace{.5in} \longrightarrow \hspace{.5in} \gamma = \frac{1}{\sqrt{1-\left(\frac{v}{c}\right)^{2}}} \rightarrow \frac{1}{0} \rightarrow \infty
+\] 
+
+The force on the particle goes as $\frac{1}{\gamma^{2}}$, and so it goes to zero at high energies.  The space charge force is a problem at low energies, but not when the beam becomes highly relativistic.  At low energies, the component of the force from the magnetic field vanishes ($v \rightarrow 0$), and the repulsive electrostatic force dominates.
+
+{\color{grey} \hrulefill}
+
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+

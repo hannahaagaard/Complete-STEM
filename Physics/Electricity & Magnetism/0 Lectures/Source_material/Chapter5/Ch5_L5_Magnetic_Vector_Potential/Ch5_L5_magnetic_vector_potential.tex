@@ -1,0 +1,411 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+\setlength{\columnseprule}{1pt}
+\setlength{\columnsep}{.5in}
+
+\usepackage[makeroom]{cancel} %From Matthew Adas
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{frcursive}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{grey}{RGB}{150, 150, 150}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{mygreen}{RGB}{0, 100, 0}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{myred}{RGB}{120, 0, 0}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+%\frac{1}{\text{\small\slshape\cursive r}}  (this is 1/(script r))
+% \frac{\mu_{0}}{4\pi}
+% \text{\small\slshape\cursive r}  (this is script r}
+% ( \vec{r^{\prime}} )
+% \textbf{\textit{ approximation}}
+
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 5, Lecture 5} \end{flushright}
+\begin{flushleft}
+
+\subsection*{\bf \color{myblue} Magnetic vector potential}
+
+The magnetostatic Maxwell equations are:
+\begin{equation*}
+\begin{aligned}
+&  \vec{\nabla} \times \vec{B} = \mu_{0}\vec{J}  \\ 
+&  \vec{\nabla} \cdot \vec{B}  = 0
+\end{aligned}
+\end{equation*}
+
+A valid form of an expression for the vector potential is found using the source-free Maxwell equation.  Since the divergence of a curl is always zero, then the magnetic field can be written as the curl of a vector function, (call it the magnetic vector potential).
+
+\[
+\vec{\nabla} \cdot \vec{B} = 0  \hspace{.2in} \Longrightarrow \hspace{.2in} \vec{B} = \vec{\nabla}  \times \vec{A}
+\]
+
+The additional constraint, $\vec{\nabla} \cdot \vec{A} =0$, leads to an expression relating $\vec{A}$ to $\vec{J}$, the source of the magnetic field.  This can be seen by substituting $\vec{nabla} \times \vec{A}$ for $\vec{B}$ in the other Maxwell equation.
+
+\begin{equation}
+\vec{\nabla} \times (\vec{\nabla} \times \vec{A}) = \mu_{0}\vec{J}
+\label{eq:curlcurl}
+\end{equation}
+
+The following identity will be used:
+
+\begin{equation}
+\vec{\nabla} \times (\vec{\nabla} \times \vec{A}) = \vec{\nabla}(\vec{\nabla} \cdot \vec{A}) -\nabla^{2}\vec{A}
+\label{eq:ident}
+\end{equation}
+
+Substitute Eq.~\ref{eq:ident} into  Eq.~\ref{eq:curlcurl}, and for convenience set $(\vec{\nabla} \cdot \vec{A})=0$.  Then:
+
+\begin{eqnarray*}
+\vec{\nabla}(\cancelto{0}{\vec{\nabla} \cdot \vec{A}}) - \nabla^{2} \vec{A} & = & \mu_{0}\vec{J} \\
+\nabla^{2} \vec{A} & = & -\mu_{0}\vec{J}
+\end{eqnarray*}
+
+This has the same form as Poisson's equation.  Since the solution to Poisson's equation is known, the solution for the vector potential is also known:
+
+\begin{eqnarray*}
+\nabla^{2} V = -\frac{\rho}{\varepsilon_{0}} \hspace{.3in} & \longrightarrow  & \hspace{.3in} V=\frac{1}{4\pi \varepsilon_{0}} \int \frac{\rho d\tau^{\prime}}{\text{\small\slshape\cursive r}} \\
+\nabla^{2} \vec{A} = -\mu_{0}\vec{J} \hspace{.3in} &  \longrightarrow  & \hspace{.3in} \vec{A} = \frac{\mu_{0}}{4\pi} \int \frac{\vec{J} \, d\tau^{\prime}}{\text{\small\slshape\cursive r}} 
+\end{eqnarray*}
+
+Or, for surface or line currents the magnetic vector potential $\vec{A}$ is given by:
+\begin{eqnarray*}
+\begin{aligned}
+& \vec{A} = \frac{\mu_{0}}{4\pi} \int \frac{\vec{K} \, da^{\prime}}{\text{\small\slshape\cursive r}} \\
+& \vec{A} = \frac{\mu_{0}}{4\pi} \int \frac{\vec{I} \, dl^{\prime}}{\text{\small\slshape\cursive r}}
+\end{aligned}
+\end{eqnarray*}
+
+The choice $\vec{\nabla} \cdot \vec{A}=0$ is called the `Coulomb gauge'.  If  the given vector potential $
+\vec{A}_{0}$ is such that $\vec{\nabla} \cdot \vec{A}_{0} \ne 0$, it is possible to choose another vector potential $\vec{A}$ with $\vec{\nabla} \cdot \vec{A} =0$.  This must be done without changing the physical magnetic field, $\vec{B}=\vec{\nabla} \times \vec{A}_{0}$.  Since the curl of a gradient is zero, $\vec{A}_{0}$ can be shifted by the gradient of a scalar function ($\vec{\nabla} \lambda$) without changing the field.
+
+\begin{eqnarray*}
+\begin{aligned}
+& \vec{A} = \vec{A}_{0} + \vec{\nabla} \lambda \\
+& \vec{\nabla} \times \vec{A} = \vec{\nabla} \times (\vec{A}_{0} +\vec{\nabla}\lambda) = \vec{\nabla} \times \vec{A}_{0} + \vec{\nabla} \times \vec{\nabla}\lambda \\
+&\vec{\nabla} \times \vec{A} = \vec{\nabla} \times \vec{A}_{0} + 0 = \vec{B}  \hspace{.7in} \text{\color{myblue} As required}
+\end{aligned}
+\end{eqnarray*}
+
+OK, but what $\lambda$ do we need to achieve $\vec{\nabla} \cdot \vec{A} = 0$?  We can find out what $\lambda$ must be in terms of our original vector potential $\vec{A}_{0}$:
+
+\[
+\vec{\nabla} \cdot \vec{A}  = \vec{\nabla} \cdot \vec{A}_{0} + \nabla^{2}\lambda 
+\]
+
+Then, in order to get $\vec{\nabla} \cdot \vec{A} =0$, it must be that
+\begin{equation}
+ \nabla^{2}\lambda =  -\vec{\nabla} \cdot \vec{A}_{0} 
+\label{eq:newA}
+\end{equation}
+
+Note that Eq.~\ref{eq:newA} also has the form of Poisson's equation, so there is a known form of solution for $\lambda$:
+
+\[
+\lambda = \frac{1}{4\pi} \int \frac{\vec{\nabla} \cdot \vec{A}_{0}\, d\tau^{\prime}}{\text{\small\slshape\cursive r}}
+\]
+
+The coulomb gauge ($\vec{\nabla} \cdot \vec{A} = 0$) is a convenient choice for magnetostatic problems, since there is an associated solution for $\vec{A}$  using the current distribution.  However, you will find out that a different choice of gauge is more suitable for dynamical situations.
+
+%\vspace{.2in}
+%{\color{mygreen} \hrulefill}
+
+\subsection*{\bf \color{myblue} Magnetic vector potential in the far field region}
+
+In the far field limit, where the scale of the current distribution is much less than the distance to the observation point ($r^{\prime} \ll r$), a multipole expansion of $\vec{A}$ is a convenient approximation for the magnetic vector potential.  The expression for the magnetic vector potential, $\vec{A}$, is similar to that of the scaler potential, $V$, so the basic technique of doing the multipole expansion is similar.
+
+\begin{eqnarray*}
+\begin{aligned}
+& V=\frac{1}{4\pi \varepsilon_{0}} \int \frac{\rho d\tau^{\prime}}{\text{\small\slshape\cursive r}} \hspace{.7in} \text{\color{myblue} Scalar potential}\\[8pt]
+& \vec{A} = \frac{\mu_{0}}{4\pi} \int \frac{\vec{I} \, dl^{\prime}}{\text{\small\slshape\cursive r}} \hspace{.85in} \text{\color{myblue} Magnetic vector potential}
+\end{aligned}
+\end{eqnarray*}
+
+In both cases, a binomial expansion can be performed on $1/\text{\small\slshape\cursive r}$, allowing the potential to be expressed as a series of terms in increasing powers of $\left( r^{\prime}/r \right)$.  In the far field limit, these terms then diminish in magnitude as their order increases.  Then, the potential (or the field) may be approximated by keeping the first non-zero term of the expansion.
+
+The expansion of $1/\text{\small\slshape\cursive r}$ followed by collecting terms $\left( r^{\prime}/r \right)$ in order of their powers was done previously for the electrostatic potential.  This resulted in the following:
+
+\[
+\frac{1}{\text{\small\slshape\cursive r}} = \frac{1}{r}\sum_{n}\left( \frac{r^{\prime}}{r} \right)^{n} P_{n}(\cos{\theta^{\prime}})
+\]
+
+For electrostatics, the monopole term is,
+
+\[
+V(r)_{\text{monopole}} = \frac{1}{4\pi\varepsilon_{0}} \frac{1}{r} \int \rho(r^{\prime})d\tau^{\prime} = \frac{1}{4\pi\varepsilon_{0}} \left( \frac{Q_{\text{net}}}{r} \right)
+\]
+where $Q_{net}$ is the net charge.
+
+For magnetostatics, the monopole term is,
+
+\[
+\vec{A}(\vec{r})_{\text{monopole}} = \frac{\mu_{0} I}{4\pi} \frac{1}{r} \oint d\vec{l}^{\prime} = 0
+\]
+since the integral of the displacement around a closed loop is zero.
+
+There is never a magnetic monopole term. The dipole term is,
+
+\begin{eqnarray}
+\vec{A}(\vec{r})_{\text{dipole}} & = & \frac{\mu_{0} I}{4\pi} \frac{1}{r^{2}} \oint r^{\prime}\cos{\theta^{\prime}} d\vec{l}^{\prime} \nonumber \\[4pt]
+& = & \frac{\mu_{0} I}{4\pi r^{2}}  \oint ( \hat{r} \cdot r^{\prime} ) d\vec{l}^{\prime} \label{eq:dot} \\[4pt]
+& = & \frac{\mu_{0} I}{4\pi r^{2}}  \left( - \hat{r} \times \int d\vec{a^{\prime}} \right) \label{eq:cross} \\[4pt]
+& = & \frac{\mu_{0}}{4\pi}  \: \frac{\vec{m} \times \hat{r}}{r^{2}} \label{eq:dipolepot}
+\end{eqnarray}
+
+Reminder, the magnetic dipole moment is defined as,
+\[
+\vec{m} = I \int d\vec{a^{\prime}} 
+\]
+where the direction of an area element is normal to the surface of that element, $\hat{n}$. \\
+In simpler days, we had $\vec{m}$ of a flat coil of area $A$ and $N$ turns as: $\vec{m} = NIA \: \hat{n} $.
+
+%{\color{grey} \hrulefill}\\
+\vspace{.4in}
+{\color{grey} \rule{\linewidth}{0.7mm} }
+{\color{myblue} \bf Aside} (If you want a guide on how to get from Eq.~\ref{eq:dot} to Eq.~\ref{eq:cross}):\\
+\vspace{\baselineskip}
+That is, show that the following holds:
+\[
+\oint ( \hat{r} \cdot r^{\prime} ) d\vec{l^{\prime}} = - \hat{r} \times \int d\vec{a^{\prime}}
+\]
+
+First, show that,
+\[
+\int \vec{\nabla^{\prime}}T \times d\vec{a^{\prime}} = - \oint T d\vec{l^{\prime}}
+\]
+
+Use Stokes theorem on $\vec{c}\,T$, where $\vec{c}$ is a constant vector,
+\begin{equation}
+\int \vec{\nabla^{\prime}} \times (\vec{c}\,T) \cdot d\vec{a^{\prime}} = \oint \vec{c}\,T \cdot d\vec{l^{\prime}} \hspace{.8in} \text{\color{myblue} Stokes theorem}
+\label{eq:stokeswithc}
+\end{equation}
+
+By product rule 5 (front cover of Griffiths):
+\begin{equation}
+\vec{\nabla^{\prime}} \times (\vec{c}\,T) = T (\cancelto{0}{\vec{\nabla^{\prime}} \times \vec{c}} ) - \vec{c} \times \vec{\nabla^{\prime}} T
+\label{eq:rule5}
+\end{equation}
+
+The second term on the right of Eq.~\ref{eq:rule5} goes to zero because the curl of a constant vector is zero.  (Or, a constant vector has no curl!)
+
+While by the triple product rule,
+\begin{equation}
+( \vec{c} \times \vec{\nabla^{\prime}} T ) \cdot d\vec{a^{\prime}} = \vec{c} \cdot ( \vec{\nabla^{\prime}} T \times  d\vec{a^{\prime}} )
+\label{eq:tripleproduct}
+\end{equation}
+
+Combining equations \ref{eq:stokeswithc}, \ref{eq:rule5}, and \ref{eq:tripleproduct} we have:
+\[
+\int \vec{\nabla^{\prime}} \times (\vec{c}\,T) \cdot d\vec{a^{\prime}} = -\int \vec{c} \cdot ( \vec{\nabla^{\prime}} T \times  d\vec{a^{\prime}} ) = \oint \vec{c}\,T \cdot d\vec{l^{\prime}}
+\]
+
+Pulling the constant vector outside the integrals,
+\[
+ \vec{c} \cdot \int \vec{\nabla^{\prime}} T \times  d\vec{a^{\prime}}  = - \vec{c} \cdot \oint \,T  d\vec{l^{\prime}}
+\]
+
+So, it must be that,
+\begin{equation}
+\int \vec{\nabla^{\prime}} T \times  d\vec{a^{\prime}}  = - \oint \,T  d\vec{l^{\prime}}
+\label{eq:dadl}
+\end{equation}
+
+Now that we have Eq.~\ref{eq:dadl}, for the second part of this derivation, let our heretofore arbitrary scalar $T$ be defined as $T=\hat{r} \cdot r^{\prime}$.  Equation \ref{eq:dadl} is then written,
+
+\begin{equation}
+\int \vec{\nabla^{\prime}}(\hat{r} \cdot r^{\prime}) \times  d\vec{a^{\prime}}  = - \oint \,(\hat{r} \cdot r^{\prime}) d\vec{l^{\prime}}
+\label{eq:almostthere}
+\end{equation}
+
+By product rule 4 (front cover of Griffiths):
+\begin{equation}
+\vec{\nabla^{\prime}}(\hat{r} \cdot r^{\prime}) = \hat{r}\times\vec{\nabla^{\prime}}\times\vec{r^{\prime}} + \vec{r^{\prime}} \times \vec{\nabla^{\prime}} \times \hat{r} + ( \hat{r} \cdot \vec{\nabla^{\prime}} )\vec{r^{\prime}} + (\vec{r^{\prime}} \cdot \vec{\nabla^{\prime}} )\hat{r}
+\label{eq:rule4}
+\end{equation}
+
+Three of the terms on the right side of Eq.~\ref{eq:rule4} are zero.
+\begin{eqnarray*}
+ \hat{r}\times\vec{\nabla^{\prime}}\times\vec{r^{\prime}} \hspace{.3in} & \longrightarrow  & \hspace{.3in} \text{The curl of the radial vector is zero} \\
+ \vec{r^{\prime}} \times \vec{\nabla^{\prime}} \times \hat{r} \hspace{.3in} &  \longrightarrow  & \hspace{.3in} \text{$\hat{r}$ has no primed variable dependence} \\
+(\vec{r^{\prime}} \cdot \vec{\nabla^{\prime}} )\hat{r} \hspace{.3in} &  \longrightarrow  & \hspace{.3in} \text{$\hat{r}$ has no primed variable dependence}  
+ \end{eqnarray*}
+ 
+ This leaves $( \hat{r} \cdot \vec{\nabla^{\prime}} )\vec{r^{\prime}}$ as the only non-zero term.
+\vspace{.1in} 
+
+ In general for any constant vector, $\vec{b}$, 
+ \begin{equation}
+ ( \vec{b}\cdot \vec{\nabla} ) \vec{r} = \vec{b}  \hspace{.8in} \text{Where $\vec{b}$ is a constant vector}
+ \label{eq:constantvectrelation} 
+\end{equation}
+ 
+Let's show Eq.~\ref{eq:constantvectrelation} explicitly (since we are dragging through details in this section anyway!).
+\begin{eqnarray*}
+\begin{aligned}
+& \left[ (b_{x}\hat{x} + b_{y}\hat{y} + b_{z}\hat{z} ) \cdot \left(\hat{x}\frac{\partial}{\partial x} + \hat{y}\frac{\partial}{\partial y} + \hat{z}\frac{\partial}{\partial z}\right) \right] \vec{r} \\[2pt]
+& = \left(b_{x}\frac{\partial}{\partial x} + b_{y}\frac{\partial}{\partial y} + b_{z}\frac{\partial}{\partial z}\right)(x\hat{x}+y\hat{y}+z\hat{z}) \\[2pt]
+& = b_{x}\hat{x} + b_{y}\hat{y} + b_{z}\hat{z} \\[2pt]
+& = \vec{b}
+\end{aligned}
+\end{eqnarray*}
+
+Therefore,
+\[
+\vec{\nabla^{\prime}}(\hat{r} \cdot r^{\prime}) = ( \hat{r} \cdot \vec{\nabla^{\prime}} )\vec{r^{\prime}} = \hat{r}
+\]
+
+so that,
+\[
+\int \vec{\nabla^{\prime}}(\hat{r} \cdot r^{\prime}) \times  d\vec{a^{\prime}} = \hat{r} \times \int d\vec{a^{\prime}}
+\]
+
+Then, Eq.~\ref{eq:almostthere} can be written, 
+\[
+\hat{r} \times \int d\vec{a^{\prime}} = - \oint \,(\hat{r} \cdot r^{\prime}) d\vec{l^{\prime}}
+\]
+
+This is what we had set out to prove.
+
+{\color{myblue} \bf End of aside}\\
+\vspace{-.1in}
+{\color{grey} \rule{\linewidth}{0.7mm} }
+%{\color{grey} \hrulefill}
+
+\subsection*{\bf \color{myblue} Magnetic dipole field}
+
+Here, starting with $\vec{A}(\vec{r})_{\text{dipole}}$, the magnetic dipole potential  (Eq.~\ref{eq:dipolepot} above) it will be shown that the magnetic field of a dipole is given by:
+
+\begin{equation}
+\vec{B}(\vec{r})_{\text{dipole}} = \frac{\mu_{0}}{4\pi}\left[  \frac{3\hat{r}(\vec{m}\cdot \hat{r}) - \vec{m}}{r^{3}} \right]
+\label{eq:bdipole}
+\end{equation}
+
+The magnetic field is given by the curl of the vector potential,
+
+\[
+\vec{B}(\vec{r})_{\text{dipole}} = \vec{\nabla} \times \vec{A}(\vec{r})_{\text{dipole}} = \vec{\nabla} \times \frac{\mu_{0}}{4\pi}  \: \frac{\vec{m} \times \hat{r}}{r^{2}}
+\]
+
+Since $(\vec{m} \times \hat{r})$ is a vector, and $\frac{1}{r^{3}}$ is a scalar, the following vector identity is useful here (with $f$ a scalar, and $\vec{v}$ a vector):
+
+\[
+\vec{\nabla} \times (f\vec{v}) = \vec{\nabla}f \times \vec{v} + f\vec{\nabla} \times \vec{v}
+\]
+
+In this case,
+
+\begin{equation}
+\vec{B} = \frac{\mu_{0}}{4\pi}\left[ \vec{\nabla}\left( \frac{1}{r^{3}}\right) \times (\vec{m} \times \vec{r})  + \left( \frac{1}{r^{3}}\right)\vec{\nabla} \times (\vec{m} \times \vec{r}) \right]
+\label{eq:b1}
+\end{equation}
+
+Use the following vector identity on the first term of the RHS of Eq.~\ref{eq:b1},
+
+\[
+\vec{a} \times (\vec{b} \times \vec{c}) = (\vec{a}\cdot\vec{c})\vec{b} - (\vec{a}\cdot\vec{b})\vec{c}
+\]
+with $\vec{a}=\vec{\nabla}\frac{1}{r^{3}}$, $\vec{b}=\vec{m}$, and $\vec{c}=\vec{r}$.
+
+Then, the first term on the RHS of Eq.~\ref{eq:b1} can be written,
+\begin{equation}
+\vec{\nabla}\left( \frac{1}{r^{3}}\right) \times (\vec{m} \times \vec{r}) = \left(\vec{\nabla}\left(\frac{1}{r^{3}}\right) \cdot \vec{r} \right) \vec{m} - \left(\vec{\nabla}\left(\frac{1}{r^{3}}\right) \cdot \vec{m} \right) \vec{r}
+\label{eq:term1rhsB}
+\end{equation}
+
+The gradient of $r^{-3}$ is the following,
+\[
+\vec{\nabla}\left( \frac{1}{r^{3}}\right) = \frac{\partial r^{-3}}{\partial r} \, \hat{r} = -3r^{-4}\hat{r} = -\frac{3}{r^{4}}\, \hat{r}
+\]
+
+\vspace{.1in}
+Then, the first term on the RHS of Eq.~\ref{eq:term1rhsB} is, 
+
+\[
+\left(\vec{\nabla}\left(\frac{1}{r^{3}}\right) \cdot \vec{r} \right) \vec{m} = -\frac{3\vec{m}}{r^{3}}
+\]
+
+and the second term on the RHS of Eq.~\ref{eq:term1rhsB} is,
+
+\[
+- \left(\vec{\nabla}\left(\frac{1}{r^{3}}\right) \cdot \vec{m} \right) \vec{r} = \frac{3(\hat{r} \cdot \vec{m})\hat{r}}{r^{3}}
+\]
+
+\vspace{.1in}
+It remains to deal with the second term on the RHS of of Eq.~\ref{eq:b1}, starting with $\vec{\nabla} \times (\vec{m} \times \vec{r}) $.  There is another vector identity to help with this task,
+
+\[
+\vec{\nabla} \times (\vec{a} \times \vec{b}) = \vec{a}(\vec{\nabla} \cdot \vec{b}) -\vec{b}(\vec{\nabla} \cdot \vec{a}) + (\vec{b} \cdot \vec{\nabla})\vec{a} - (\vec{a} \cdot \vec{\nabla})\vec{b}
+\]
+
+With $\vec{a}=\vec{m}$, and $\vec{b}=\vec{r}$, the vector identity reads,
+\begin{equation}
+\vec{\nabla} \times (\vec{m} \times \vec{r}) = \vec{m}(\vec{\nabla} \cdot \vec{r}) -\vec{r}(\vec{\nabla} \cdot \vec{m}) + (\vec{r} \cdot \vec{\nabla})\vec{m} - (\vec{m} \cdot \vec{\nabla})\vec{r}
+\label{eq:term2rhsB}
+\end{equation}
+
+The second and third terms on the RHS of Eq.~\ref{eq:term2rhsB} are zero, because $\vec{m}$ is a constant vector (operating on a constant vector with $\vec{\nabla}$ yields zero).  Examining $\vec{\nabla} \cdot \vec{r}$ (in the first term on the RHS of Eq.~\ref{eq:term2rhsB}):
+
+\[
+\vec{\nabla} \cdot \vec{r} = \frac{\partial x}{\partial x} + \frac{\partial y}{\partial y} + \frac{\partial z}{\partial z} = 3
+\] 
+
+While examining the last term on the RHS of Eq.~\ref{eq:term2rhsB} we find:
+
+\[
+(\vec{m} \cdot \vec{\nabla})\vec{r} = \hat{x}m_{x}\frac{\partial x}{\partial x} + \hat{y}m_{y}\frac{\partial y}{\partial y} + \hat{z}m_{z}\frac{\partial z}{\partial z} = \vec{m}
+\]
+
+So, overall the second term in brackets in Eq.~\ref{eq:b1} can be written as follows,
+
+\[
+\left( \frac{1}{r^{3}}\right) \vec{\nabla} \times (\vec{m} \times \vec{r}) = \left( \frac{1}{r^{3}}\right) (3\vec{m} - \vec{m}) = \frac{2\vec{m}}{r^{3}}
+\]
+
+Putting all of this together, Eq.~\ref{eq:b1} simplifies:
+
+\begin{equation*}
+\vec{B} = \frac{\mu_{0}}{4\pi}\left[  -\frac{3\vec{m}}{r^{3}} + \frac{3(\hat{r} \cdot \vec{m})\hat{r}}{r^{3}} + \frac{2\vec{m}}{r^{3}} \right]
+\end{equation*}
+
+Finally simplifying to Eq.~\ref{eq:bdipole}:
+\tcbset{highlight math style={colframe=myblue,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation*}
+\vec{B}(\vec{r})_{\text{dipole}} = \frac{\mu_{0}}{4\pi}\left[  \frac{3(\vec{m}\cdot \hat{r})\hat{r} - \vec{m}}{r^{3}} \right]
+\end{empheq}
+
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+
+

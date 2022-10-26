@@ -1,0 +1,145 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+%\documentstyle[12pt]{article}
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.5in
+\topmargin = -.25in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+\pagestyle{empty}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{3.0ex}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{frcursive}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+
+\begin{document}
+
+%\frac{1}{\text{\small\slshape\cursive r}} 
+% \frac{1}{4\pi \varepsilon_{0}}
+% \text{\small\slshape\cursive r}
+
+\subsubsection*{\bf Finding the field for a short line of charge}
+
+Suppose there is a line of positive charge uniformly distributed along its  length $2L$, positioned so that it is lying along the x-axis, with its center at the origin of the coordinate system.  The linear charge density of the line of charge is $\lambda$ [C/m].  A point $P$ is located on the z-axis a distance $R$ above the origin.  What is the electric field due to the line of charge at $P$?
+\vspace{.2in}
+
+\begin{figure}[h]
+\centering
+\includegraphics*[width=.6\columnwidth]{bar.png}
+%\caption{This is a test of the SimIon graphics transfer}
+\label{fig:chrgbar}
+\end{figure}
+
+According to Coulomb's law the electric field due to a small element of charge $dq$ a distance $\text{\small\slshape\cursive r}$ away is:
+
+\[
+d\vec{E}=k\frac{dq}{ \text{\small\slshape\cursive r}^{2}}\hat{ \text{\small\slshape\cursive r}}=\frac{1}{4\pi \varepsilon_{0}}\frac{dq}{ \text{\small\slshape\cursive r}^{2}}\hat{ \text{\small\slshape\cursive r}}
+\]
+
+The distance between the charge and the observer is $\vec{\text{\small\slshape\cursive r}}=\vec{r}-\vec{r^{`}}$.  The distance from the origin to $P$ is $\vec{r}=R\hat{z}$.  The position of an element of charge $dq$ is $\vec{r^{`}}=x\hat{x}$.  The distance between the observer and the element of charge is given by
+\begin{eqnarray*}
+ \text{\small\slshape\cursive r} & =& \sqrt{ \left( \vec{r} - \vec{r^{`}} \right)^{2} } \\
+ & = & \sqrt{ \left( R\hat{z} - x\hat{x} \right)^{2} } \\
+ & = & \sqrt{  R\hat{z} \cdot R\hat{z} -2(R\hat{z} \cdot x\hat{x}) + x\hat{x} \cdot x\hat{x} } \\
+  & = & \sqrt{  R^{2} + x^{2} } 
+\end{eqnarray*}
+
+Visualize the field at $P$ by selecting two small pieces of the line of charge located symmetrically about the origin (labeled 1 and 2 in the figure).  Since the charge is positive, the field due to each small piece of charge is along the line connecting it to point $P$, and oriented so that it is pointing away from the charge.  It is possible to see that the x components of the field vectors $\vec{E}_{1}$ and $\vec{E}_{2}$ will cancel, while the z components will add.  The net field at $P$ will be the sum of the field contribution from each small piece along the line of charge.  
+
+Examine the small element of charge 1 in the figure to see that the field it 
+produces at $P$ may be resolved into components as follows:
+\begin{eqnarray*}
+dE_{z} & = & (\cos{\theta}) \: dE =  \left( \frac{R}{\text{\small\slshape\cursive r}} \right) \: dE 
+= \left( \frac{R}{\sqrt{x^{2}+R^{2}}} \right) \: dE\\
+dE_{x} & = & -(\sin{\theta}) \: dE = -\left( \frac{x}{\text{\small\slshape\cursive r}} \right) \: dE = 
+-\left( \frac{x}{\sqrt{x^{2}+R^{2}}} \right) \: dE
+\end{eqnarray*}
+
+The negative sign in the expression for the $dE_{x}$ component of the field arises because when a charge element is located on the positive x-axis, it produces an $E_{x}$ field in the negative x direction and vice vs.  Alternatively, direct substitution for $\text{\small\slshape\cursive r}$ yields the same result as was found from an inspection of the geometry, 
+\[
+\hat{\text{\small\slshape\cursive r}}=\frac{\vec{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}} = \frac{R\hat{z}-x\hat{x}}{\sqrt{  R^{2} + x^{2} } } = \cos{(\theta)}\hat{z} - \sin{(\theta)}\hat{x}
+\]
+
+Now adding up the field from all the charges (superposition) the total x and z components are given by:
+\begin{eqnarray*}
+E_{z} & = & k\int \frac{ \cos{(\theta)}dq }{ \text{\small\slshape\cursive r}^{2} } \\
+E_{x} & = & -k\int \frac{\sin{(\theta)}dq}{\text{\small\slshape\cursive r}^{2} }
+\end{eqnarray*}
+
+Using $\text{\small\slshape\cursive r}=\sqrt{x^{2}+R^{2}}$ and $dq=\lambda dx$ since the charge is uniformly distributed:
+\begin{eqnarray*}
+E_{z} & = & k\int_{-L}^{L} \frac{\lambda dx}{(x^{2}+R^{2})}
+\left( \frac{R}{\sqrt{x^{2}+R^{2}}} \right)  \\
+E_{x} & = & -k\int_{-L}^{L} \frac{\lambda dx}{(x^{2}+R^{2})}
+\left( \frac{x}{\sqrt{x^{2}+R^{2}}} \right)
+\end{eqnarray*}
+%\vspace{.1in}
+
+The total electric field in the x direction at point $P$ is zero as expected:
+\begin{eqnarray*}
+E_{x} & = & -k\lambda \int_{-L}^{L} \frac{xdx}{(x^{2}+R^{2})^{3/2}}
+=-k\lambda \left[ \left. \frac{-1}{\sqrt{(x^{2}+R^{2})}} \:  \right\vert_{-L}^{L}  \right] \\
+   & = & \frac{\lambda}{4\pi \varepsilon_{0}}\left[ \frac{1}{\sqrt{(L^{2}+R^{2})}}-\frac{1}{\sqrt{(L^{2}+R^{2})}}\right] \\
+   & = & 0
+\end{eqnarray*}
+ 
+The total electric field in the z direction at point $P$ is given by:
+\begin{eqnarray*}
+E_{z} & = & k\lambda R \int_{-L}^{L} \frac{dx}{(x^{2}+R^{2})^{3/2}}
+=k\lambda R \left[ \left. \frac{x}{R^{2}\sqrt{(x^{2}+R^{2})}} \:  \right\vert_{-L}^{L}  \right] \\
+   & = & \frac{\lambda R}{4\pi \varepsilon_{0}}\left[ \frac{L}{R^{2}\sqrt{(L^{2}+R^{2})}}-\frac{(-L)}{R^{2}\sqrt{(L^{2}+R^{2})}}\right] \\
+   & = & \frac{\lambda}{2\pi \varepsilon_{0} R}\left[ \frac{L}{\sqrt{(L^{2}+R^{2})}} \right] \\
+\end{eqnarray*}
+
+If $L\rightarrow \infty$, then the line of charge becomes infinite.  Divide the top and bottom of the previous equation by $L$ so that the limit of this 
+expression may be determined.
+
+\[
+E_{z} = \frac{\lambda}{2\pi \varepsilon_{0} R}\left[ \frac{L/L}{\frac{1}{L}\sqrt{(L^{2}+R^{2})}} \right] = \frac{\lambda}{2\pi \varepsilon_{0} R}\left[ \frac{1}{\sqrt{(1+(R/L)^{2})}} \right]
+\]
+
+As $L\rightarrow \infty$ the electric field, $E_{z}\rightarrow \frac{\lambda}{2\pi \varepsilon_{0} R}$
+
+On the other hand, if the length of the line of charge shrinks to zero, 
+$2L\rightarrow \Delta L$, then:
+
+\[
+E_{z} = \frac{\lambda}{2\pi \varepsilon_{0} R}
+\left[ 
+\frac{\frac{\Delta L}{2}}{ \sqrt{ (\frac{\Delta L}{2})^{2}+R^{2}} }
+\right]
+\]
+
+As $\Delta L\rightarrow 0$, the $R^{2}$ term dominates the term in the 
+square root.
+\[
+E_{z} = \frac{\lambda \Delta L }{4\pi \varepsilon_{0} R^{2}}=\frac{q}{4\pi \varepsilon_{0} R^{2}}
+\]
+
+Now the field looks like the electric field due to a point charge, as might be expected since the line of charge has shrunk to a small chunk of charge.
+\end{document}
+
+
+
+
+
+
+
+

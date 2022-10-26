@@ -1,0 +1,413 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{frcursive}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{grey}{RGB}{200, 200, 200}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{mygreen}{RGB}{0, 100, 0}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{myred}{RGB}{120, 0, 0}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+%\frac{1}{\text{\small\slshape\cursive r}}  (this is 1/(script r))
+% \frac{\mu_{0}}{4\pi}
+% \text{\small\slshape\cursive r}  (this is script r}
+% ( \vec{r^{\prime}} )
+% \textbf{\textit{ approximation}}
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 5, Lecture 2} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\bf \color{myblue} Magnetostatics and the Biot-Savart law}
+
+Steady currents are the source of magnetostatic fields.  Superposition holds for magnetic field, so contributions from small sections of steady current ($Idl^{\prime}$) may be added up to get the net magnetic field at any point in space.  The dependence of $\vec{B}$ on the distance $\text{\small\slshape\cursive r}$ to the current element, and the value of the current $I$, was experimentally determined (just as was the dependence of $\vec{E}$ on $\text{\small\slshape\cursive r}$ and $q$).  This is expressed as the Biot-Savart law:
+
+\begin{equation}
+\vec{B}  = \frac{ \mu_{0} }{4\pi} \int \frac{ \vec{I} \times  \hat{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}^{2}} \,  dl^{\prime} 
+\label{eq:biotsavart}
+\end{equation}
+
+The Biot-Savart law may also be written for surface currents and volume currents:
+
+\begin{equation*}
+\begin{aligned}
+&   \vec{B}  = \frac{ \mu_{0} }{4\pi} \int \frac{ \vec{K} \times  \hat{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}^{2}} \,  da^{\prime} \\ 
+&   \vec{B}  = \frac{ \mu_{0} }{4\pi} \int \frac{ \vec{J} \times  \hat{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}^{2}} \,  d\tau^{\prime}
+\end{aligned}
+\end{equation*}
+
+\vspace{.1in}
+Doing some examples is the best way to get a feeling for the Biot-Savart law.
+
+\vspace{.2in}
+{\color{mygreen} \hrulefill}
+\vspace{-.2in}
+\subsubsection*{\bf Magnetic field at distance $s$ from a wire segment with steady current $I$}
+
+As an example of calculating the magnetic field with the Biot-Savart law, consider a segment of uniform current along the y-axis, as shown in Fig.~\ref{fig:iseg}.  A point $P$ is located a distance $s$ above the y-axis in the $y$-$z$ plane.  What is the magnetic field at $P$ due to the current in the segment?  
+
+\textbf{\textit{Direction:}}\\
+\vspace{.1in}
+First, consider the direction of the field contribution from different sections of the wire segment.  Since both the current $Idl^{\prime}$ and the distance $\vec{\text{\small\slshape\cursive r}}$ to $P$ are in the plane of the page, the direction of their cross-product must be perpendicular to the plane of the page.  The RHR gives the direction of $\vec{B}$ to be out of the page ($\hat{x}$ direction) for any section of the wire.  Or, arguing another way, $Idl^{\prime}$ is in the $\hat{y}$ direction, while $\vec{\text{\small\slshape\cursive r}}$ can be resolved into an $\hat{y}$ and a $\hat{z}$ component.  Then $\hat{y} \times \hat{y} =0$ while $\hat{y} \times \hat{z} = \hat{x}$, so the cross-product $Idl^{\prime} \times \vec{\text{\small\slshape\cursive r}}$ is in the $\hat{x}$ direction.  Also note that the right-hand-rule for wires gives the same result; if you put your thumb in the direction of the current, your fingers curl around the wire so that they are coming out of the page at point $P$.
+\vspace{.2in}
+
+\begin{figure}[h]
+\centering
+\includegraphics*[width=.6\columnwidth]{current_segment.pdf} 
+\caption{Current carrying wire segment.  One end of the segment makes an angle $\theta_{1}$ between $s$ and $\text{\small\slshape\cursive r}_{1}$, while the other end of the segment makes an angle $\theta_{2}$ between $s$ and $\text{\small\slshape\cursive r}_{2}$.}
+\label{fig:iseg}
+\end{figure}
+
+Begin evaluation of the Biot-Savart integral by finding $\vec{\text{\small\slshape\cursive r}}$, $\text{\small\slshape\cursive r}$ and $\hat{\text{\small\slshape\cursive r}}$.  In general terms, the distance between the charge and the observer is $\vec{\text{\small\slshape\cursive r}}=\vec{r}-\vec{r^{\prime}}$.  In this case, the distance from the origin to $P$ is $\vec{r}=s\hat{z}$.  The position of an element of current $Idl^{\prime}$ is $\vec{r^{\prime}}=y^{\prime}\hat{y}$.
+\begin{eqnarray*}
+\vec{\text{\small\slshape\cursive r}} & =& \vec{r}-\vec{r}^{\prime} \\
+& = & s\hat{z}-y^{\prime}\hat{y}
+\end{eqnarray*}
+
+The distance between the observer and the element of charge is then given by:
+
+\begin{eqnarray*}
+ \text{\small\slshape\cursive r} & =& \sqrt{ \left( \vec{r} - \vec{r^{`}} \right)^{2} } \\
+ & = & \sqrt{ \left( s\hat{z} - y^{\prime}\hat{y} \right)^{2} } \\
+ & = & \sqrt{  s\hat{z} \cdot s\hat{z} -2(s\hat{z} \cdot y^{\prime}\hat{y}) + y^{\prime}\hat{y} \cdot y^{\prime}\hat{y} } \\
+  & = & \sqrt{  s^{2} + (y^{\prime})^{2} } 
+\end{eqnarray*}
+
+And the unit vector,
+\begin{eqnarray*}
+\hat{\text{\small\slshape\cursive r}} & =& \frac{\vec{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}} \\
+& = & \frac{s\hat{z}-y^{\prime}\hat{y}}{\sqrt{ s^{2}+(y^{\prime})^{2}}}
+\end{eqnarray*}
+
+The differential current element, $Id\vec{l}^{\prime}$, goes along the wire segment, which lies on the $y$-axis.  Then, $Id\vec{l}^{\prime}=Idy^{\prime}\hat{y}$.  Take the cross-product with the unit vector, $Idy^{\prime}\hat{y} \times  \hat{\text{\small\slshape\cursive r}}$, to get the  numerator of the Biot-Savart integrand.
+
+\[
+Idy^{\prime}\hat{y} \times  \hat{\text{\small\slshape\cursive r}}=Idy^{\prime}\hat{y} \times \frac{(s\hat{z}-y^{\prime}\hat{y})}{\sqrt{ s^{2}+(y^{\prime})^{2}}} = Isdy^{\prime}\frac{\hat{y} \times \hat{z}}{\sqrt{ s^{2}+(y^{\prime})^{2}}} = \frac{Isdy^{\prime} \hat{x}}{\sqrt{ s^{2}+(y^{\prime})^{2}}}
+\]
+
+So, the Biot-Savart integral for the magnetic field at point $P$ is given by:
+
+\begin{equation*}
+\vec{B}  = \frac{ \mu_{0} }{4\pi} \int \frac{ Id\vec{l}^{\prime} \times  \hat{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}^{2}}  
+= \frac{ \mu_{0}Is }{4\pi} \int_{y_{1}}^{y_{2}} \frac{ dy^{\prime} }{(s^{2}+(y^{\prime})^{2})^{\frac{3}{2}}} \, \hat{x}
+\end{equation*}
+
+Evaluating the integral:
+
+\begin{eqnarray*}
+\vec{B} & =& \frac{ \mu_{0} Is \, \hat{x}}{4\pi} \int_{y_{1}}^{y_{2}} \frac{dy^{\prime}}{\left( s^{2} + (y^{\prime})^{2} \right)^{\frac{3}{2}}} \\
+\vspace{.05in}\\
+\vec{B} & =& \frac{ \mu_{0} Is}{4\pi} \left[ \left. \frac{y}{s^{2}\sqrt{(y^{2}+s^{2})}} \:  \right\vert_{y_{1}}^{y_{2}}  \right] \, \hat{x} =  \frac{ \mu_{0} I}{4\pi s} \left[ \frac{y_{2}}{\sqrt{(y_{2}^{2}+s^{2})}} -  \frac{y_{1}}{\sqrt{(y_{1}^{2}+s^{2})}} \right] \, \hat{x}
+\end{eqnarray*}
+
+\textbf{\textit{Check the limit as $y_{1}\rightarrow -\infty$ and $y_{2} \rightarrow \infty$:}}\\
+\vspace{.1in}
+If $y_{1}\rightarrow -\infty$, and $y_{2}\rightarrow +\infty$ then the segment of current becomes an infinite line of current.  Start with Eq.~\ref{eq:limits} for the field from a short segment of current between end points $y_{1}$ and $y_{2}$: 
+
+\begin{equation}
+B = \frac{ \mu_{0} I}{4\pi s} \left[ \frac{y_{2}}{\sqrt{(y_{2}^{2}+s^{2})}} -  \frac{y_{1}}{\sqrt{(y_{1}^{2}+s^{2})}} \right]
+\label{eq:limits} 
+\end{equation}
+
+\vspace{.1in}
+Divide the top and bottom of the first fraction by $|y_{2}|$ and the top and bottom of the second fraction by $|y_{1}|$ to give the following,  
+\begin{eqnarray*}
+B & = & \frac{ \mu_{0} I}{4\pi s} \left[ \frac{\frac{y_{2}}{|y_{2}|}}{\sqrt{\left( \left( \frac{y_{2}}{y_{2}} \right)^{2}+\left( \frac{s}{y_{2}} \right)^{2} \right)}} -  
+\frac{ \frac{y_{1}}{|y_{1}|} }{ \sqrt{\left( \frac{y_{1}}{y_{1} }\right)^{2} + \left( \frac{s}{y_{1}} \right)^{2}} } \right] \\
+\end{eqnarray*}
+
+Now taking the appropriate limits:
+\[
+\lim_{y_{2} \to +\infty}  \frac{ \frac{y_{2}}{|y_{2}|} }{\sqrt{\left( \left( 1 \right)^{2}+\left( \frac{s}{y_{2}} \right)^{2} \right)}} = 1
+\hspace{.5in}
+\lim_{y_{1} \to -\infty}  \frac{ \frac{y_{1}}{|y_{1}|} }{\sqrt{\left( \left( 1 \right)^{2}+\left( \frac{s}{y_{1}} \right)^{2} \right)}} = -1
+\]
+
+So that, as expected for an infinite line of current,
+
+\begin{equation*}
+ \lim_{y_{2/1} \to \pm\infty}  B = \frac{ \mu_{0} I}{4\pi s} \left[ 1 - (-1) \right] = \frac{ \mu_{0} I}{2\pi s}  
+\end{equation*}
+
+\vspace{.2in}
+{\color{mygreen} \hrulefill}\\
+\vspace{-.1in}
+\subsubsection*{\bf Magnetic field near a wire segment, Take 2:}
+
+Now let's do the exact same problem, but instead of classically finding $\vec{\text{\small\slshape\cursive r}}$, $\text{\small\slshape\cursive r}$ and $\hat{\text{\small\slshape\cursive r}}$, parameterize the integrand of the Biot-Savart integral in terms of the angles in Fig.~\ref{fig:iseg} and Fig.~\ref{fig:angles}.
+
+The cross-product $Id\vec{l}^{\prime} \times \hat{\text{\small\slshape\cursive r}} = Idl^{\prime} \sin{(\theta+\frac{\pi}{2})}|\hat{\text{\small\slshape\cursive r}}|$, as shown in Fig.~\ref{fig:angles}.  The angle $\theta$ is defined as the angle at point $P$ between $s$ and $\text{\small\slshape\cursive r}$.  Use the following trigonometric identity,
+
+\[
+\sin{(\theta+\frac{\pi}{2})}=\sin{(\theta)}\cos{(\frac{\pi}{2})}+\sin{(\frac{\pi}{2})}\cos{(\theta)} = \cos{(\theta)}
+\]
+
+to write $Idl^{\prime} \sin{(\theta+\frac{\pi}{2})}=Idl^{\prime} \cos{(\theta)}$
+
+\begin{figure}[h]
+\centering 
+\includegraphics*[width=.6\columnwidth]{angles.pdf} 
+\caption{Depiction of the angle between a section of the current carrying wire segment, $Idl^{\prime}$, and the $\hat{\text{\small\slshape\cursive r}}$ direction.  That angle is $\theta + \frac{\pi}{2}$.}
+\label{fig:angles}
+\end{figure}
+
+\begin{equation*}
+\vec{B}  = \frac{ \mu_{0} }{4\pi} \int \frac{ Id\vec{l}^{\prime} \times  \hat{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}^{2}}  = \frac{ \mu_{0} }{4\pi} \int \frac{ Idl^{\prime} \cos{(\theta)} }{\text{\small\slshape\cursive r}^{2}} 
+\end{equation*}
+
+The distance $\text{\small\slshape\cursive r}$ between $P$ and a segment of current, $Idl^{\prime},$ may be obtained from the geometry of the figure:
+\begin{equation*}
+\begin{aligned}
+& \cos{(\theta)}= \frac{s}{\text{\small\slshape\cursive r}} \\
+& \text{\small\slshape\cursive r} = \frac{s}{\cos{(\theta)}}
+\end{aligned}
+\end{equation*}
+
+So that
+\[
+\frac{1}{\text{\small\slshape\cursive r}^{2}} =\frac{\cos^{2}{(\theta)}}{s^{2}}
+\]
+
+An expression for $dl^{\prime}$ in terms of $\theta$ is still needed.  Since the distance from the origin to the current element is $l^{\prime}$, and the distance from the origin to point $P$ is $s$, then $l^{\prime}/s=\tan{(\theta)}$.  Differentiate this,
+
+\[
+\frac{dl^{\prime}}{d\theta}  =  s\frac{d}{d\theta}\left( \tan{(\theta)} \right)  = s\frac{d}{d\theta} \left( \frac{\sin{(\theta)}}{\cos{(\theta)}} \right) 
+\]
+
+Then use the product rule,
+
+\begin{eqnarray*}
+\frac{dl^{\prime}}{d\theta} & = & s\frac{d}{d\theta} \left( \frac{\sin{(\theta)}}{\cos{(\theta)}} \right) \\
+ \vspace{.03in}\\
+ & = & s\left[ \sin{(\theta)} \frac{d}{d\theta}\left( \frac{1}{\cos{(\theta)}}\right) + \frac{1}{\cos{(\theta)}}\frac{d}{d\theta} \left( \sin{(\theta)} \right) \right] \\
+ \vspace{.03in}\\
+ & = & s\left[ \frac{\sin^{2}{(\theta)}}{\cos^{2}{(\theta)}}  + \frac{\cos{(\theta)}}{\cos{(\theta)}} \right] 
+ = s\left[ \frac{\sin^{2}{(\theta)}+\cos^{2}{(\theta)} }{\cos^{2}{(\theta)}} \right] \\
+  \vspace{.03in}\\
+dl^{\prime} & = & \frac{s}{\cos^{2}{(\theta)}} \, d\theta
+\end{eqnarray*}
+
+Then putting it all together to calculate the field,
+\begin{eqnarray*}
+B & =& \frac{ \mu_{0} I}{4\pi} \int \frac{ dl^{\prime}  }{\text{\small\slshape\cursive r}^{2}} \left( \cos{(\theta)} \right) \\
+\vspace{.03in}\\
+ & =& \frac{ \mu_{0} I}{4\pi} \int \left( \frac{\cos^{2}{(\theta)}}{s^{2}} \right) \left( \frac{s}{\cos^{2}{(\theta)}} \right) \cos{(\theta)} \, d\theta\\
+\vspace{.03in}\\
+ & =& \frac{ \mu_{0} I}{4\pi s} \int_{\theta_{1}}^{\theta_{2}} \cos{(\theta)} \, d\theta \\
+\end{eqnarray*}
+Finally,
+\begin{equation}
+B=\frac{ \mu_{0} I}{4\pi s} \left[ \sin{(\theta_{2})}-\sin{(\theta_{1})} \right]
+\label{eq:segsin}
+\end{equation}
+
+Note that:
+\[
+\sin{(\theta_{1})} = \frac{y_{1}}{\sqrt{(y_{1}^{2}+s^{2})}} 
+\]
+
+and similarly for $\sin{(\theta_{2})}$.  So, Eq.~\ref{eq:segsin} is identical to Eq.~\ref{eq:limits}.  For the wire to become infiinite, $\theta_{1}\rightarrow -\frac{\pi}{2}$ and $\theta_{2} \rightarrow +\frac{\pi}{2}$.  In that case, Eq.~\ref{eq:segsin} becomes:
+
+\[
+B=\frac{ \mu_{0} I}{4\pi s} \left[ 1-(-1) \right] = \frac{ \mu_{0} I}{2\pi s}
+\]
+as expected.
+
+\vspace{.2in}
+{\color{mygreen} \hrulefill}
+\vspace{-.2in}
+\subsubsection*{\bf Magnetic field at the center of a current loop}
+
+As another example of calculating the magnetic field with the Biot-Savart law, let's find the field at the center of a current loop.  Put the current loop in the $x$-$y$ plane, centered on the origin.
+\begin{figure}[h]
+\centering 
+\includegraphics*[width=.35\columnwidth]{circ_in_plane.pdf} 
+\caption{Current loop of radius $R$ in the $x$-$y$ plane, carrying current $I$.  Point $P$ is in the center of the loop, at the origin.}
+\label{fig:inplane}
+\end{figure}
+
+\vspace{-.2in}
+\begin{equation*}
+\vec{B}  = \frac{ \mu_{0} }{4\pi} \int \frac{ Id\vec{l^{\prime}} \times  \hat{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}^{2}}  \hspace{.5in} \longrightarrow \hspace{.5in} \text{BS to find field}
+\end{equation*}
+
+In this case, the field is being sought at the origin, so the location of the observation of the field is $r=0$.  All current elements are on the circular current loop, so $\vec{r^{\prime}}=R\hat{s}$.  Then,
+\begin{equation*}
+\begin{aligned}
+& \vec{\text{\small\slshape\cursive r}} = \vec{r}-\vec{r^{\prime}} = 0 - R\hat{s} \\
+& \text{\small\slshape\cursive r} = R \\
+& \hat{\text{\small\slshape\cursive r}} =\frac{\vec{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}} = -\hat{s}
+\end{aligned}
+\end{equation*}
+
+All current segments, $Id\vec{l}^{\prime}$, are on the circular loop.  Taking the current to be flowing counterclockwise as shown in the figure, then the direction of $Id\vec{l}^{\prime}$ is $\hat{\phi}$.
+\[
+Id\vec{l}^{\prime}=Ids\, \hat{\phi} = I R \, d\phi \, \hat{\phi}
+\]
+
+Since $\hat{\phi} \times -\hat{s} = \hat{z}$, the direction of $\vec{B}$ at the center of the circle is $\hat{z}$, and the field is,
+
+\begin{equation*}
+\vec{B}  = \frac{ \mu_{0} I}{4\pi R} \int_{0}^{2\pi} d\phi \, \hat{z} = \frac{\mu_{0} I}{2R} \hat{z}
+\end{equation*}
+
+\vspace{.2in}
+{\color{mygreen} \hrulefill}\\
+\vspace{-.1in}
+\subsubsection*{\bf Magnetic field above the center of a circular loop of current}
+
+The Biot-Savart law is also used to find the magnetic field a distance $z$ above the center of a circular current-carrying loop.  Let the loop have radius $R$ and carry current $I$.  
+
+\begin{figure}[h]
+\centering 
+\includegraphics*[width=.4\columnwidth]{diskI.png} 
+\caption{Current loop of radius $R$ in the $x$-$y$ plane, carrying current $I$.}
+\label{fig:circloop}
+\end{figure}
+
+Begin evaluation of the Biot-Savart integral by finding $\vec{\text{\small\slshape\cursive r}}$, $\text{\small\slshape\cursive r}$ and $\hat{\text{\small\slshape\cursive r}}$.  In general terms, the distance between the charge and the observer is $\vec{\text{\small\slshape\cursive r}}=\vec{r}-\vec{r^{\prime}}$.  In this case, the distance from the origin to $P$ is $\vec{r}=z\hat{z}$.  An element of current $Idl^{\prime}$ may be anywhere on the circular loop, $\vec{r^{\prime}}=R\cos{(\phi)}\hat{x} + R\sin{(\phi)}\hat{y}$.  Then, the expression for $\vec{\text{\small\slshape\cursive r}}$ is,
+
+\begin{eqnarray*}
+\vec{\text{\small\slshape\cursive r}} & =& \vec{r}-\vec{r}^{\prime} \\
+& = & z\hat{z}-R\hat{s} \\
+& = & z\hat{z} - R\cos{(\phi)}\hat{x} - R\sin{(\phi)}\hat{y}
+\end{eqnarray*}
+
+Now it is possible to get $\text{\small\slshape\cursive r}$,
+
+\begin{eqnarray*}
+\text{\small\slshape\cursive r}  & =& \sqrt{ \left( \vec{r} - \vec{r^{`}} \right)^{2} } \\
+ & = & \sqrt{ \left( z\hat{z} - R\hat{s} \right) \cdot  \left( z\hat{z} - R\hat{s} \right)} 
+ \end{eqnarray*}
+ 
+ The cross-terms of the dot product include $\hat{z} \cdot \hat{s}$ which is zero since the unit vectors are mutually orthogonal.  This leaves the following,
+
+ \begin{eqnarray*}
+\text{\small\slshape\cursive r} & = & \sqrt{  (z\hat{z} \cdot z\hat{z}) +  (R\hat{s} \cdot  R\hat{s})} \\
+  & = & \sqrt{  z^{2} + R^{2} }
+\end{eqnarray*}
+
+And the unit vector,
+\begin{eqnarray*}
+\hat{\text{\small\slshape\cursive r}} & =& \frac{\vec{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}} \\
+& = & \frac{z\hat{z}-R\hat{s}}{\sqrt{ z^{2}+R^{2}}}
+\end{eqnarray*}
+
+Now, let's get the direction by considering the numerator of the integral expression for the field, and also by referring to Fig.~\ref{fig:ringB} for a physical picture.
+
+\begin{figure}[h]
+\centering 
+\includegraphics*[width=.35\columnwidth]{ringB.pdf} 
+\caption{Magnetic field directions at point $P$ from two points on a current loop of radius $R$ in the $x$-$y$ plane, carrying current $I$.  The point on the loop labeled with an `x' denotes the location where the current is going directly into the page, whereas the dot across from the `x' denotes the location where the current is directed out of the page.}
+\label{fig:ringB}
+\end{figure}
+
+The direction of field contributions from certain segments of the current ring is shown graphically in Fig.~\ref{fig:ringB}.  Looking at the figure, consider two current segments at opposite sides of the ring; current in the right segment is directed into the page as indicated by the `x', and the current in the left segment is directed out of the page as indicated by the dot.  Consider the right segment with current flowing into the page; $\vec{\text{\small\slshape\cursive r}}$ lies in the plane of the page directed from the `x' to point $P$.  Since the field generated by this element of current is in the direction of $Id\vec{l} \times \vec{\text{\small\slshape\cursive r}}$, it is perpendicular to both vectors.  That is, in the plane of the page (perpendicular to $Id\vec{l}$) and at a right angle to $\vec{\text{\small\slshape\cursive r}}$.  The $\vec{B}$ field vector is shown as the solid (not dashed) B vector in figure.  Similarly, the left segment with current flowing out of the page produces a contribution to $\vec{B}$ shown as the dashed B vector in the figure.  Note that these two contributions to the total field add in the $\hat{z}$ direction, but are opposed in the $\hat{s}$ direction.  So, we expect the analytic result to be in the $\hat{z}$ direction.
+
+The numerator in the integrand of the Biot-Savart law (repeated below) gives the direction of the field.
+
+\begin{equation*}
+\vec{B}  = \frac{ \mu_{0} }{4\pi} \int \frac{ Id\vec{l}^{\prime} \times  \hat{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}^{2}}
+\end{equation*}
+
+
+In this case, $Id\vec{l}^{\prime}$ is a segment of current along the circular loop.  Taking the current to be flowing counterclockwise as shown in the figure, then the direction of $Id\vec{l}^{\prime}$ is $\hat{\phi}$.  
+\[
+Id\vec{l}^{\prime}=Ids\, \hat{\phi} = I R \, d\phi \, \hat{\phi}
+\]
+
+Then the numerator of the Biot-Savart integral is the following,
+
+\begin{equation*}
+\begin{aligned}
+& I R \, d\phi \, \hat{\phi} \times \hat{\text{\small\slshape\cursive r}} \\
+& =  I R \, d\phi \, \hat{\phi} \times  \frac{z\hat{z}-R\hat{s}}{\sqrt{ z^{2}+R^{2}}} \\
+& = \frac{ I z R \, d\phi \, \hat{s}  + I  R^{2} \, d\phi \, \hat{z} } { \sqrt{ z^{2}+R^{2}} }
+\end{aligned}
+\end{equation*}
+
+So the entire Biot-Savart integral is then,
+\vspace{.1in}
+\begin{eqnarray}
+\vec{B} & = & \frac{ \mu_{0} I}{4\pi} \int \frac{ z R \, d\phi \, \hat{s} } { \left( z^{2}+R^{2} \right)^{\frac{3}{2}} } + \frac{ \mu_{0} I}{4\pi} \int \frac{R^{2} \, d\phi \, \hat{z} } { \left( z^{2}+R^{2} \right)^{\frac{3}{2}} } \nonumber \\
+\vspace{.1in} \nonumber \\
+\vec{B} & = & \left( \frac{ \mu_{0} I}{4\pi} \right) \frac{zR}{\left( z^{2}+R^{2} \right)^{\frac{3}{2}} } \int_{0}^{2\pi} d\phi \, \hat{s}  + \left( \frac{ \mu_{0} I}{4\pi}\right) \frac{R^{2}\hat{z}}{\left( z^{2}+R^{2} \right)^{\frac{3}{2}} }\int_{0}^{2\pi} d\phi  \nonumber \\
+\vspace{.1in} \nonumber \\
+\vec{B} & = & \frac{ \mu_{0} IzR}{4\pi \left( z^{2}+R^{2} \right)^{\frac{3}{2}}} \int_{0}^{2\pi} d\phi \, \hat{s}  + \frac{ \mu_{0} I R^{2}}{2\left( z^{2}+R^{2} \right)^{\frac{3}{2}}} \hat{z}
+\label{eq:twobiotsavart}
+\end{eqnarray}
+where the constants have been pulled out of the integrals, and the second integral evaluated.  
+
+The first cannot be evaluated as is, since $\hat{s}$ is not a constant and cannot be pulled out of an integral.  In order to calculate the first integral of Eq.~\ref{eq:twobiotsavart}, $\hat{s}$ will be written in terms of the Cartesian unit vectors, $\hat{s}=\cos{(\phi)}\hat{x}+\sin{(\phi)}\hat{y}$.  Then the first integral is,
+
+\begin{equation*}
+B\hat{s} = \frac{ \mu_{0} IzR\hat{x}}{4\pi \left( z^{2}+R^{2} \right)^{\frac{3}{2}}} \int_{0}^{2\pi}  \cos{(\phi)}  \, d\phi + \frac{ \mu_{0} IzR\hat{y}}{4\pi \left( z^{2}+R^{2} \right)^{\frac{3}{2}}} \int_{0}^{2\pi} \sin{(\phi)} \, d\phi = 0
+\end{equation*}
+
+So, $B\hat{z}$ is the only non-zero component of $\vec{B}$ after integration over the entire current loop, as expected.  Note that if $z=0$ then point $P$ is in the center of the ring, and the expression for $B$ simplifies, 
+
+\begin{equation*}
+\begin{aligned}
+& \left( z^{2}+R^{2} \right)^{\frac{3}{2}} \hspace{.8in} \longrightarrow \hspace{.4in}  R^{3} \\
+& B=\frac{ \mu_{0} I R^{2}}{2\left( z^{2}+R^{2} \right)^{\frac{3}{2}}} \hat{z} \hspace{.3in} \longrightarrow \hspace{.4in}  B=\frac{ \mu_{0} I }{2R} \hat{z}
+\end{aligned}
+\end{equation*}
+
+This is consistent with the earlier result for $\vec{B}$ in the center of a circular current ring.
+
+\vspace{.1in}
+{\color{mygreen} \hrulefill}\\
+\vspace{.2in}
+
+\subsection*{Summarizing the results of these notes on the Biot-Savart law:}
+\vspace{.2in}
+
+\tcbset{highlight math style={colframe=myblue,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation*}
+\begin{aligned}
+& B = \frac{ \mu_{0} I}{4\pi s} \left[ \frac{y_{2}}{\sqrt{(y_{2}^{2}+s^{2})}} -  \frac{y_{1}}{\sqrt{(y_{1}^{2}+s^{2})}} \right] \hspace{.5in} \text{B field from a wire segment}\\ 
+& B= \frac{ \mu_{0} I}{4\pi } \left[ \sin{(\theta_{2})}-\sin{(\theta_{1})} \right] \hspace{1.25in} \text{B field from a wire segment}\\ 
+& \vec{B} = \frac{ \mu_{0} I}{2\pi s} \hat{\phi } \hspace{2.5in}  \text{B field from an infinite wire} \\
+& \vec{B} = \frac{\mu_{0}I}{2}\frac{R^{2}}{(R^{2}+z^{2})^{\frac{3}{2}}} \hspace{1.83in} \text{B above the center of a wire loop} \\
+& \vec{B} = \frac{ \mu_{0} I }{2R} \hat{z} \hspace{2.55in} \text{B at the center of a wire loop}
+\end{aligned}
+\label{eq:perp_bc}
+ \end{empheq}
+
+
+\end{flushleft}
+\end{document}  
+
+
+
+
+
+
+
+

@@ -1,0 +1,285 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 1, Lecture 1} \end{flushright}
+\begin{flushleft}
+
+%{\large {\bf Introduction to longitudinal emittance}}\\
+
+The theory of electrodynamics is beautifully given by Maxwell's equation.  In \underline{vacuum} the differential form of Maxwell's equations are given by:
+
+\begin{eqnarray}
+ \vec{\nabla} \cdot \vec{E} & = & \frac{\rho}{\varepsilon_{0}} \label{eq:divE}\\
+ \vec{\nabla} \cdot \vec{B} & = & 0 \\
+ \vec{\nabla} \times \vec{E} & = & -\frac{\partial \vec{B}}{\partial t} \label{eq:curlE} \\
+\vec{\nabla} \times \vec{B} & = & \mu_{0}\vec{J}+\mu_{0}\varepsilon_{0}\frac{\partial \vec{E}}{\partial t} \label{eq:curlB} 
+\end{eqnarray}
+
+\vspace{.2in}
+$\vec{\nabla}$, or `del', is a vector operator.  In Cartesian coordinates, this is shorthand for,  
+\[
+\vec{\nabla}=\hat{x}\frac{\partial}{\partial x} +\hat{y}\frac{\partial}{\partial y}+\hat{z}\frac{\partial}{\partial z}
+\] 
+
+There are two ways for $\vec{\nabla}$ to operate on a vector function (say $\vec{a}$), $\vec{\nabla} \cdot \vec{a}$ and $\vec{\nabla} \times \vec{a}$.
+
+\vspace{.2in}
+Suppose $\vec{a}=a_{x}(x,y,z)\hat{x}+a_{y}(x,y,z)\hat{y}+a_{z}(x,y,z)\hat{z}$, where $a_{x}(x,y,z)$ means that the $\hat{x}$ component of $\vec{a}$ in this case depends on coordinates $x$, $y$, $z$.  Then $\vec{\nabla} \cdot \vec{a}$ is the $\vec{\nabla}$ operator dotted into the vector function $\vec{a}$:
+
+\begin{equation*}
+\vec{\nabla} \cdot \vec{a}=\frac{\partial a_{x}}{\partial x} +\frac{\partial a_{y}}{\partial y}+\frac{\partial a_{z}}{\partial z}
+\end{equation*}
+
+and similarly $\vec{\nabla} \times \vec{a}$ is the cross product of del with $\vec{a}$:
+\begin{eqnarray*}
+ \vec{\nabla} \times \vec{a} & = & \left| \begin{array}{ccc} 
+\hat{x} & \hat{y} & \hat{z} \\ 
+\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+a_{x} & a_{y} & a_{z}
+\end{array} \right| \\
+\\
+& = & \left( \frac{\partial a_{z}}{\partial y}-\frac{\partial a_{y}}{\partial z} \right)\hat{x} - \left( \frac{\partial a_{z}}{\partial x}-\frac{\partial a_{x}}{\partial z} \right)\hat{y} + \left( \frac{\partial a_{y}}{\partial x}-\frac{\partial a_{x}}{\partial y} \right)\hat{z}
+\end{eqnarray*}
+
+
+$\vec{\nabla} \cdot \vec{E}$ and $\vec{\nabla} \cdot \vec{B}$ ({\it \color{myblue} divergence}) $\longrightarrow$ scalar functions or scalars\\
+$\vec{\nabla} \times \vec{E}$ and $\vec{\nabla} \times \vec{B}$ ({\it \color{myblue} curl}) $\longrightarrow$ vector functions or vectors\\
+
+\vspace{.2in}
+The right hand side of Maxwell's equations describes the {\it source} of the field that is on the left hand side of the equation.  For example, Eq.~\ref{eq:divE} says that a static charge density ($\rho$) produces an electric field that {\it diverges} from that charge.  Equation \ref{eq:divE}  is a static equation because there is no time dependence anywhere.  The field from a point charge terminates on that charge, and has a radial (diverging) dependence.   More generally, the divergence of a vector field is a measure of how much the vector `spreads out' in a region.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{divdraw.png}
+\caption{Divergence (or not) sketch taken from Griffiths EM text page 17.}
+\label{fig:divdraw}
+\end{figure}
+
+ In contrast, a curl field wraps around the source of the field and does not terminate on the source.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{curldraw.png}
+\caption{Curl sketch (sort of) taken from Griffiths EM text page 19.}
+\label{fig:curldraw}
+\end{figure}
+
+You are probably more familiar with the integral form of Maxwell's equations.  We can get these by integrating the differential form, and using the `divergence theorem' and the `curl theorem'.  Before doing this, note the following Griffithism, a differential volume is denoted $d\tau$, not $dV$ as you might be expecting.
+
+Get Gauss' law by integrating Eq.~\ref{eq:divE} over a volume in space:
+\begin{equation*}
+\int_{V} (\vec{\nabla} \cdot \vec{E}) \: d\tau  =  \frac{1}{\varepsilon_{0}} \int_{V} \rho \: d\tau
+\end{equation*}
+
+The integral of the charge density $\rho \: \left[ \frac{ \mbox{C} }{ \mbox{m}^{3} } \right]$ over a volume is just the total charge enclosed by that volume, $q_{enc}$.  The divergence theorem is used to recast the left hand side of the equation to a flux integral.  The divergence theorem states that the integral of the divergence of a vector over a volume is the same as the dot product of that vector with the area enclosing that volume (the flux through the area):
+
+\begin{equation*}
+\int_{V} (\vec{\nabla} \cdot \vec{v}) \: d\tau  =   \oint_{S} \vec{v} \cdot d\vec{a} 
+\end{equation*}
+
+The circle on the area integral means that the integration must be done over the entire closed surface surrounding the volume.  The divergence of a vector field in a volume can be known by its flux through the surface - how can this be?  The electric field diverges from its source (point charges) in a specific way, with a  strength dependence on distance that is exactly compensated by the surface area.  Also, superposition holds.  These together conspire to make Gauss' law work.  So, anyway, now the first Maxwell equation can be written:
+
+\begin{equation*}
+\oint_{S} \vec{E} \cdot d\vec{a} = \frac{q_{enc}}{\varepsilon_{0}} \hspace{2.in} \mbox{\color{myblue} Gauss' law!} 
+\end{equation*}
+
+You might guess that the curl theorem will be needed to get the integral form of Maxwell's equations Eq.~\ref{eq:curlE} and Eq.~\ref{eq:curlB}.  The curl theorem states that the integral of the curl of a vector over a surface is the same os the dot product of that vector with the boundary, $P$, of the surface:
+\begin{equation*}
+\int_{S} (\vec{\nabla}\times\vec{v}) \cdot d\vec{a} = \oint_{P} \vec{v} \cdot d\vec{l}
+\end{equation*}
+
+The circle on the line integral means that the integration must be done over the entire closed loop surrounding the area.   Faraday's law can be obtained by integrating Eq.~\ref{eq:curlE} over a surface:
+\begin{equation*}
+\int_{S} (\vec{\nabla} \times \vec{E}) \cdot d\vec{a}  =  -\frac{\partial \int \vec{B} \cdot d\vec{a} }{\partial t} = -\frac{\partial \Phi_{B} }{\partial t}
+\end{equation*}
+
+ and then applying the curl theorem:
+\begin{equation*}
+\oint \vec{E} \cdot d\vec{l}  =  -\frac{\partial \Phi_{B} }{\partial t} \hspace{2.in} \mbox{\color{myblue} Faraday's law!}
+\end{equation*}
+
+The Ampere-Maxwell law can be obtained by integrating Eq.~\ref{eq:curlB} over a surface:
+  \begin{eqnarray*}
+\int_{S} (\vec{\nabla} \times \vec{B}) \cdot d\vec{a}  & =  & \mu_{0}\int_{S} \vec{J} \cdot d\vec{a} + \mu_{0}\varepsilon_{0}\frac{\partial \int_{S} \vec{E} \cdot d\vec{a} }{\partial t} \\ 
+& = & \mu_{0}I_{enc} + \mu_{0}\varepsilon_{0}\frac{\partial \Phi_{E} }{\partial t}
+\end{eqnarray*}
+and then applying the curl theorem:
+  \begin{equation*}
+\oint \vec{B} \cdot d\vec{l}  = \mu_{0}I_{enc} +\frac{\partial \Phi_{E} }{\partial t} \hspace{2.in} \mbox{\color{myblue} Ampere-Maxwell law!}
+\end{equation*}
+
+In deriving the integral form of Maxwell's equations, we have run across line integrals, surface integrals, and volume integrals.  We'll do lots of these.
+\begin{eqnarray*}
+\int_{P} \vec{v} \cdot d\vec{l}   \hspace{.5in} & \mbox{closed path} \longrightarrow  & \hspace{.5in} \oint \vec{v} \cdot d\vec{l} \\ 
+\int_{S} \vec{v} \cdot d\vec{a}  \hspace{.5in} & \mbox{closed surface} \longrightarrow  & \hspace{.5in} \oint \vec{v} \cdot d\vec{a} \\
+\int_{V} v \: d\tau  \hspace{.6in} & &
+\end{eqnarray*}
+
+Also note that for statics (which is what we will be doing for most of the semester):
+\begin{eqnarray}
+ \vec{\nabla} \cdot \vec{E}  =  \frac{\rho}{\varepsilon_{0}} \hspace{.5in} &  & \hspace{.5in} \vec{\nabla} \cdot \vec{E}  =  \frac{\rho}{\varepsilon_{0}} \nonumber \\
+ \vec{\nabla} \cdot \vec{B}  =  0 \hspace{.5in} &  & \hspace{.5in}  \vec{\nabla} \cdot \vec{B}  =  0 \nonumber\\
+ \vec{\nabla} \times \vec{E}  =  -\frac{\partial \vec{B}}{\partial t} \label{eq:curlE} \hspace{.5in} & \longrightarrow & \hspace{.5in} \vec{\nabla} \times \vec{E}  =  0 \nonumber \\
+\vec{\nabla} \times \vec{B} = \mu_{0}\vec{J}+\mu_{0}\varepsilon_{0}\frac{\partial \vec{E}}{\partial t}  \hspace{.5in} & \longrightarrow & \hspace{.5in} \vec{\nabla} \times \vec{B} = \mu_{0}\vec{J} \nonumber
+\end{eqnarray}
+
+{\large {\bf Gradient festival} }
+
+The gradient is the one way for $\vec{\nabla}$ to operate on a scalar function (say, $f$).
+\[
+\vec{\nabla}f = \frac{\partial f}{\partial x}\hat{x} +\frac{\partial f}{\partial y}\hat{y}+\frac{\partial f}{\partial z}\hat{z}
+\]
+
+Notice that operating on a scalar function with $\vec{\nabla}$ is the multidimensional analog of taking the derivative (finding the slope) of a function in 1D.  So, we expect a similar meaning.  The following example is taken from Roel Snieder 'A Guided Tour of Mathematical Methods for the Physical Sciences':\\
+\vspace{.2in}
+Consider a function of $x$ and $y$, $f(x,y)$, at locations A, B, and C, as shown in Fig.~\ref{fig:grad}.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=1cm 0cm 1cm 0cm, clip=true, width=0.8\columnwidth]{grad.png}
+\caption{}
+\label{fig:grad}
+\end{figure}
+
+The small change in the function, $\delta f$, between point A and point C is given by:
+\begin{eqnarray}
+\delta f & =  & f_{C}-f_{A} \nonumber \\ 
+            & =  &  (f_{C}-f_{B}) + (f_{B}-f_{A}) \nonumber \\
+            & = &  [f(x+\delta x, y+\delta y) - f(x+\delta x, y)] + [f(x+\delta x, y)-f(x, y)] \label{eq:df}
+\end{eqnarray}
+
+Re-write this using the Taylor expansion.  Taylor expansion reminder:
+
+\[
+f(x+h)=\sum_{n=0}^{\infty} \frac{h^{n}}{n!}\frac{d^{n}f(x)}{dx^{n}}=f(x)+h\frac{df(x)}{dx}+\frac{h^{2}}{2}\frac{d^{2}f(x)}{dx^{2}}+\dots
+\]
+
+where the expansion point is $x$, and you are moving away from the expansion point by a small amount $h$.  If some of the higher order terms of the summation are dropped, then the function is represented by a finite number of terms, and this representation is an {\it approximation} of the actual function.  The accuracy of the approximation depends on how rapidly the higher order terms decrease in value.  For example, if a function is linear, only two terms in the Taylor expansion are non-zero, and the two-term representation of the function is exact.  (Note that $y(x)=mx+b$ with $m=$ slope and $b=$ intercept is the same as  $y(0+x)=y(0)+ x\frac{dy}{dx}$).  Getting back to the business at hand: use the Taylor expansion of $f(x+\delta x,y)$ near $f(x,y)$ and of $ f(x+\delta x,y+\delta y)$ near $f(x+\delta x,y)$, and keep only the first two terms (this is OK in the limit $\delta r \rightarrow 0$):
+
+\begin{equation*}
+\begin{aligned}
+& f(x+\delta x,y) - f(x,y) = \frac{\partial f(x,y)}{\partial x} \delta x \\
+& f(x+\delta x,y+\delta y) - f(x+\delta x,y) = \frac{\partial f(x+\delta x,y)}{\partial y} \delta y
+\end{aligned}
+\end{equation*}
+
+Substituting these into Eq.~\ref{eq:df}:
+
+\begin{equation*}
+\begin{aligned}
+\delta f & = \frac{\partial f(x,y)}{\partial x} \delta x + \frac{\partial f(x+\delta x,y)}{\partial y} \delta y \\
+            & = \frac{\partial f(x,y)}{\partial x} \delta x + \frac{\partial f(x,y)}{\partial y} \delta y + \frac{\partial^{2} f(x,y)}{\partial x\partial y} \delta x \delta y
+\end{aligned}
+\end{equation*}
+
+To leading order,
+
+\begin{equation*}
+\delta f  = \frac{\partial f(x,y)}{\partial x} \delta x + \frac{\partial f(x,y)}{\partial y} \delta y = \vec{\nabla}f \cdot \delta \vec{r}
+\end{equation*}
+
+$\vec{\nabla}$ has magnitude and direction.  $\delta f = \vec{\nabla}f \cdot \delta \vec{r}$ is maximum when $\vec{\nabla}f$ is parallel to $\delta r$, and minimum when $\delta r$ is directed along a contour of constant $f$.  The gradient, $\vec{\nabla}f$, points in the direction of the maximum increase of the function $f$.  The magnitude $|\nabla f|=\frac{df}{dr}$ gives the slope (rate of increase) along this maximal direction.  So, $\vec{\nabla}f$ is the multidimensional analog of the 1D slope.
+
+One more thing lifted from Snieder - What is the gradient of the potential energy?  (For the non-dissipative Newtonian case.)  Since energy is conserved, the total energy does not change with time:
+
+\begin{equation}
+\frac{dE}{dt}  = \frac{d}{dt}\left( \frac{1}{2}mv^{2} +U(r) \right) =0 
+\label{eq:energy}
+\end{equation}
+
+where $U(r)$ is the potential energy.  Now take the time derivative of the kinetic energy,
+
+\begin{eqnarray}
+\frac{d}{dt}\left( \frac{1}{2}mv^{2} \right) & = & m \left( v_{x}\frac{dv_{x}}{dt} +  v_{y}\frac{dv_{y}}{dt} +  v_{z}\frac{dv_{z}}{dt} \right) \nonumber \\
+                  & = & \vec{v} \cdot m\frac{\vec{dv}}{dt} 
+\label{eq:keterm}
+\end{eqnarray}
+
+Write the time derivative of the potential energy in its explicit form,
+\begin{equation}
+\frac{dU(r)}{dt} = \lim_{\delta t \rightarrow 0} \frac{U(r(t+\delta t))-U(r(t))}{\delta t}
+\label{eq:potderiv}
+\end{equation}
+
+It is convenient to use the following:
+\[
+\delta r = r(t+\delta t) - r(t) \hspace{.5in} \longrightarrow \hspace{.5in}  r(t+\delta t) = r(t) + \delta r
+\] 
+
+Putting this into Eq.~\ref{eq:potderiv} and then using the Taylor expansion of $U(r(t)+\delta r)$:
+
+\[
+\lim_{\delta t \rightarrow 0} \frac{U(r(t)+\delta r)-U(r(t))}{\delta t}  = \lim_{\delta t \rightarrow 0} \frac{ \frac{\partial U(r(t))}{\partial r} \delta r}{\delta t}
+\]
+
+This is,
+\begin{eqnarray}
+\lim_{\delta t \rightarrow 0} \frac{ \frac{\partial U(r(t))}{\partial r} \delta r}{\delta t}
+  & = & \lim_{\delta t \rightarrow 0} \frac{ \vec{\nabla}U(r) \cdot \delta \vec{r}}{\delta t} \nonumber \\
+ & = & \vec{v} \cdot \vec{\nabla}U \label{eq:peterm}
+\end{eqnarray}
+
+Plugging Eq.~\ref{eq:keterm} and Eq.~\ref{eq:peterm} into Eq.~\ref{eq:energy}:
+\[
+\frac{dE}{dt} = \vec{v} \cdot \left(  m\frac{\vec{dv}}{dt}  + \vec{\nabla}U  \right) = 0
+\]
+
+The term in parentheses must be equal to zero:
+
+\[
+\vec{F} = m\vec{a} = -\vec{\nabla}U 
+\]
+
+The force is the negative gradient of the potential energy.  This is also be true in the electrostatic case, and when the charge is divided from both sides of the equation it becomes the familiar relation between the electric field and the electric potential,
+
+\[
+\vec{E}  = -\vec{\nabla}V 
+\]
+
+which in integral form is:
+
+\[
+V = -\int \vec{E}\cdot d\vec{l} 
+\]
+
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+

@@ -1,0 +1,312 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+\setlength{\columnseprule}{1pt}
+\setlength{\columnsep}{.5in}
+
+\usepackage[makeroom]{cancel} %From Matthew Adas
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{frcursive}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{grey}{RGB}{200, 200, 200}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 5, Lecture 1} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\bf A comparison of the formalism of electrostatics to magnetostatics}
+
+\begin{multicols}{2}
+\def\columnseprulecolor{\color{grey}}
+\begin{center} \underline{Electrostatics} \end{center}
+
+\[
+\vec{\nabla} \cdot \vec{E}  = \rho/\varepsilon_{0}   \hspace{.5in} \vec{\nabla} \times \vec{E} = 0
+\]
+
+Coulomb's law and superposition \\
+We can find $\vec{E}$ from $\rho$:
+
+\[
+\vec{E}  = \frac{1}{4\pi \varepsilon_{0}} \int \frac{ \rho( \vec{r^{\prime}} ) }{\text{\small\slshape\cursive r}^{2}} \, \hat{\text{\small\slshape\cursive r}} d\tau^{\prime} 
+\]
+
+\vspace{.2in}
+With sufficient symmetry,\\
+the integral form of the divergence eq.\\
+(Gauss' law) is useful:
+
+\[
+\oint_{S} \vec{E} \cdot d\vec{a} = \frac{q_{enc}}{\varepsilon_{0}}
+\]
+
+\vspace{.2in}
+The source free equation gives\\
+ an expression for the potential:
+ 
+\[
+\vec{\nabla} \times \vec{E} = 0  \hspace{.2in} \Longrightarrow \hspace{.2in} \vec{E} = -\vec{\nabla} V
+\]
+
+This leads to Poisson's equation,\\
+an expression relating $V$ to $\rho$,
+
+\[
+\nabla^{2} V = -\frac{\rho}{\varepsilon_{0}}
+\]
+
+Providing a solution for $V$ in terms of $\rho$:
+
+\[
+V = \frac{1}{4\pi \varepsilon_{0}} \int \frac{\rho \, d\tau^{\prime}}{\text{\small\slshape\cursive r}} 
+\]
+
+\columnbreak
+\begin{center} \underline{Magnetostatics} \end{center}
+
+\[
+\vec{\nabla} \times \vec{B} = \mu_{0}\vec{J}  \hspace{.5in} \vec{\nabla} \cdot \vec{B}  = 0
+\]
+
+Biot-Savart low and superposition\\
+We can find $\vec{B}$ from $\vec{J}$:
+
+\[
+\vec{B}  = \frac{ \mu_{0} }{4\pi} \int \frac{ \vec{J}( \vec{r^{\prime}} ) \times  \hat{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}^{2}} \,  d\tau^{\prime} 
+\]
+
+\vspace{.2in}
+With sufficient symmetry,\\
+the integral form of the curl equation\\
+(Ampere's law) is useful:
+
+\[
+\oint_{P} \vec{B} \cdot d\vec{l} = \mu_{0} I_{enc}
+\]
+
+\vspace{.2in}
+The source free equation gives\\
+ an expression for the vector potential:
+
+\[
+\vec{\nabla} \cdot \vec{B} = 0  \hspace{.2in} \Longrightarrow \hspace{.2in} \vec{B} = \vec{\nabla}  \times \vec{A}
+\]
+
+The additional constraint, $\vec{\nabla} \cdot \vec{A} =0$,\\
+leads to an expression relating $\vec{A}$ to $\vec{J}$,
+
+\[
+\nabla^{2} \vec{A} = -\mu_{0}\vec{J}
+\]
+
+Providing a solution for $\vec{A}$ in terms of $\vec{J}$:
+
+\[
+\vec{A} = \frac{\mu_{0}}{4\pi} \int \frac{\vec{J} \, d\tau^{\prime}}{\text{\small\slshape\cursive r}} 
+\]
+\end{multicols}
+
+
+\subsubsection*{\bf Static Maxwell's equations in vacuum}
+
+\begin{equation*}
+\begin{rcases}
+& \vec{\nabla} \cdot \vec{E}  = \rho/\varepsilon_{0} \hspace{.5in} \\ 
+& \vec{\nabla} \times \vec{E} = 0
+\end{rcases}
+\hspace{.5in} \text{Electrostatics}
+\end{equation*}
+
+\begin{equation*}
+\begin{rcases}
+&  \vec{\nabla} \cdot \vec{B}  = 0 \hspace{.8in} \\ 
+&  \vec{\nabla} \times \vec{B} = \mu_{0}\vec{J}
+\end{rcases}
+\hspace{.5in} \text{Magnetostatics}
+\end{equation*}
+
+The constant in the Maxwell's equations relating to the magnetic field in a vacuum is called the vacuum permeability, $\mu_{0}$:
+\[
+\mu_{0} = 4\pi \times 10^{-7} \left[ \frac{\mbox{N}}{\mbox{A}^{2}} \right] = 1.257 \times 10^{-6} \left[ \frac{\mbox{N}}{\mbox{A}^{2}} \right]
+\]
+
+The SI units for magnetic field are Tesla [T], also [T]=[Ns/Cm]=[N/Am].
+
+Notice:
+\vspace{-.1in}
+\begin{itemize}
+\item[(1)] If there are no source terms ($\rho, \vec{J}$), there are no fields.
+\item[(2)] The source term for $\vec{E}$ is in the divergence equation, while the curl of $\vec{E}$ is zero.  E-fields {\it diverge} from sources (charges).
+\item[(3)] The source term for $\vec{B}$ is in the curl equation, while the divergence of $\vec{B}$ is zero.  B-fields `{\it wrap-around}' sources (currents).
+\item[(4)] The equations for $\vec{E}$ and $\vec{B}$ are uncoupled.  They are independent sets of equations.
+\end{itemize}
+
+\subsubsection*{\bf Current (the source of $\vec{B}$ fields)}
+\vspace{-.1in}
+Currents, which are moving charges, are the source of magnetic fields.  Since the charges are moving, why do we call it magneto\underline{statics}?  The static case is when the {\it distribution} of moving charges does not change.  A snapshot of the system at any instant of time would show the same currents present as seen in a snapshot at any other instant of time.
+
+A line current is the charge/time passing a certain point.  A uniform 1D current can be expressed as a uniform linear charge density, $\lambda$, multiplied by the velocity $v$ of the charges:
+
+\[
+\vec{I} = \lambda \left[\frac{\text{\small C}}{\cancel{\text{\small m}}}\right] \, \vec{v} \left[\frac{\cancel{\text{\small m}}}{\text{\small s}}\right]
+  = \lambda \, \vec{v}  \: \left[ \text{\small A} \right]
+\]
+% \cancelto{<value>}{expression} Draws a diagonal arrow through the expression pointing to the <value>
+
+\vspace{.1in}
+The SI units of current are coulomb/second, [C/s], which is the same thing as amps [A].
+
+{\color{grey} \hrulefill} \\
+Particle Accelerator example:\\
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=1cm 1cm 1cm 1cm, clip=true, width=0.7\columnwidth]{accumulator.pdf}
+\caption{\small Left: FNAL Accumulator tunnel.  Right: Schematic of the FNAL Accumulator.}
+\label{fig:crush}
+\end{figure}
+
+The charged particles moving through an accelerator are a `beam current'.  Unlike current in a circuit the particles are traveling through a vacuum, and don't suffer collisions.  The particles in a high energy beam are essentially moving at the speed of light.  The Fermilab Accumulator Ring, with a circumference of approximately 500 m, once stored antiprotons as a continuous stream of circulating particles.  An antiproton has the same magnitude of charge as a proton, but of opposite (negative) sign.  Suppose there were $10^{10}$ antiprotons in the ring - what is the beam current in this case?  First, calculate $\lambda$:
+\[
+\lambda = \frac{\text{total charge}}{\text{total length}} = \frac{\text{Nq}}{\text{circumference}} 
+= \frac{ (10^{10})(1.6 \times 10^{-19}) }{500} \frac{\text{C}}{\text{m}} =3.2 \times 10^{-12} \frac{\text{C}}{\text{m}}
+\]
+Then, multiply by $v=c$ to get the magnitude of the current:
+\[
+I=\lambda v = (3.2 \times 10^{-12}) \left[\frac{\text{\small C}}{\text{\small m}}\right] (3 \times 10^{8}) \left[\frac{\text{\small m}}{\text{\small s}} \right]
+\approx 1 \times 10^{-3} \text{A} = 1 \, \text{mA}
+\]
+{\color{grey} \hrulefill}
+
+{\bf Surface and volume currents}\\
+\vspace{.1in}
+
+A surface current, $\vec{K}$ A/m, is the charge/time passing a line on a surface.  A uniform 2D current can be expressed as a uniform surface charge density, $\sigma$, multiplied by the velocity $v$ of the charges.   Note that the surface current is related to the current as follows,
+\[
+\vec{K} = \frac{d\vec{I}}{dl_{\perp}}
+\]
+where $l_{\perp}$ is a line perpendicular to the direction of the current flow.
+
+A volume current, $\vec{J}$ A/m$^{2}$, is the charge/time passing a cross-sectional area.  A uniform 3D current can be expressed as a uniform volume charge density, $\rho$, multiplied by the velocity $v$ of the charges.  Note that the volume current is related to the current as follows,
+\[
+\vec{J} = \frac{d\vec{I}}{da_{\perp}}
+\]
+where $a_{\perp}$ is an area perpendicular to the direction of the current flow.  
+
+Summarizing the relationship between steady currents and uniform charge densities in one, two, and three dimensions:
+
+\tcbset{highlight math style={colframe=myblue,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation*}
+\begin{aligned}
+& \vec{I} =\lambda \, \vec{v} \hspace{.3in} \text{\small A} \\
+& \vec{K} = \sigma \, \vec{v} \hspace{.2in} \text{\small A}/\text{\small m} \\ 
+& \vec{J} = \rho \, \vec{v} \hspace{.2in} \text{\small A}/\text{\small m}^{2}
+\end{aligned}
+\label{eq:currents}
+\end{empheq}
+
+\vspace{.2in}
+{\color{grey} \hrulefill}\\
+Example:\\
+There is a current density of $\vec{J}=\alpha s$ in a cylindrical cable of radius $R$ (the cable is concentric with the $z$-axis).  What is the total current flowing in the cable?
+\[
+I = \int \vec{J} \cdot d\vec{a} = \int J \, da_{\perp} =\int_{0}^{2\pi} \int_{0}^{R} \vec{J} sdsd\phi 
+= 2\pi \alpha \int_{0}^{R} s^{2}ds = 2\pi \alpha \frac{R^{3}}{3}
+\]
+{\color{grey} \hrulefill}
+
+\vspace{.2in}
+
+{\bf The continuity equation (charge conservation)}\\
+\vspace{.2in}
+
+The continution equation, Eq.~\ref{eq:continuity}, is an expression of local charge conservation.  
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 1cm 0cm .5cm, clip=true, width=0.6\columnwidth]{bound_surface.png}
+\caption{\small Arbitrary bounding surface enclosing a volume.}
+\label{fig:border}
+\end{figure}
+
+\tcbset{highlight math style={colframe=myblue,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+\vec{\nabla} \cdot \vec{J} = -\frac{\partial \rho}{\partial t}
+\label{eq:continuity}
+\end{empheq}
+
+\vspace{.1in}
+
+Equation \ref{eq:continuity} may be obtained by considering a surface that encloses a volume of space, such as shown in Fig.~\ref{fig:border}.  By charge conservation, the charge that flows through the bounding surface must be equal to the change in the amount of charge within the volume.  An outward flow of charge through the boundary is given by:
+
+\[
+\oint \, \vec{J} \cdot d\vec{a} 
+\]
+
+This must be equal to the decrease of charge within the volume.
+
+\[
+-\frac{dq}{dt} = -\frac{\partial}{\partial t} \int \rho\, d\tau
+\]
+
+Set these equal to each other and apply the divergence theorem to write the area integral as a surface integral.
+
+\begin{equation*}
+\begin{aligned}
+& \oint \, \vec{J} \cdot d\vec{a}  = -\frac{\partial}{\partial t} \int \rho\, d\tau \\
+& \int ( \vec{\nabla} \cdot \vec{J} ) \, d\tau = \int -\frac{\partial \rho}{\partial t} \, d\tau \\
+& \vec{\nabla} \cdot \vec{J} = -\frac{\partial \rho}{\partial t}
+\end{aligned}
+\end{equation*}
+
+{\bf The `curly' nature of $\vec{B}$}\\
+\vspace{.2in}
+
+In a later lecture the functional form of the magnetic field around an infinite wire will be derived.  Here it will just be noted that the magnetic field lines curl around a line of current.  Figure~\ref{fig:bwire} shows a cartoon of the way that a $\vec{B}$ field wraps around a section of an infinite wire.
+
+A magnetic field is concentric around the wire generating the field.  The question is which direction is the field circulating?  See Fig.~\ref{fig:bwire} to understand how to get this direction.  Put the thumb of your {\bf \textit{right hand}} pointing in the direction of the current in the wire.  Curl your figures so that your thumb is perpendicular to the those curled figures (like you are giving a `thumbs up' sign).  The $\vec{B}$ field direction is pointing in the same direction the tips of your figures are pointing.  Check against the figures below.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=1cm 1cm 1cm .5cm, clip=true, width=0.6\columnwidth]{B_longwires.png}
+\caption{\small Magnetic fields curl around a line of current.}
+\label{fig:bwire}
+\end{figure}
+
+The left subfigure of Fig.~\ref{fig:bwire} corresponds to a `thumbs up'.  If your thumb is pointing in the +$\hat{z}$ direction, then your figures are curing in the +$\hat{\phi}$ direction.  (Remember CCW from the $x$-axis when looking down from the positive $z$-axis is the  +$\hat{\phi}$ direction.)  The right subfigure of Fig.~\ref{fig:bwire} corresponds to a `thumbs down'.  If your thumb is pointing in the -$\hat{z}$ direction, then your figures are curling in the -$\hat{\phi}$ direction.
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+
+

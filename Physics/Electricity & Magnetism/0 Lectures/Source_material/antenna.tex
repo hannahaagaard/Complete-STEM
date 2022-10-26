@@ -1,0 +1,207 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.5in
+\topmargin = -.5in
+\oddsidemargin = -0.2in
+%\evensidemargin = -0.5in
+\pagestyle{empty}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{empheq}
+\usepackage{frcursive}
+\usepackage{amsmath,amssymb}
+\usepackage{calligra}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
+
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+
+% script r
+\newcommand{\scriptr}[1]{\ensuremath{\mathcalligra{#1}}}
+
+%blue lines
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+\begin{document}
+\begin{flushleft}
+
+
+\iffalse
+\subsubsection*{Fields of a moving point charge}
+Next we will consider the special case of a moving point charge.  Ultimately, we would like to know what the fields look like compared to static fields.  The route to finding those fields is to first find tractable expressions for the potentials, these are called the Lienard-Wiechert potentials.
+\begin{equation*}
+\begin{aligned}
+V(\vec{r},t)  & =\frac{1}{4\pi \varepsilon_{0}} \: \frac{qc}{\text{\small\slshape\cursive r}c-\vec{\pmb{\text{\small\slshape\cursive r}}}\cdot\vec{v} } \\
+\vec{A}(\vec{r},t) & = =\frac{\mu_{0}}{4\pi} \: \frac{qc\vec{v}}{ \text{\small\slshape\cursive r}c-\vec{\pmb{\text{\small\slshape\cursive r}}}\cdot\vec{v} } 
+\end{aligned}
+\end{equation*}
+\fi
+
+\subsection*{Radiated power from a short dipole antenna} 
+
+\iffalse
+{\color{myblue} \rule{\linewidth}{0.5mm} }\\
+{\color{myblue} \rule{\linewidth}{0.5mm} }
+\text{\small\slshape\cursive r}
+\cos{(\alpha)}\cos{(\beta)}  - \sin{(\alpha)}\sin{(\beta)}
+\fi
+
+This material uses some ideas from the following website:
+
+https://www.cv.nrao.edu/course/astr534/AntennaTheory.html  \\
+
+\vspace{.1in}
+The website is a `National Radio Astronomy Observatory' website, and the point is made that a passive radio telescope is a receiving antenna, and that since the radiation pattern is the same at a transmitting antenna as at a receiving antenna, the analysis for a transmitting antenna contributes to the understanding of a receiving antenna.
+
+\vspace{.2in}
+The goal is to calculate the power radiated from a half-wave antenna, as shown below.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[width=.5\columnwidth]{antenna.png}
+\end{figure}
+
+The average power from the antenna is given by:
+
+\begin{equation*}
+\begin{aligned}
+<P> &  = \left< \oint \vec{S} \cdot d\vec{a} \right>  = \left< \frac{1}{\mu_{0}} \oint (\vec{E} \times \vec{B}) \cdot d\vec{a} \right> \\
+ & = \left< \frac{1}{\mu_{0}c} \oint E^{2} \: da \right>
+\end{aligned}
+\end{equation*}
+
+Now the question is, are the electrons in the antenna non-relativistic?  If so, we don't have to worry about  correction factors for the radiated power.
+
+\subsubsection*{Electron speed}
+The relationship between current density and average electron speed in a conductor as given by the Drude model is the following:
+
+\[
+J = n\; e \; v_{avg}
+\]
+
+where $n$ is the number volume of free electrons in the conductor, $e$ is the charge of the electron, and $v_{avg}$ is the drift velocity of the electrons.  In terms of current this is,
+\[
+I=JA=nA\; e \; v_{avg}
+\]
+
+Suppose there is 1 amp of current flowing though a copper wire of cross-section (1 mm)$^{2}$,  and that the copper has a number density of free electrons of $n \approx 1\times 10^{29}$ m$^{-3}$.  Then the average velocity of the electrons is 
+
+\begin{equation*}
+\begin{aligned}
+v_{avg} & = \frac{I}{nAe} = \frac{1 \mbox{[amp]} }{ (1\times 10^{29} \mbox{[m$^{-3}$]}) (1 \times 10^{-3} \mbox{[m]} )^{2}(1.6 \times 10^{-19} [\mbox{C}] ) } \\
+& = 6.25 \times 10^{-5} \: [\mbox{m}/\mbox{s}]
+\end{aligned}
+\end{equation*}
+
+The electrons are not moving at relativistic speeds.
+
+\subsubsection*{Approach of the NRAO notes}
+
+Since the electrons in the antenna are not moving relativistically, the expression for the electric field is given by:
+
+\begin{equation*}
+\begin{aligned}
+\vec{E}  & = \frac{q}{4\pi \varepsilon_{0}} \left( \frac{\text{\small\slshape\cursive r}}{c^{3}\text{\small\slshape\cursive r}^{3}} \right) [c\hat{\text{\small\slshape\cursive r}}(\text{\small\slshape\cursive r}\hat{\text{\small\slshape\cursive r}} \cdot \vec{a})-\vec{a}(c\text{\small\slshape\cursive r}) ] \\
+ &  = \frac{\mu_{0}q}{4\pi} \left( \frac{1}{\text{\small\slshape\cursive r}} \right) [\hat{\text{\small\slshape\cursive r}}(\hat{\text{\small\slshape\cursive r}} \cdot \vec{a})-\vec{a} ] \\
+ &  = \frac{\mu_{0}q}{4\pi} \left( \frac{a}{\text{\small\slshape\cursive r}} \right) [\hat{\text{\small\slshape\cursive r}}\cos{(\theta)}-\hat{z} ]
+\end{aligned}
+\end{equation*}
+
+The magnitude of the electric field is $|E|=\sqrt{\vec{E} \cdot \vec{E}}$, which is
+\begin{equation*}
+\begin{aligned}
+|E| &  = \frac{\mu_{0}q}{4\pi} \left( \frac{a}{\text{\small\slshape\cursive r}} \right) \sqrt{\cos^{2}{(\theta)}-2(\hat{\text{\small\slshape\cursive r}} \cdot \hat{z}) \cos{(\theta)} +1} \\
+  &  = \frac{\mu_{0}q}{4\pi} \left( \frac{a}{\text{\small\slshape\cursive r}} \right) \sqrt{\cos^{2}{(\theta)}-2\cos^{2}{(\theta)} +1} \\
+   &  = \frac{\mu_{0}q}{4\pi} \left( \frac{a}{\text{\small\slshape\cursive r}} \right) \sqrt{1-\cos^{2}{(\theta)}} \\
+     &  = \frac{\mu_{0}qa}{4\pi} \left( \frac{\sin{(\theta)}}{\text{\small\slshape\cursive r}} \right) 
+\end{aligned}
+\end{equation*}
+
+Add up all the charges along the length of the antenna:
+\[
+E = = \frac{ \mu_{0} }{4\pi} \int_{-L/2}^{L/2} \left( \frac{\sin{(\theta)}}{\text{\small\slshape\cursive r}} \right) a dq 
+\]
+
+With a sinusoidal drive current at the feed, the charges oscillate in the antenna.  Then, $I=I_{0}e^{-i\omega t}$ (remembering that for a measurable quantity, we take only the real part).  Use the chain rule and the fact that, since the driving current is sinusoidal, $\dot{v}=-i\omega v$  (remember $I=neAv$): 
+\[
+adq=\dot{v}\left( \frac{dq}{dz} \right) dz = -i\omega v  \left( \frac{dq}{dz} \right) dz= -i\omega \left(  \frac{dz}{dt} \right) \left( \frac{dq}{dz} \right) dz = - i\omega \left( \frac{dq}{dt} \right) dz = -i\omega I dz
+\]
+ 
+Then
+\[
+E = = \frac{ -i\omega \mu_{0} }{4\pi} \left( \frac{\sin{(\theta)}}{\text{\small\slshape\cursive r}} \right) \int_{-L/2}^{L/2}   I dz 
+\]
+
+Finally, to evaluate the integral expression for $E$, an expression for I in the antenna is needed.  The driving current coming in at the center of the antenna is sinusoidal, $I_{drive}=I_{0}e^{-i\omega t}$.  The current must drop to zero at the ends of the antenna where the conductivity goes to zero.  For a short antenna, the approximation can be made that the current drops linearly to zero at the ends of the antenna:
+
+\[
+I = I_{0}e^{-i\omega t}\left[ 1 - \frac{z}{\frac{L}{2}} \right]
+\]
+
+So that,
+\begin{equation*}
+\begin{aligned}
+E & = \frac{ -i\omega \mu_{0} }{4\pi} \left( \frac{\sin{(\theta)}}{\text{\small\slshape\cursive r}} \right) I_{0} e^{-i\omega t } \int_{-L/2}^{L/2}   \left(1-\frac{2z}{L}\right) dz \\
+ & = \frac{ -i\omega \mu_{0} }{4\pi} \left( \frac{\sin{(\theta)}}{\text{\small\slshape\cursive r}} \right) I_{0} e^{-i\omega t } \int_{-L/2}^{L/2}   \left(1-\frac{2z}{L}\right) dz \\
+  & = \frac{ -i\omega \mu_{0} }{4\pi} \left( \frac{\sin{(\theta)}}{\text{\small\slshape\cursive r}} \right) I_{0} e^{-i\omega t }  \left[ \left( \frac{L}{2} - \frac{ L^{2} }{4L}  \right) -  \left( \frac{-L}{2} - \frac{ L^{2} }{4L}  \right) \right] \\
+\end{aligned}
+\end{equation*}
+
+Then the Poynting vector is,
+\begin{equation*}
+\begin{aligned}
+\vec{S} & =\frac{1}{\mu_{0}c}E^{2} \hat{\text{\small\slshape\cursive r}} \\
+& = \frac{\mu_{0}}{c}\left( \frac{\omega }{4\pi } \right)^{2} \left( \frac{\sin{(\theta)}}{\text{\small\slshape\cursive r}} \right)^{2} \left( I_{0}L \right)^{2}(\cos{(\omega t)})^{2}\hat{\text{\small\slshape\cursive r}} 
+\end{aligned}
+\end{equation*}
+
+So that
+\begin{equation*}
+\begin{aligned}
+<P> & = \left< \frac{1}{\mu_{0}c} \oint E^{2} \: da \right> \\
+& = \frac{\mu_{0}}{c}\left( \frac{\omega }{4\pi } \right)^{2}  \left( I_{0}L \right)^{2}\left(\frac{1}{2}\right) \int \left( \frac{\sin{(\theta)}}{\text{\small\slshape\cursive r}} \right)^{2} \text{\small\slshape\cursive r}^{2}\sin{(\theta)}d\theta d\phi \\
+& = \frac{\mu_{0}}{c}\left( \frac{1}{2}\right)^{2} \left( \frac{\omega  I_{0}L }{2 \pi}  \right)^{2}\left(\frac{1}{2}\right) \left( \frac{8\pi}{3} \right) \\
+\end{aligned}
+\end{equation*}
+
+This can be written in terms of the wavelength, $\lambda$, since $k=\frac{2\pi}{\lambda}=\frac{\omega}{c} \rightarrow \frac{c}{\lambda}=\frac{\omega}{2\pi}$, 
+
+\[
+<P> = \frac{\mu_{0}\pi c}{3}\left( \frac{I_{0}L}{\lambda} \right)^{2}
+\]
+
+
+\subsubsection*{Consistent with Griffiths}
+
+For the case of an oscillating dipole, the derivation of the radiated power in Griffiths give the following:
+
+\[
+<P> = \frac{\mu_{0} \: p_{0}^{2}\: \omega^{4}}{12 \pi c} = \frac{\mu_{0} \pi (q_{0}d)^{2}\omega^{2}}{3 c}\left( \frac{\omega}{2 \pi} \right)^{2}  = \frac{\mu_{0} \pi (q_{0}\omega)^{2}d^{2}}{3 c}\left( \frac{\omega}{2 \pi} \right)^{2}
+\]
+
+Since $d$ is equivalent to $L$, and $\omega q_{0} = I_{0}$, and $\frac{\omega}{2\pi}=\frac{c}{\lambda}$, the results are equivalent.
+
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+

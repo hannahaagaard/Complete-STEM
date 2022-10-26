@@ -1,0 +1,303 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{grey}{RGB}{200, 200, 200}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{mygreen}{RGB}{0, 100, 0}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{myred}{RGB}{120, 0, 0}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 3, Lecture 5} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\color{myblue} \bf Separation of Variables: Laplace's equation in 2D cylindrical coordinates}
+
+Consider the Laplace equation in cylindrical coordinates when the voltage has no $z$ dependence, we have $V(s,\phi)$, and so no $z$ derivative in Laplace's equation,
+
+\begin{equation*}
+\begin{aligned}
+& \nabla^{2}V(s,\phi) = 0 \\[6pt]
+& \frac{1}{s}\frac{\partial}{\partial s}\left( s \frac{\partial V(s,\phi)}{\partial s} \right) + \frac{1}{s^{2}} \frac{\partial^{2} V(s,\phi)}{\partial \phi^{2}}  = 0
+\end{aligned}
+\end{equation*}
+
+Write $V(s,\phi)$ as a product of functions, each dependent on only one of the independent variables, $V(s,\phi)=\mathcal{S}(s)\Phi(\phi)$.  Substituting this into Laplace's equation,
+
+\begin{equation}
+\frac{\Phi(\phi)}{s}\frac{\partial}{\partial s}\left( s \frac{\partial \mathcal{S}(s)}{\partial s} \right) + \frac{\mathcal{S}(s)}{s^{2}} \frac{\partial^{2} \Phi(\phi)}{\partial \phi^{2}}  = 0
+\label{eq:cylproduct}
+\end{equation}
+
+Now multiply both sides of Eq.~\ref{eq:cylproduct} by $\frac{s^{2}}{\mathcal{S}(s)\Phi(\phi)}$:
+
+\begin{equation}
+\frac{s}{\mathcal{S}(s)}\frac{\partial}{\partial s}\left( s \frac{\partial \mathcal{S}(s)}{\partial s} \right) + \frac{1}{\Phi(\phi)} \frac{\partial^{2} \Phi(\phi)}{\partial \phi^{2}}  = 0
+\label{eq:cylsepterms}
+\end{equation}
+
+The first term of Eq.~\ref{eq:cylsepterms} has only $s$-dependence, while the second term of Eq.~\ref{eq:cylsepterms} has only $\phi$-dependence.  Each term must be a constant, choose $k^{2}$, for later convenience.  Since the constant is unknown at this point, the exact form of the constant doesn't affect the final solution.
+
+\begin{align}
+& \frac{s}{\mathcal{S}(s)}\frac{\partial}{\partial s}\left( s \frac{\partial \mathcal{S}(s)}{\partial s} \right) = k^{2} \label{eq:seq} \\[6pt]
+& \frac{1}{\Phi(\phi)} \frac{\partial^{2} \Phi(\phi)}{\partial \phi^{2}}  = -k^{2} \label{eq:phieq}
+\end{align}
+
+Eq.~\ref{eq:phieq} is the harmonic oscillator equation, with the known solution,
+
+\[
+\Phi(\phi) = C\cos{(k\phi)} + D\sin{(k\phi)}
+\]
+
+Eq.~\ref{eq:seq} is Euler's equation, which has the known solution,
+\begin{align}
+& \mathcal{S}(s) = As^{k} +Bs^{-k} \hspace{.5in} \longrightarrow \hspace{.5in}  k \ne 0 \\
+& \mathcal{S}(s) = G + H\ln{(s)} \hspace{.5in} \longrightarrow \hspace{.5in}  k = 0
+\end{align}
+
+Our choice of constant $k$ was arbitrary, so sum $V(s,\phi) = \mathcal{S}(s)\Phi(\phi)$ over all possible integer values of $k$ to have the general solution:
+
+\begin{equation}
+V(s,\phi) = G + H\ln{(s)} + \sum_{k=1}^{\infty} \left(  A_{k}s^{k} + B_{k}s^{-k} \right) ( C_{k} \cos{(k\phi)}+D_{k}\sin{(k\phi)} )
+\label{eq:withkzero}
+\end{equation}
+
+The natural log function blows up in both directions, $s\rightarrow 0$ and $s\rightarrow \infty$, as shown in Fig.~\ref{fig:lns}.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.4\columnwidth]{lns.png}
+\caption{\small The function $\ln{(s)}$ blows up to $-\infty$ as $s\rightarrow 0$, and blows up (more slowly) to $+\infty$ as $s\rightarrow \infty$.}
+\label{fig:lns}
+\end{figure}
+
+The behavior of $\ln{(s)}$ makes it unlikely to satisfy boundary conditions (at $s=0$ or $s\rightarrow \infty$) in a realistic problem.  The constant term in the solution ('G' above), may or may not be present, depending on the physical problem.  It acts as an additive constant to the potential, thus shifting the value of the potential everywhere.  It does not change the functional variation of the potential, and for most of the problems you will do in this course it is appropriate to set $G=0$.  Then, for practical purposes (ignoring the $k=0$ terms) the potential in 2D cylindrical (also called circular) coordinates is as follows:
+
+\tcbset{highlight math style={colframe=myblue,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+V(s,\phi) = \sum_{k=1}^{\infty} \left(  A_{k}s^{k} + B_{k}s^{-k} \right) ( C_{k} \cos{(k\phi)}+D_{k}\sin{(k\phi)} )
+ \end{empheq}
+  
+Note that this geometry is applicable to finding the potential and fields of magnets in particle accelerators.  Many of the magnets ideally have an unchanging field in the $z$ direction, the (longitudinal) direction of beam propagation.  The field may vary in the transverse direction.  Calculation of the magnetic potential and fields for accelerator magnets can be found in the optional Chapter 5 lecture entitled 'Ch5\_Extra\_magnetic\_elements'.  A less 'real world' example follows below.
+  
+ \vspace{.2in}
+{\color{grey} \rule{\linewidth}{0.7mm} }\\
+\vspace{-.2in}
+{\textbf{\color{mygreen} Example problem: Long cylindrical shell}}\\
+\vspace{.1in}
+The 'long' in an example problem such as 'long cylindrical shell' implies that the functional form of the potential does not change in the $z$ direction.  A problem of this type then has a 2D cylindrical (or circular) geometry.  The general solution of Laplace's equation for these cases is as discussed above:
+\[
+V(s,\phi) = \sum_{k=1}^{\infty} \left(  a_{k}s^{k} + b_{k}s^{-k} \right) ( c_{k} \cos{(k\phi)}+d_{k}\sin{(k\phi)} )
+ \]
+ 
+ Then we follow the general steps below:
+\begin{enumerate} 
+\item Write out the boundary conditions for the problem at hand. 
+\item Apply the general (often zero voltage/charge in some limit) boundary conditions to simplify the general solution.
+\item Apply the voltage/charge B.C. specific to the problem at hand, solving for the last undetermined coefficient using the properties of orthogonal functions.
+\end{enumerate}
+
+Before doing a specific problem, consider boundary value problems with a cylindrical shell as the boundary in general.  A cylindrical shell of radius $s=R$ splits space into two regions; a region where $s<R$, with a voltage function that we'll call $V_{\text{in}}(s,\phi)$, and a region where $s>R$, with a voltage function that we'll call $V_{\text{out}}(s,\phi)$.  For \textit{any} problem, the following B.C. holds:
+
+\begin{equation}
+V_{\text{in}}(R,\phi) = V_{\text{out}}(R,\phi)
+\label{eq:inout}
+\end{equation}
+
+Or, stating that another way,
+
+\[
+\left. V_{\text{in}}(s,\phi) = V_{\text{out}}(s,\phi) \: \right|_{s=R}
+\]
+
+We'll get back to Eq.~\ref{eq:inout} soon.
+
+For all of the 2D cylindrical geometry problems in this course, 
+
+\begin{equation}
+V_{\text{in}}(s,\phi)   \hspace{.05in} \text{is finite as} \hspace{.1in} s\rightarrow 0 
+\label{eq:bc1}
+\end{equation}
+
+Considering the limit given by Eq.~\ref{eq:bc1}:
+\begin{align}
+& V_{\text{in}}(s\rightarrow 0, \phi)=\lim\limits_{s \to 0} \: \sum_{k=1}^{\infty}  \left(  a_{k}s^{k} + b_{k}s^{-k} \right) ( c_{k} \cos{(k\phi)}+d_{k}\sin{(k\phi)} ) \hspace{.1in} \text{is finite} \notag \\[2pt]
+& \lim\limits_{s \to 0} \: a_{k}s^{k} = 0 \notag \\[2pt]
+& \lim\limits_{s \to 0} \: b_{k}s^{-k} \rightarrow \infty \hspace{1in} \text{\color{myblue} This term blows up!} \notag 
+\end{align}
+
+Note that if there is a finite non-zero value of the potential as $s\rightarrow 0$, then the constant $k=0$ term ($G$ in Eq.~\ref{eq:withkzero}) that was previously dropped should instead be retained in the expression for the potential.  Since the $b_{k}s^{-k}$ terms blow up as $s\rightarrow 0$, all the $b_{k}$ coefficients of the $s^{-k}$ terms in $V_{\text{in}}$ must be zero.  That is,
+
+\begin{equation}
+ V_{\text{in}}(s,\phi) = \sum_{k=1}^{\infty} a_{k}s^{k} ( c_{k}\cos{(k\phi)}+d_{k}\sin{(k\phi)} ) 
+\label{eq:vin}
+\end{equation}
+
+For most (but not all!) of the cylindrical boundary value problems in the course, 
+
+\begin{equation}
+V_{\text{out}}(s,\phi) = 0 \hspace{.1in} \text{as} \hspace{.1in} s\rightarrow \infty 
+\label{eq:bc2}
+\end{equation}
+
+The B.C. of Eq.~\ref{eq:bc2} does not apply to some of the problems (a few of them in Chapter 4) where a cylindrical shell is immersed in a constant electric field that extends to infinity.  In that case, the potential cannot vanish at infinity either.
+
+If the limit given by Eq.~\ref{eq:bc2} holds then:
+\begin{align}
+& V_{\text{out}}(s\rightarrow \infty, \phi)=\lim\limits_{s \to \infty} \: \sum_{k=1}^{\infty}  \left(  a_{k}s^{k} + b_{k}s^{-k} \right) ( c_{k} \cos{(k\phi)}+d_{k}\sin{(k\phi)} )\hspace{.1in} \rightarrow 0 \notag \\[4pt]
+& \lim\limits_{s \to \infty} \: a_{k}s^{k}  \ne 0 \hspace{1.2in} \text{\color{myblue} This term does not vanish!} \notag \\[4pt]
+& \lim\limits_{s \to \infty} \: b_{k}s^{-k} = 0 \notag 
+\end{align}
+
+Since the $a_{k}s^{k}$ terms fail to vanish as $s\rightarrow \infty$, all the $a_{k}$ coefficients of the $s^{k} $ terms in $V_{\text{out}}$ must be zero.  That is,
+
+\begin{equation}
+ V_{\text{out}}(s,\phi) =  \sum_{k=1}^{\infty} b_{k}s^{-k} ( c_{k} \cos{(k\phi)}+d_{k}\sin{(k\phi)} )
+\label{eq:vout}
+\end{equation}
+
+Now going back to Eq.~\ref{eq:inout}, using Eq.~\ref{eq:vin} and Eq.~\ref{eq:vout}:
+
+\begin{align}
+& V_{\text{in}}(R,\phi) = V_{\text{out}}(R,\phi) \notag \\[4pt]
+& \sum_{k=1}^{\infty} a_{k}R^{k} ( c_{k} \cos{(k\phi)}+d_{k}\sin{(k\phi)} ) = \sum_{k=1}^{\infty} b_{k}R^{-k} ( c_{k} \cos{(k\phi)}+d_{k}\sin{(k\phi)} ) \notag \\[4pt]
+& a_{k}R^{k} = b_{k}R^{-k} \hspace{.5in} \text{\color{myblue} For every $k$!} \notag \\[6pt]
+& b_{k} = a_{k}R^{2k} \label{eq:albl}
+\end{align}
+
+Finally, these three relatively general boundary conditions yield the following simplified expressions for the potentials inside and outside the cylindrical shell:
+
+\begin{eqnarray}
+V_{\text{in}}(s,\phi) & = & \sum_{k=1}^{\infty}  s^{k} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} )\label{eq:vinzeros}\\
+V_{\text{out}}(s,\phi) &  = & \sum_{k=1}^{\infty} R^{2k}  s^{-k} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} )\label{eq:voutzeros}
+\end{eqnarray}
+
+Note that products of undetermined coefficients have been combined into a new undetermined coefficient; that is, $A_{k}=a_{k}c_{k}$ and $B_{k}=a_{k}d_{k}$.  There are then only two remaining coefficients, $A_{k}$ associated with the cosine functions, and $B_{k}$ associated with the sine functions.  The $A_{k}$ coefficients will be determined using the orthogonality property of the cosine functions, and the $B_{k}$ coefficients will be determined using the orthogonality property of the sine functions.  For any problem with finite potential as $s\rightarrow 0$ and vanishing potential $s\rightarrow \infty$, it is acceptable to start with equations \ref{eq:vinzeros} and \ref{eq:voutzeros}, as long as the justifications are briefly stated.  Something like,
+\begin{itemize}
+\item $V_{\text{in}}$, there are no $b_{k}s^{-k}$ terms since $V$ is finite as $s\rightarrow 0$. \\
+\item $V_{\text{out}}$, there are no $a_{k}s^{k}$ terms since $V=0$ as $r\rightarrow \infty$. \\
+\item $b_{k} = a_{k}R^{2k}$ since $V_{\text{in}}(R,\phi)=V_{\text{out}}(R,\phi)$
+\end{itemize}
+
+\textbf{\color{myblue} Griffiths Problem 3.26}\\
+Now for a specific problem, namely, 3.26 in Griffiths 4th edition of 'Introduction to Electrodynamics'.  Restating the problem here - \\
+\vspace{.1in}
+ "Charge density $\sigma(\phi)=a\sin{(5\phi)}$, where $a$ is constant, is glued over the surface of an infinite cylinder of radius $R$.  Find the potential inside and outside the cylinder."
+ 
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.3\columnwidth]{cylwcharge.png}
+\caption{\small A cylindrical shell of radius $R$ with charge density $\sigma(\phi)=a\sin{(5\phi)}$ on its surface.}
+\label{fig:cylofcharge}
+\end{figure}
+
+The finite, localized surface charge implies that the potential vanishes at infinity, and requires that the potential remain finite at $s=0$.  Then we may start here:
+
+\begin{eqnarray*}
+V_{\text{in}}(s,\phi) & = & \sum_{k=1}^{\infty}  s^{k} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} ) \\[4pt]
+V_{\text{out}}(s,\phi) &  = & \sum_{k=1}^{\infty} R^{2k}  s^{-k} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} )
+\end{eqnarray*}
+
+In this particular problem, the last boundary condition is:
+
+\begin{equation}
+\left. \frac{\partial V_{out}(s,\phi)}{\partial s} - \frac{\partial V_{in}(s,\phi)}{\partial s} \: \right\vert_{s=R}= -\frac{\sigma(s,\phi) }{\varepsilon_{0}}
+\label{eq:lastbc}
+\end{equation}
+
+The charge density is proportional to the \textit{gradient} of the potential, not the potential itself.  The derivatives are taken in the direction normal to the boundary surface (in this case $\hat{n}=\hat{s}$, so we have $s$ derivatives).  If this last B.C. bothers you, see Chapter 2 'Efield\_BC' lecture notes.  Anyway, the next step is to calculate the derivatives,
+
+\begin{eqnarray*}
+ \left. \frac{\partial V_{out}(s,\phi)}{\partial s} \right|_{s=R} & = & 
+ \left. \sum_{k=1}^{\infty} R^{2k}  \frac{\partial s^{-k}}{\partial s} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} ) \right|_{s=R}\\[4pt]
+& =  & \left. \sum_{k=1}^{\infty} R^{2k} (-k) s^{-k-1} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} ) \right|_{s=R} \\[4pt]
+& = &  \sum_{k=1}^{\infty} (-k) R^{2k} R^{-k-1} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} ) \\[4pt]
+& = & \sum_{k=1}^{\infty} (-k) R^{k-1} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} )
+\end{eqnarray*}
+
+And, 
+
+\begin{eqnarray*}
+ \left. \frac{\partial V_{in}(s,\phi)}{\partial s} \right|_{s=R} & = & 
+\left. \sum_{k=1}^{\infty}  \frac{\partial s^{k}}{\partial s} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} )  \right|_{s=R} \\[4pt]
+& =  & \left. \sum_{k=1}^{\infty}  (k) s^{k-1} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} )  \right|_{s=R} \\[4pt]
+& = & \sum_{k=1}^{\infty}  (k) R^{k-1} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} ) 
+\end{eqnarray*}
+
+Plugging these results into Eq.~\ref{eq:lastbc}: 
+\begin{equation*}
+\sigma_{0}(R,\phi) = \varepsilon_{0} \sum_{k=1}^{\infty} \left[ (k) R^{k-1}  + (k) R^{k-1} \right] ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} ) 
+\end{equation*}
+
+Simplifying and plugging in the specific expression for the charge density,
+
+\begin{equation}
+a\sin{(5\phi)} = \varepsilon_{0} \sum_{k=1}^{\infty} 2kR^{k-1} ( A_{k} \cos{(k\phi)}+B_{k}\sin{(k\phi)} ) 
+\label{eq:cylsurface}
+\end{equation}
+
+Before applying the orthogonality relation, reduce the work by considering the parity of the charge density, which is proportional to $\sin{(5\phi)}$, an odd function over the interval.  An odd function cannot be decomposed into even functions such as $\cos{(n\phi)}$.  In fact, as will be seen below, since the charge density is made up of a single harmonic (the 5th harmonic), there can only be one surviving term in the expansion for the potential.  The cosine terms will be discarding for parity reasons.  To find the coefficients $B_{k}$, multiply the expression given by Eq.~\ref{eq:cylsurface} for the charge density by the nth harmonic, and integrate over the interval:
+
+\begin{align}
+& \int_{0}^{2\pi} a\sin{(5\phi)}\sin{(n\phi)} d\phi = \varepsilon_{0} \sum_{k=1}^{\infty} 2kR^{k-1} B_{k} \int_{0}^{2\pi} \sin{(k\phi)} \sin{(n\phi)} d\phi \notag \\[6pt]
+& a\pi \, \delta_{5n} = \varepsilon_{0} \sum_{k=1}^{\infty} 2kR^{k-1} B_{k} \pi \, \delta_{kn} =  \varepsilon_{0} 2nR^{n-1} B_{n} \pi \, \delta_{nn} 
+\end{align}
+
+Note that only the nth term of the summation survives, the other terms are zero since $k\ne n$.  Now solving for $B_{n}$, :
+
+\begin{equation}
+B_{n} = \left( \frac{a}{\varepsilon_{0}} \right) \left( \frac{1}{2nR^{n-1}} \right) \, \delta_{5n} 
+\label{eq:deltas}
+\end{equation}
+
+All $B_{n}$ are zero except for $B_{5}$ due to the $\delta_{5n}$.   When solutions to a potential (or charge density) are written as expansions of harmonic functions, the solution is often approximated by truncating the expansion after a sufficient number of terms.  However, if the voltage or charge density of the boundary has the functional form of a single term of the harmonic expansion, that term alone will produce an exact match at the boundary and is all that is needed for an exact solution.  Finishing up this particular problem, 
+
+\[
+B_{5} = \left( \frac{a}{\varepsilon_{0}} \right) \left( \frac{1}{10R^{4}} \right)
+\]
+
+So, the potentials are then,
+
+\begin{eqnarray*}
+V_{\text{in}}(s,\phi) & = &  \left( \frac{a}{10 \varepsilon_{0}} \right) \left( \frac{s^{5}}{R^{4}} \right) \sin{(5\phi)}  \\[4pt]
+V_{\text{out}}(s,\phi) &  = &   \left( \frac{a}{10 \varepsilon_{0}} \right) \left( \frac{R^{6}}{s^{5}} \right) \sin{(5\phi)} 
+\end{eqnarray*}
+
+Notice that if $s=R$ then $V_{\text{in}}=V_{\text{out}}$ as it should.  Also note that these solutions behave properly in the limits, that is, as $s\rightarrow 0$, $V_{\text{in}} \rightarrow 0$ and as $s\rightarrow \infty$, $V_{\text{out}} \rightarrow 0$.
+ 
+ {\color{grey} \rule{\linewidth}{0.7mm} }\\
+
+\end{flushleft}
+\end{document}
+
+ 
+%Future - add examples
+
+
+

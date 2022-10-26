@@ -1,0 +1,270 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{15.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{grey}{RGB}{200, 200, 200}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 5, Lorentz Force} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\color{myblue} \bf Electromagnetic force on charged particles}
+
+Charged particles are subject to the Lorentz force,
+\[
+\vec{F}=q[\vec{E} + \vec{v} \times \vec{B}]
+\]
+
+{\color{grey} \hrulefill}\\
+Aside (skip if you can RHR):\\
+A quick reminder may be in order on how to use the `Right-Hand-Rule (RHR) for cross products such as $\vec{v} \times \vec{B}$ (just in case).
+
+\vspace{.1in}
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.35\columnwidth]{RHR_vectors.png}
+\caption{\small Vector direction of $\vec{A} \times \vec{B}$.  In the figure on the left, when the thumb of the right hand is aligned with the first vector in the vector product expression, $\vec{A}$, and the fingers of the right hand are aligned with the second vector of the vector product, $\vec{B}$, then the palm is facing into the screen.  The vector product direction is into the screen as indicated by the circle with an `X'.   For the figure on the right, again the thumb is aligned with $\vec{A}$ and the fingers with $\vec{B}$, but now the palm faces out of the screen.  The vector product points out of the screen as indicated by the circle with the dot.}
+\label{vect_prod}
+\end{figure}
+
+Consider a generic cross-product, $\vec{A} \times \vec{B} = \vec{C}$.  First of all, the direction of the vector $\vec{C}$ will {\it always be} perpendicular to the plane that contains the vectors $\vec{A}$ and $\vec{B}$.  That narrows it to only two potential directions - the question is which of those two is it?  An explanation of the right-hand rule method for determining the direction of the vector product is given in Fig.~\ref{vect_prod}.
+
+%\afterpage{\clearpage}
+{\color{grey} \hrulefill}
+
+Getting back to the Lorentz force,
+\[
+\vec{F}=q[\vec{E} + \vec{v} \times \vec{B}]
+\]
+
+Only a force from an electric field can do work on the particles (and increase their energy). 
+\[ 
+W=\int \: \vec{F} \cdot d\vec{l}
+\]
+Unless the force acting on a particle has some component parallel to the direction of motion, the work done by the force is zero, and there cannot be an increase in energy.  The force on a particle from a magnetic field always acts in a direction perpendicular to the motion $\vec{F}\perp \vec{v}$, and so cannot do any work on the particle.  Magnetic forces can only change the direction of the motion.  Electric forces can either change the direction of the particle (if there is a component of the field perpendicular to the motion) or do work on the particle (if there is a component of the field parallel to the field).
+
+\subsubsection*{\color{myblue} \bf Circular trajectories in uniform magnetic fields}
+
+Moving charged particles in a region of uniform magnetic field typically move in circular trajectories.  If the initial velocity is directed completely within a plane perpendicular to the magnetic field direction, then the particle will move in a circular trajectory.  If the initial velocity of the particle is parallel or antiparallel to the field, then it will be unaffected by the field.  If there are both a parallel and perpendicular component of the particle velocity with respect to the magnetic field direction, then the particle will undergo helical motion, that is, a combination of linear and circular motion.
+
+In order for a particle to move in a circle, there must be a centripetal force.  To move a negatively charged particle in counterclockwise circular motion as shown below, the magnetic field must be directed out of the plane of the figure.  The magnetic force on the particle is given by \mbox{$\vec{F}=q\vec{v}\times \vec{B}$}, where $q$ is the charge of the particle (including the sign of the charge), $\vec{v}$ is the particle velocity, and $\vec{B}$ is the magnetic field through which the particle travels.  The direction of the particle velocity at any point in the circular trajectory is tangent to the circle.  The force, velocity and magnetic field vectors are mutually orthogonal.  Given that the force is directed radially inward, and that the velocity is tangent to the trajectory, the magnetic field must be directed upward, perpendicular to the plane containing the circular particle trajectory.  See the `Magnets' lecture for more information on the magnets used in particle accelerators (there is information there on how magnets are constructed to get the specific fields needed in an accelerator).
+
+\vspace{.3in}
+\begin{figure}[h]
+\centering
+\includegraphics*[width=.3\columnwidth]{ptraj.pdf}
+\end{figure}
+
+As an example, consider an antiproton (same charge as an electron) with a total energy of 9 GeV.  Suppose we want to bend it around a circle (storage ring) of circumference 500 m.  Calculating how much bend per 
+length is needed;
+\[
+\frac{\mbox{deflection}}{\mbox{meter}}= 
+\frac{2\pi \:\mbox{radian}}{500 \: \mbox{m}}
+ = 0.013 \: \mbox{rad/m}
+\]
+
+The {\bf revolution period}, $T_{rev}$ or $T_{0}$, is the time it takes for a particle to complete one transit around the ring, and return to the starting point.  The {\bf revolution frequency} is $f_{rev}=f_{0}=\frac{1}{T_{0}}$.  For the above antiproton storage ring, since the particles are moving at light speed, the revolution frequency would be:\\
+\begin{align*}
+f_{0} & =\frac{1}{T_{0}}=\frac{\mbox{velocity}}{\mbox{circumference}}\\
+        & =\frac{3 \times 10^{8} \:\text{m/s}}{500 \:\text{m}} = 600 \; \mbox{kHz}
+\end{align*}
+
+If there were 10$^{10}$ antiprotons circulating in the ring, then the average current would be:
+\[
+I_{avg}=qNf_{0}=(1.6 \times 10^{-19}\:\text{C})(10^{10})(6 \times 10^{5} \:\text{s}^{-1})=9.6 \times 10^{-4} \approx 1 \mbox{mA}
+\]
+
+
+{\bf Orbit radius}
+
+Calculation of the orbit radius is slightly different for the case of a relativistic particle than for the case of a non-relativistic particle.  In both cases, the radius can  be found by setting the centripetal force equal to the Lorentz force from the magnetic field of the bending magnets.   The centripetal force has an extra `gamma factor' in the relativistic case.
+
+For a non-relativistic particle,
+\begin{eqnarray*}
+\frac{mv^{2}}{R} & = qv\times B\\
+ mv & = qBR
+\end{eqnarray*}
+Solving for $R$,
+\[
+R = \frac{mv}{qB}
+\]
+
+\iffalse
+For a relativistic particle,
+\begin{eqnarray*}
+\frac{\gamma mv^{2}}{R} & = qv\times B\\
+ \gamma mv & qBR
+\end{eqnarray*}
+Solving for $R$,
+\[
+R = \frac{\gamma mv}{qB}
+\]
+\fi
+
+\subsubsection*{\color{myblue} \bf Field required to bend particles}
+
+A calculation of basic importance in the manipulation of charged particle beams is the determination of the deflection of a particle by a magnetic or electric field.  The force on a particle must have a component 
+perpendicular to the direction of motion in order to bend its trajectory.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[width=0.7\columnwidth]{bendit.pdf}
+\caption{\small The left figure shows a negatively charged particle getting 
+bent in an electrostatic field.  The right figure shows a negatively 
+charged particle getting bent in a magnetic field.  The magnetic field 
+points out of the page.}
+\label{fig:bendit}
+\end{figure}
+
+Particles in a beam typically have large momenta in the direction motion, $p_{\parallel}$.  As a high energy particle travels through a field, the transverse momentum, $p_{\bot}$, imparted by the field to turn the 
+particle is much smaller than the momentum in the direction of motion.
+\begin{figure}[h]
+\centering
+\includegraphics*[width=0.5\columnwidth]{momvect.pdf}
+\caption{An sketch showing parallel and perpendicular components of 
+particle motion (scale of perpendicular momentum exaggerated for clarity).}
+\label{fig:momvect}
+\end{figure}
+
+In other words, in traveling through the bending field, the particle is turned through a small angle.  So, the small angle approximation may be used to simplify calculations.
+\[
+\tan{(\Delta\theta)}\simeq \sin{(\Delta\theta)}\simeq \Delta\theta 
+\simeq \frac{p_{\bot}}{p_{\parallel}} \simeq \frac{p_{\bot}}{p}
+\]
+
+
+Writing the change in the transverse momentum as $\Delta p$, the longitudinal momentum as $p$, and the angle change imparted by the field as $\Delta \theta$:
+\[
+\Delta \theta = \frac{\Delta p}{p}
+\]
+
+Using the chain rule to get $\Delta \theta$ in terms of the force:
+\begin{eqnarray*}
+\Delta \theta  & = & \frac{1}{p}\: \frac{\Delta p}{\Delta t} \:
+                    \frac{\Delta t}{\Delta z}\Delta z\\
+                      & = & \frac{1}{p\left(\frac{\Delta z}{\Delta t}\right)} \:
+                    \frac{\Delta p}{\Delta t}\: \Delta z
+\end{eqnarray*}
+where $\Delta z$ is the short distance traveled through the field in a time 
+$\Delta t$.  Going to differential notation:
+\begin{eqnarray*}
+\Delta \theta & = & \frac{1}{p\left(\frac{dz}{dt}\right)}\: 
+                    \frac{dp}{dt}\: dz\\
+              & = & \frac{1}{pv}\: F\: dz
+\end{eqnarray*}
+
+The total angle change through a field region of length $L$ is:
+\begin{equation}
+\theta = \frac{1}{pv} \int_{0}^{L}\: F\: dz
+\label{eq:bendangle}
+\end{equation}
+
+If the direction of beam motion is $\hat{z}$, and the desired deflection is in the $\hat{x}$ direction, then for a negatively charged particle the field must be directed in the $-\hat{x}$ direction.  That is, $F_{E}\hat{x}=-eE_{x}(-\hat{x})=eE_{x}\hat{x}$.  Plugging the electric field term of the Lorentz force into Eq.~\ref{eq:bendangle},
+
+\begin{equation}
+\theta_{total}=\frac{1}{pv}\int_{0}^{L} eE_{x} dz
+\label{eq:Eangle}
+\end{equation}
+
+In order to evaluate Eq.~\ref{eq:Eangle}, it is convenient to manipulate the momentum, velocity, and charge of the particle into a numerically convenient parameterization.  Suppose we want to bend a negatively charged particle with total energy  9 GeV and charge of magnitude $e$ through an angle of 0.013 rad as it travels one meter in the direction of motion.  The relativistic momentum of the particle ($p=\gamma m_{0} v$, with $m_{0}$ equal to the rest mass)  may be written in terms of the particle energy.  Since  $\text{Energy}=\gamma m_{0} c^{2}$, with $c$ equal to the speed of light, then $p=\gamma m_{0} c^{2} \left( \frac{v}{c^{2}} \right) =\text{Energy} \left( \frac{\beta}{c} \right)$.  This particle has a beta of $\beta=.995$, where $\beta=\frac{v}{c}$ gives the fraction of the particle speed to the speed of light.  Also note that the  energy over the charge is $\frac{9GeV}{e}=9\times 10^{9}$ volts.  Now we are ready to find the strength needed from an electric field to bend the particle.  Solving Eq.~\ref{eq:Eangle} for the integrated electric field,
+
+\begin{eqnarray*}
+\int_{0}^{L} E_{x} dz & = & \frac{\theta p v}{e} = 
+\frac{\theta (\gamma m_{0} c^{2}) \beta^{2}}{e}\\
+E_{x}L & = & 
+\frac{(13 \times 10^{-3}\:\mbox{[rad]})(9 \times 10^{9} \:\mbox{[eV]})(.99)}{e \:\text{[C]}}
+\end{eqnarray*}
+
+where $\gamma m_{0} v=\gamma m_{0} \beta c$ is the momentum of the particle, $\gamma m_{0} c^{2}$ is the energy of the particle, $\beta=\frac{v}{c}$, and in this case, $\beta^{2}=.99$.  Then, for a one meter long electrostatic device, the following field is needed for a 9 GeV particle:
+
+\[
+E_{x} = 116 \hspace{.1in} \frac{\mbox{MV}}{\mbox{m}}
+\]
+
+
+If a particle is to be bent in the $\hat{x}$ direction by a magnetic field instead, the $B$ field must be 
+directed in the $\hat{y}$ direction, or, 
+$F_{B}\hat{x}=-ev\hat{z} \times B_{y}\hat{y}=evB_{y}\hat{x}$.  Plugging the magnetic field term of the Lorentz force into Eq.~\ref{eq:bendangle},
+
+\begin{eqnarray*}
+\theta_{total} & = & \frac{1}{pv}\int_{0}^{L} ev B_{y} dz\\
+               & = & \frac{e}{p}\int_{0}^{L} B_{y} dz\\
+\end{eqnarray*}
+Note that the angular deflection a particle will experience is proportional to its charge and inversely proportional to its momentum.  A single bending dipole may be used as a spectrometer, spreading out the particles in a beam according to their momenta.  Solving the previous equation for the integrated magnetic field,
+
+\begin{eqnarray*}
+\int_{0}^{L}\hspace{.1in} B_{y} dz & = & \frac{\theta p}{e} = 
+\frac{\theta (\gamma m c^{2}) \beta}{ec}\\
+B_{y}L & = & \frac{(.95)(13 \times 10^{-3}\:\mbox{[rad]})(9 \times 10^{9}) \:\mbox{[V]}}
+{3\times 10^{8} \:\mbox{[m/s]}}
+\end{eqnarray*}
+For a one meter dipole magnet, the following field is needed:
+\[
+B_{y} = 0.37 \hspace{.1in} \mbox{T}
+\]
+The extra factor of $v=\beta c$ in the magnetic force makes a large 
+difference in the scale of the needed magnetic field compared to 
+electric field.
+
+{\bf \color{myblue} Magnetic force on a current carrying wire}
+
+Since a wire carrying a uniform current is a linear distribution of charge, the force on a wire due to an external magnetic field is similar to the Lorentz force.  In fact, the expression for the force on a segment of wire $\Delta l$ can be remembered in a cheesy way by a slight rearrangement of the Lorentz force equation with $q\rightarrow \Delta q$.
+
+\begin{eqnarray*}
+\begin{aligned}
+\vec{F} & = \Delta q \frac{\Delta \vec{l}}{\Delta t} \times \vec{B} \\
+& = \frac{\Delta q}{\Delta t} \Delta \vec{l} \times \vec{B} \\
+& = \frac{dq}{dt} d\vec{l} \times \vec{B} \hspace{.2in} \longrightarrow \hspace{.2in} \text{Going to differental form} \\
+& = I d\vec{l} \times \vec{B} \\
+\end{aligned}
+\end{eqnarray*}
+
+The total force on the wire can be found by integrating,
+
+\[
+\vec{F} = = \int I d\vec{l} \times \vec{B}
+\]
+
+The force per length on a segment of wire is then,
+
+\[
+\frac{d\vec{F}}{dl} = \vec{I} \times \vec{B}
+\]
+
+Note that the vector indicator has moved from the length parameter to the current parameter, which is fine since the current is directed along the length of the wire.  Also note that $\vec{B}$ in this expression is the field at the location of the wire that is {\textbf {\textit not}} due to the wire itself.  A wire does not move from its own field any more than a point charge moves from its field.  Anyway, the classic example using this equation is the expression for the force on one infinite wire due to another parallel infinite wire.  The magnitude of the force/length on wire 1 due to wire 2 is written:
+
+\[
+\frac{F_{1} }{L} = \frac{\mu_{0}I_{1}I_{2}}{2\pi s_{21}}
+\]
+while the direction is attractive if the currents are parallel, and repulsive if the currents are antiparallel.
+
+
+\end{flushleft}
+\end{document}

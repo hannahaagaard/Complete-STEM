@@ -1,0 +1,286 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 5, Boundary Conditions} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\bf Boundary Conditions (BC) for Magnetic fields}
+
+\iffalse
+\begin{figure}[h]
+\centering
+% L B R T
+\includegraphics*[trim=2cm 0cm 0cm 0cm, clip=true, width=0.5\columnwidth]{2Esphere_uniform.png}
+\caption{Sketch of the electric field versus radius for a uniformly charged sphere centered at the origin with radius $R=1$.  Note that there is no change in field amplitude at the edge of the sphere.  (Plotted with htpps://www.desmos.com/calculator)}
+\label{fig:uniformsphere}
+\end{figure} 
+\fi
+
+\subsubsection*{\color{myblue} \bf Derivation of Boundary Conditions}
+
+Magnetostatic boundary conditions are the statement of how magnetic field components are related on either side of a boundary; for magnetic fields a boundary is a surface with a surface current density $\vec{K}$.  The components of the field perpendicular to the surface, and the components of the field parallel to the surface are considered separately.  The Maxwell's equations for magnetostatic fields are used to find the boundary conditions.
+
+\begin{eqnarray}
+\vec{\nabla} \cdot \vec{B} & = & 0 \hspace{.8in}  {\color{myblue} \longrightarrow \hspace{.3in} \mbox{B.C. for $B_{\perp}$}} 
+\label{eq:divb}\\
+\vec{\nabla} \times \vec{B} &  = & \mu_{0} \vec{J} \hspace{.6in}  {\color{myblue} \longrightarrow \hspace{.3in} \mbox{B.C. for $B_{||}$}}
+\label{eq:curlb}
+\end{eqnarray}
+
+\vspace{.2in}
+{\bf \color{myblue} BC for perpendicular components of the magnetostatic field}
+
+The integral form of Eq.~\ref{eq:divb} (the divergence equation) is used to find the relationship between the perpendicular components of the field, $B_{\perp}$, on either side of a boundary (surface).  Since for magnetic fields, the divergence equation has no source term (zero on RHS), you might guess that the perpendicular component of the field will not change across a current carrying boundary.
+
+\begin{equation*}
+\oint_{S} \vec{B} \cdot d\vec{a} = 0 
+\label{eq:gauss}
+\end{equation*}    
+
+Choose a pillbox straddling the surface, as shown in Fig.\ref{fig:pillbox}.  One end of the pillbox on one side of the boundary, and the other end of the pillbox on the other side.  The sides connecting the two ends are very short, so that the flux through these sides is negligible compared to the ends.
+\vspace{.2in}
+
+\begin{figure}[h]
+\centering
+% L B R T
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{Bperp_bc.pdf}
+\caption{Pillbox Gaussian surface straddling the boundary }
+\label{fig:pillbox}
+\end{figure}
+
+
+The flux through the pillbox shown in Fig.\ref{fig:pillbox} is as follows:
+
+\begin{equation*}
+\begin{aligned}
+& \oint_{S} \vec{B} \cdot d\vec{a} = \int_{end2} \vec{B} \cdot d\vec{a}+ \int_{end1} \vec{B} \cdot d\vec{a} = 0 \\
+& (B_{2_{\perp}} - B_{1_{\perp}}) A  =0 
+\end{aligned} 
+\end{equation*}
+
+where $A$ is the area of the ends of the pillbox, as well as the area of the enclosed surface.  Note that the sign difference of the terms is because $\vec{B}_{2_{\perp}}$ is parallel to $\hat{n}_{2}$, the unit vector for endcap 2 area, while $\vec{B}_{1_{\perp}}$ is antiparallel to $\hat{n}_{1}$, the unit vector of endcap 1.  So, we have the boundary condition relating the perpendicular components of the magnetic field at a boundary:
+
+ \tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+B_{2_{\perp}} - B_{1_{\perp}} = 0
+\label{eq:perp_bc}
+ \end{empheq}
+
+
+\vspace{.2in}
+{\bf \color{myblue} BC for parallel components of the magnetostatic field}
+
+In the electrostatic case, a surface charge causes a discontinuity in the perpendicular component of the field.  For the magnetostatic case, a surface current causes a discontinuity in the parallel component of the field.   The curl equation is the magnetostatic equation with the source term, and it is the curl equation that picks off the parallel component of the field at the boundary.  The integral form of Eq.~\ref{eq:curlb} (the curl equation) is used to find the relationship between the parallel components of the field, $B_{||}$, on either side of a boundary (surface).
+
+\begin{equation*}
+\oint \vec{B} \cdot d\vec{l} = \mu_{0}I_{enc}
+\label{eq:loop}
+\end{equation*}    
+
+Choose a loop straddling the surface, as shown in Fig.\ref{fig:loop}.  One side of the loop is on side 2 and is parallel to the boundary, and another side of the loop is on the side 1 and is parallel to the boundary.  The perpendicular segments of the loop are very short, so that their contribution to the loop integral is negligible.     
+
+\begin{figure}[h]
+\centering
+% L B R T
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{Bpar_bc.pdf}
+\caption{Closed one-dimensional loop straddling a boundary.}
+\label{fig:loop}
+\end{figure}
+\vspace{.2in}
+
+Evaluating the line integral for the loop shown in Fig.\ref{fig:loop} gives a relationship between the magnitudes of the parallel component of $B$ on either side of the boundary:
+
+\begin{equation*}
+\begin{aligned}
+& \oint \vec{B} \cdot d\vec{l} = \int_{side2} \vec{B}_{2} \cdot d\vec{l}+ \int_{side1} \vec{B}_{1} \cdot d\vec{l} =  \mu_{0} KL \\
+& (B_{2_{||}} - B_{1_{||}})  \, L  = \mu_{0} KL \\
+\end{aligned} 
+\end{equation*}
+
+where $L$ is the length of the surface-parallel sides of the loop.  Note that the sign difference of the terms is because $\vec{B}_{2_{||}}$ (the magnetic field on side 2) is parallel to the loop direction, while $\vec{B}_{1_{||}}$ (the magnetic field on side 1) is antiparallel to the loop direction.  So, we have the boundary condition relating the parallel components of the magnetic field at a boundary:
+
+\tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+B_{2_{||}} - B_{1_{||}} = \mu_{0} K
+\label{eq:par_bc}
+ \end{empheq}
+
+Equation \ref{eq:par_bc}  does not give the direction of the field discontinuity.  Assuming $\hat{n}$ points into region 2 (call it $\hat{n}_{2}$) as shown in Fig.~\ref{fig:loop}, then the vector form of this boundary condition would be:
+
+\tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+\vec{B}_{2_{||}} - \vec{B}_{1_{||}} = \mu_{0} (\vec{K} \times \hat{n}_{2})
+\label{eq:vecbc_par}
+ \end{empheq}
+
+A boundary with a surface current produces a discontinuity in the field parallel to the surface, but does not affect the field perpendicular to the surface.  Again, while Eq.~\ref{eq:vecbc_par} might seem a bit abstract and suspicious, remember the Ampere's law result for an infinite sheet.  If the loop is chosen parallel to the current, then no current passes through the plane of the loop, so that $K=0$, and the field in that direction is zero.  If the loop is perpendicular to the current, then in region 2 above the sheet $\vec{B}_{2_{||}}=\frac{\mu_{0}\vec{K}}{2} \times \hat{n}_{2}$, while in region 1 below the sheet $\vec{B}_{1_{||}}=\frac{\mu_{0}\vec{K}}{2} \times (-\hat{n}_{2})$.  Then,
+\[
+\vec{B}_{2_{||}} - \vec{B}_{1_{||}}= = \frac{\mu_{0}\vec{K}}{2} \times \hat{n}_{2} - \frac{\mu_{0}\vec{K}}{2} \times (-\hat{n}_{2}) = \mu_{0} \vec{K} \times \hat{n}_{2}
+\]
+
+% Summary curl and div parallel and perp
+ 
+\vspace{.3in}
+{\bf \color{myblue} BC in terms of the potential}
+
+The coulomb gauge of magnetostatics, $\vec{\nabla} \cdot \vec{A} = 0$ implies  $A_{2_{\perp}}=A_{1_{\perp}}$ at a boundary in the same way that $\vec{\nabla} \cdot \vec{B} = 0$ implies that $B_{2_{\perp}}=B_{1_{\perp}}$.  In addition, a consequence of the curl equation $\vec{\nabla} \times \vec{A} = \vec{B}$ is  that $A_{2_{||}}=A_{1_{||}}$, since using the curl theorem this is,
+\[
+\oint \vec{A} \cdot d\vec{l} = \int \vec{B} \cdot d\vec{a} = \Phi_{B}
+\]
+and the flux through the sides of a loop of vanishing area is zero.  Together the continuity of the perpendicular and parallel components of $\vec{A}$ at a boundary just say that the total vector potential is continuous across a boundary:
+
+\tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+\vec{A}_{2} = \vec{A}_{1}
+\label{eq:pot_bc}
+ \end{empheq}
+
+The derivative of the potential is a different story, since the curl of $\vec{A}$ is equal to the magnetic field, and the parallel components of the magnetic field are discontinuous.  The boundary condition for the normal derivative of $\vec{A}$ is given by,
+
+\tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+\frac{\partial \vec{A}_{2}}{\partial n} - \frac{\partial \vec{A}_{1}}{\partial n} = -\mu_{0}\vec{K}
+\label{eq:perpA_bc}
+\end{empheq}
+
+Picking a specific cartesian reference is one way to verify Eq.~\ref{eq:perpA_bc}.  Let a current sheet lie in the $x$-$y$ plane, with the current flowing in the $\hat{x}$ direction.  Then, in this case Eq.~\ref{eq:perpA_bc} holds if the following three relations hold:
+
+\begin{eqnarray}
+%\begin{aligned}
+\frac{\partial A_{2x} }{\partial z} - \frac{\partial A_{1x} }{\partial z} & = & -\mu_{0}K \label{eq:Axderiv} \\
+\frac{\partial A_{2y}}{\partial z} - \frac{\partial A_{1y}}{\partial z} & = & 0 \label{eq:Ayderiv} \\
+\frac{\partial A_{2z}}{\partial z} - \frac{\partial A_{1z}}{\partial z} & = & 0 \label{eq:Azderiv}
+%\end{aligned}
+\end{eqnarray}
+
+Verify Eq.~\ref{eq:Azderiv} using $\vec{\nabla} \cdot \vec{A} = 0$ and $\vec{A}_{1}=\vec{A}_{2}$.  In more detail, the second of these equations is
+
+\[
+\vec{A_{2}}(x,y,+\epsilon) = \vec{A_{1}}(x,y,-\epsilon)
+\]
+
+If you slide along the underside and overside of the plane in either the $\hat{x}$ or the $\hat{y}$ directions, the vector potential remains identically equal.  Since $\vec{A}$ changes by the same amount as you travel a distance $\Delta x$ or $\Delta y$ parallel and close to the boundary, it must be true that,
+
+\begin{eqnarray*}
+\begin{aligned}
+& \frac{A_{2x}}{\partial x}  = \frac{A_{1x}}{\partial x} \\
+& \frac{A_{2y}}{\partial y} = \frac{A_{1y}}{\partial y} 
+\end{aligned}
+\end{eqnarray*}
+
+Use the above with the divergence equation:
+\begin{eqnarray*}
+\begin{aligned}
+&\left( \vec{\nabla} \cdot \vec{A}_{2} \right) - \left( \vec{\nabla} \cdot \vec{A}_{1} \right) = 0 \\
+& \left( \frac{A_{2x}}{\partial x} + \frac{A_{2y}}{\partial y} + \frac{A_{2z}}{\partial z} \right) - 
+\left( \frac{A_{1x}}{\partial x} + \frac{A_{1y}}{\partial y} + \frac{A_{1z}}{\partial z} \right) = 0 \\
+& \left( \frac{A_{2x}}{\partial x} - \frac{A_{1x}}{\partial x} \right) + \left( \frac{A_{2y}}{\partial y} - \frac{A_{1y}}{\partial y}  \right) + \left( \frac{A_{2z}}{\partial z} - \frac{A_{1z}}{\partial z} \right) = 0 + 0 + \left( \frac{A_{2z}}{\partial z} - \frac{A_{1z}}{\partial z} \right) = 0
+\end{aligned}
+\end{eqnarray*}
+
+Therefore, it is demonstrated that Eq.~\ref{eq:Azderiv} holds.
+
+\[
+\frac{A_{2z}}{\partial z} - \frac{A_{1z}}{\partial z} = 0
+\]
+
+Now verify Equations \ref{eq:Axderiv}  and \ref{eq:Ayderiv} using:
+\begin{eqnarray*}
+\begin{aligned}
+& \text{(1)} \hspace{.2in} \vec{\nabla} \times \vec{A} = \vec{B} \\
+& \text{(2)} \hspace{.2in} \vec{B}_{2_{||}} - \vec{B}_{1_{||}} = \mu_{0} (\vec{K} \times \hat{z}) \\
+& \text{(3)} \hspace{.2in} \vec{A}_{1}=\vec{A}_{2}
+\end{aligned}
+\end{eqnarray*}
+
+Stating the third equation in more detail,
+
+\[
+\vec{A_{2}}(x,y,+\epsilon) = \vec{A_{1}}(x,y,-\epsilon)
+\]
+
+Now we are going to deal with cross derivatives, so let's start again - if you slide along the underside and overside of the plane in either the $\hat{x}$ or the $\hat{y}$ directions, the vector potential remains identically equal.  It must be true that,
+
+\begin{eqnarray*}
+\begin{aligned}
+& \frac{A_{2z}}{\partial x}  = \frac{A_{1z}}{\partial x} \\
+& \frac{A_{2z}}{\partial y} = \frac{A_{1z}}{\partial y} 
+\end{aligned}
+\end{eqnarray*}
+
+Use the above, and substitute $( \vec{\nabla} \times \vec{A} )_{||}$ for $\vec{B}_{||}$ into the boundary condition.  First the $x$ direction:
+
+\begin{eqnarray*}
+\begin{aligned}
+& B_{2x} - B_{1x} = 0 \\
+& \left( \frac{A_{2z}}{\partial y} -\frac{A_{2y}}{\partial z} \right) - \left( \frac{A_{1z}}{\partial y} -\frac{A_{1y}}{\partial z} \right)  = 0 \\
+& \left( \frac{A_{2z}}{\partial y} -\frac{A_{1z}}{\partial y} \right) - \left( \frac{A_{2y}}{\partial z} -\frac{A_{1y}}{\partial z} \right) = 0 \\
+& \frac{A_{2y}}{\partial z} -\frac{A_{1y}}{\partial z} = 0 \\
+\end{aligned}
+\end{eqnarray*}
+
+Therefore, it is demonstrated that Eq.~\ref{eq:Ayderiv} holds.  Use the same procedure in the $y$ direction: 
+
+
+\begin{eqnarray*}
+\begin{aligned}
+& B_{2y} - B_{1y} = -\mu_{0}K \\
+& \left( \frac{A_{2x}}{\partial z} -\frac{A_{2z}}{\partial x} \right) - \left( \frac{A_{1x}}{\partial z} -\frac{A_{1z}}{\partial x} \right)  = -\mu_{0}K \\
+& \left( \frac{A_{2x}}{\partial z} -\frac{A_{1x}}{\partial z} \right)  - \left( \frac{A_{2z}}{\partial x} -\frac{A_{1z}}{\partial x} \right)   = -\mu_{0}K  \\
+& \frac{A_{2x}}{\partial z} -\frac{A_{1x}}{\partial z} = -\mu_{0}K
+\end{aligned}
+\end{eqnarray*}
+
+Therefore, it is demonstrated that Eq.~\ref{eq:Axderiv} holds.
+
+\vspace{.2in}
+{\bf \color{myblue} Summary}
+
+Later on, we will want to get boundary conditions for magnetic field, boundary conditions in a useful form for  materials problems, and boundary conditions for electromagnetic fields.  In all of these cases, Maxwell's divergence equations (which in integral form have a flux integral) are used to find the boundary conditions for the perpendicular components of the fields, while Maxwell's curl equations (which in integral form have a line integral) are used to find the boundary conditions for the parallel components of the fields.  The flux through a closed surface is perpendicular to the surface, so a flux integral is just the thing to get at the perpendicular field component.  The line integral can be made to run parallel (and very close) to a surface, so it is ideal for selecting out the parallel component of the field.
+
+Re-capping the boundary conditions:
+
+\tcbset{highlight math style={colframe=myblue,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation*}
+\begin{aligned}
+& B_{2_{\perp}} - B_{1_{\perp}} = 0 \\
+& B_{2_{||}} - B_{1_{||}} = \mu_{0} K \\ 
+& \vec{A}_{2} = \vec{A}_{1} \\
+& \frac{\partial \vec{A}_{2}}{\partial n} - \frac{\partial \vec{A}_{1}}{\partial n} = -\mu_{0}\vec{K}
+\end{aligned}
+\label{eq:perp_bc}
+ \end{empheq}
+
+\end{flushleft}
+\end{document}

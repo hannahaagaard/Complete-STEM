@@ -1,0 +1,337 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Linear circuits} \end{flushright}
+\begin{flushleft}
+
+%{\large {\bf Introduction to longitudinal emittance}}\\
+%\subsubsection*{\bf Linear circuits}
+
+Circuits are a convenient platform to explore the coupling of electric and magnetic fields (this is also true to history, coupling of the fields was first noticed in the context of circuits.).  The circuits here may be considered quasistatic, meaning that $E$ and $B$ do not fluctuate too rapidly, and for reasonably slow changes the methods of statics may be applied.  
+
+A linear circuit is one in which the circuit element parameters (such as the resistance $R$ of a resistor) are constant; in other words, they do not change if the voltage and current in the circuit are varied.  Capacitors, inductors and resistors are linear circuit elements.  Resistors have a linear relationship between the voltage across the resistor and the current through the resistor.  Capacitors have a linear relationship between $dV/dt$ across the capacitor, and the current $I$ flowing into the capacitor.  Inductors have a linear relationship between $dI/dt$ in the inductor and the voltage $V$ across the inductor.  The values of $R$, $C$, and $L$ are the proportionality constants
+.
+\begin{eqnarray*}
+& V = RI & \hspace{.9in} \longrightarrow \hspace{.3in} \mbox{resistor} \\
+& V = -L\frac{dI}{dt}  & \hspace{.9in} \longrightarrow \hspace{.3in} \mbox{inductor} \\
+& I = C \frac{dV}{dt} & \hspace{.9in} \longrightarrow \hspace{.3in} \mbox{capacitor} 
+\end{eqnarray*}
+
+%\vspace{-.3in}
+\subsubsection*{\bf Resistance}
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.8\columnwidth]{teststand.png}
+\caption{\small Sketch of a test stand to measure the voltage-current relationship of a test device.}
+\label{fig:teststand}
+\end{figure}
+
+Suppose we built a test stand where we could control the voltage across a pair of terminals and, once a device was plugged in, measure the current flow.  Figure \ref{fig:teststand} is a sketch of such a test stand with three devices, devices $A$, $B$, and $C$ to be plugged in and tested.
+
+Figure \ref{fig:vicurves} shows a sketch of the dependence of current on the voltage across the terminals of devices plugged into a test stand such as that of Fig.~\ref{fig:teststand}.  The current depends linearly on the applied voltage for devices $A$ and $B$ - these devices must then be resistors.  Device $C$ cannot be a resistor.  For the case of the resistors, the slope of the curve is $1/R$.   According to Fig.~\ref{fig:vicurves}, device $A$ has a smaller resistance than device $B$, since it has the greater slope, $1/R$.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.5\columnwidth]{VI_curves.png}
+\caption{\small Current versus voltage for three devices plugged into a measurement test stand.}
+\label{fig:vicurves}
+\end{figure}
+
+The power supplied to a resistor is the product of the voltage across the resistor, and the current through the resistor:
+
+\[
+P=IV= I^{2}R=\frac{V^{2}}{R}
+\]
+
+The resistor equation, $V=IR$, can be used to eliminate either the current or the voltage from the expression for the power dissipated by the resistor.  Note that power can only be dissipated, not stored, because there is no way for a resistor to store energy.  The thermal motion of the electrons in the resistor turns electrical  energy into heat energy.  Capacitors and inductors do store energy because they are able to support localized electric and magnetic fields respectively.  This impacts their behavior; as can be seen by the capacitor and inductor equations, the voltage across these devices is not in phase with the current flowing through them.
+
+\subsubsection*{\bf Capacitance}
+
+Capacitance is defined in the following way,
+
+\begin{equation}
+C=\frac{q}{V}
+\label{eq:capacitance}
+\end{equation}
+
+where $q$ is the charge on the electrodes, and $V$ is the voltage difference between the electrodes.  In other words, when there is a potential difference $V$ applied across the electrodes, one electrode will become positively charged with $+q$ amount of charge, and the other electrode will become negatively charged with $-q$ charge.  Capacitance is similar to the word capacity.  If one device has a higher capacitance (say, $C_{high}$) than another device (with capacitance $C_{low}$) then if the same voltage is applied to both devices, the one with capacitance $C_{high}$ will hold more charge.  Capacitance describes the ability of a capacitor to hold charge.  The units of capacitance are farad (F); from Eq.~\ref{eq:capacitance}, a farad is also a coulomb/volt.
+
+When a capacitor is part of an electrical circuit, the voltage across the capacitor and the charge on its electrodes is given by Eq.~\ref{eq:capacitance} ($q=CV$).
+
+Capacitance depends on the geometry of the device and the material (if any) between the electrodes.  For now, consider capacitors with no material inside.  One way to find the capacitance is to take the following steps:
+
+\begin{itemize}
+\item Relate the charge on the positive plate to the electric field (this often is done using Gauss' law).
+\item Relate the absolute value of the potential difference across the plates to the electric field, i.e. $V=|-\int{\vec{E} \cdot d\vec{l}}|$.  (Capacitance is an intrinsically positive quantity.)
+\item Take the ratio of q/V with both $q$ and $V$ written in terms of $E$.  Cancel $E$ since it appears in both the numerator and denominator of the fraction.  The result should now have only geometric parameters.
+\end{itemize}
+
+\subsubsection*{\bf Capacitance of a parallel plate capacitor}
+
+Assume that a parallel plate capacitor has $+q$ on the `top' plate of area $A$.  The electric field between the plates of a parallel plate capacitor is given by,
+
+\begin{equation}
+E=\frac{\sigma}{\varepsilon_{0}}
+\label{eq:Eparallel}
+\end{equation}
+
+If the parallel plate capacitor has $+q$ on the `top' plate of area $A$, then the charge density on that plate is,
+
+ \begin{equation}
+ \sigma = \frac{q}{A}
+ \label{eq:chrgdensity}
+ \end{equation}
+
+Substituting Eq.~\ref{eq:chrgdensity} into Eq.~\ref{eq:Eparallel} and solving for $q$,
+
+\begin{eqnarray}
+\begin{aligned}
+ & E  =  \frac{q}{\varepsilon_{0}A} \\
+ & q =  \varepsilon_{0}EA 
+ \label{eq:charge}
+\end{aligned}
+\end{eqnarray}
+
+The absolute value of the potential difference between the plates is given by,
+
+\begin{equation}
+V=\left| -\int{\vec{E} \cdot d\vec{l}} \: \right| = Ed
+\label{eq:V}
+\end{equation}
+
+where $d$ is the distance between the plates.
+
+Take the ratio of Eq.~\ref{eq:charge} to Eq.~\ref{eq:V} to get the capacitance:
+
+\begin{equation*}
+C=\frac{q}{V}=\frac{\varepsilon_{0}EA }{Ed}=\frac{\varepsilon_{0}A }{d}
+\end{equation*}
+
+Notice that the capacitance increases as the plate area increases; the plates can support more charge for a given voltage.  The capacitance decreases as the distance between the plates increases; the voltage increases for a given electric field as the plate separation increases.
+
+\subsubsection*{\bf Capacitors store energy}
+
+As the plates of a capacitor become charged, an electric field builds up in the region between the electrodes.  An electrostatic field has an associated stored energy.  An expression for the stored energy in terms of charge on the electrodes and the capacitance, $C$, may be found by considering how much work it takes to assemble the charge onto the electrodes.  Consider the scenario where an initially uncharged capacitor is connected to a DC battery with constant voltage $V_{b}$ by closing a switch.  
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm .5cm 0cm 0cm, clip=true, width=0.4\columnwidth]{chrgcap.png}
+%\caption{}
+%\label{fig:chrgcap}
+\end{figure}
+
+To have a specific picture, consider a parallel plate capacitor.  The battery starts to push small amounts of charge $dq$ onto the plates when the switch is closed.  It is initially easy because the plates are uncharged or have very little charge, but it gets more difficult as the charge on the plates builds up.  It is harder to push positive charge onto a plate that already has a lot of positive charge because of the coulomb repulsion between charges of the same sign.  Or, equivalently, it takes more work to push $dq$ to a location of greater potential.  So, as the voltage on the capacitor plate $V_{cap}$ increases, it takes more work to get additional $dq$ onto the plate.  The work (W) is equivalent to the positive change in potential energy (U).  The work  needed to add a specific charge $dq$ onto a capacitor plate carrying charge $q$ is the following:
+\[
+dW = dU = dq \, V_{cap} = dq \, \frac{q_{plate}}{C}
+\]
+
+Then, the work to completely charge an initially uncharged capacitor is given by,
+
+\[
+W =U = \int_{0}^{Q} \, \frac{q}{C} \, dq = \frac{1}{C} \int_{0}^{Q} \, q \, dq = \frac{1}{2C}Q^{2} = \frac{1}{2}CV_{cap}^{2}
+\]
+where $Q$ is the charge on the positive plate (-$Q$ on the negative plate), and $V_{cap}$ is the potential difference across the capacitor when it carries charge $Q$.  It took energy to assemble this charge (provided by the battery in this case); this energy is stored in the capacitor.  What is the stored energy in terms of the electric field between the plates?  The electric field can be written in terms of the charge on the plates.  To accomplish this, first write the capacitance in terms of geometry:
+\[
+U = \frac{d}{2\varepsilon_{0}A}Q^{2} =  \frac{\varepsilon_{0}dA}{2}\left( \frac{Q}{\varepsilon_{0}A} \right)^{2} 
+\]
+
+Now use,
+
+\[
+E=\frac{\sigma}{\varepsilon_{0}} = \frac{Q}{A\varepsilon_{0}}
+\]
+
+to obtain the following expression for the stored energy,
+
+\[
+U = \frac{d}{2\varepsilon_{0}A}Q^{2} =  \frac{\varepsilon_{0}dA}{2} E^{2} 
+\]
+
+Since the volume between the capacitor plates is $dA$, the energy density, $u$=energy/volume, is then:
+
+\[
+u =  \frac{\varepsilon_{0}}{2} E^{2} 
+\]
+
+
+\subsubsection*{\bf Inductance}
+
+This discussion is about `self-inductance', the inductive properties of a single device (typically a coil) as opposed to `mutual-inductance', describing inductive properties of two or more nearby coupled devices.  `Self-inductance' will be called just `inductance' going forward.  Inductance is defined in the following way,
+
+\begin{equation}
+L=\frac{\Phi_{B_{total}}}{I} = N\frac{\Phi_{B}}{I}
+\label{eq:inductance}
+\end{equation}
+
+where $\Phi_{B}$ is the magnetic flux passing through a single loop of a device with N loops (turns) when current $I$ is flowing through that device.  For example, if the device is a conducting coil, $\Phi_{B}$ refers to the flux passing through a loop of the coil while current $I$ flows through the coil.  We learned that when current flows in a single conducting loop, a magnetic field is induced that passes through the plane of the loop.  The integral of the magnetic field across the area of the loop (the flux) will depend on the strength of the current $I$ and the geometry of the current loop.  The same is true for a stack of loops, or a coil.  When such a device is part of an electrical circuit, it is called an inductor.  
+
+\subsubsection*{\bf Voltage across an inductor}
+
+The relationship between the voltage across an inductor and the current flowing through the inductor may be found using Eq.~\ref{eq:inductance} and Lenz's law (Eq.~\ref{eq:lenzlaw}),
+
+\begin{equation}
+\mbox{emf} = \varepsilon = V = -\frac{dN\Phi_{B}}{dt}
+\label{eq:lenzlaw}
+\end{equation}
+
+Recall that an emf is a voltage, so, when considering the flux through an inductor, the corresponding emf is the voltage across the inductor.  Using Eq.~\ref{eq:inductance} ($LI=N\Phi_{B}$) to make a substitution into Eq.~\ref{eq:lenzlaw}, the result is an expression for the voltage across an inductor in terms of the current through the inductor:
+
+\[
+V=-L\frac{dI}{dt}
+\]
+
+where the inductance, $L$, comes out of the derivative since it is a constant.
+
+\subsubsection*{\bf Finding the Inductance}
+
+The ratio of the flux through an inductor to the current flowing in the inductor depends only on the geometry of the device.  This property is called the `inductance', $L$.  The units of inductance are henry (H); from Eq.~\ref{eq:inductance}, a henry is also a Tm$^{2}$/A.
+
+One way to find the inductance is to take the following steps:
+
+\begin{itemize}
+\item Write an expression for the flux, $\Phi_{B}$, in terms of the magnetic field.
+\item Write an expression for the current, $I$, in terms of the magnetic field (often this is done using Ampere's law).
+\item Take the ratio of $\Phi_{B}$/I with both $\Phi_{B}$ and $I$ expressed in terms of the magnetic field $B$.  Cancel $B$ since it appears in both the numerator and denominator of the fraction.  The result should now have only geometric parameters.
+\end{itemize}
+
+\subsubsection*{\bf Inductance of a solenoid (coil of wire with constant cross-section)}
+
+\begin{figure}[h]
+\centering
+% left bottom right top
+\includegraphics*[trim=0cm 4cm 0cm 0cm, clip=true, width=0.4\columnwidth]{solwB.pdf}
+\caption{\small Ideal solenoid with uniform magnetic field inside the coil and no field outside.}
+\label{fig:solenoid}
+\end{figure}
+
+If there are $N$ turns of wire in the coil, then the flux through the solenoid is $N$ times the flux through a single loop of the coil.  By Ampere's law, it is known that the magnetic field inside a long solenoid is uniform and perpendicular to the cross-section of the solenoid, while it is zero outside the solenoid.  The long solenoid approximation will be used here to find the inductance of an ideal solenoid.
+
+\begin{equation}
+N\Phi_{B}=N\int \, \vec{B} \cdot d\vec{A} = NBA_{loop}
+\label{eq:fluxcoil}
+\end{equation}
+
+It is known from Ampere's law that the field in the solenoid is given by,
+
+ \begin{equation*}
+ B = \mu_{0}nI = \mu_{0}\frac{N}{\mathit{l}}I
+ %\label{eq:Bsol}
+ \end{equation*}
+where $\mu_{0}$ is the vacuum permeability, $n$ is the number of turns per length of the solenoid, $N$ is the total number of turns of the solenoid, $\mathit{l}$ is the length of the solenoid, and $I$ is the current in the solenoid.  Note that $n=N/\mathit{l}$.
+
+Then,
+ \begin{equation}
+ I = \frac{B}{\mu_{0}n}
+ \label{eq:Isol}
+ \end{equation}
+
+Substituting Eqs.~\ref{eq:fluxcoil} and ~\ref{eq:Isol} into Eq.~\ref{eq:inductance} and solving for the inductance $L$,
+
+\begin{equation}
+L=\mu_{0}nNA_{loop}=\mu_{0}n^{2}\mathit{l}A_{loop}
+\label{eq:sol_inductance}
+\end{equation}
+
+Notice that the inductance increases as the cross-sectional area of the solenoid increases, or as the number of turns increases; each of these increases the total flux.  On the other hand, if $N$ is fixed, decreasing the total length of the solenoid also increases the inductance, since this will increase the strength of the magnetic field at a given current.  The inductance depends only on the geometry of the coil.
+
+\subsubsection*{\bf Inductors store energy}
+
+When a circuit with an inductor is first completed, so that current can flow through the inductor, it takes time for the current to build to the maximum possible level.  It is initially difficult for current to flow through the inductor, because when current first begins to flow, it induces a change of magnetic flux through the coils.  That change in flux is opposed by an induced current in the opposite direction (Lenz's law); which cancels the applied current.  However, the change in flux decreases over time, decreasing the opposing current.  After some time, the flux no longer changes, so there is no longer an opposing current, and the applied current flows freely through the inductor as if it were a simple wire.  In the region inside the coil there is now a steady magnetic field.  Since it takes work to build this field, there is stored energy in the field.
+
+\begin{figure}[h]
+\centering
+% left bottom right top
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.3\columnwidth]{lrcircuit.png}
+%\caption{\small Ideal solenoid with uniform magnetic field inside the coil and no field outside.}
+%\label{fig:solenoid}
+\end{figure}
+
+An expression for the stored energy in terms of the current in the inductor and its inductance, $L$, may be found by considering how much work it takes to build up the current flowing in the inductor.  Consider the scenario where an inductor with no current is connected to a DC battery with constant voltage $V_{b}$ by closing a switch.  The work done by the battery can be found by integrating the power supplied by the battery to the inductor over the time it takes to build the magnetic field in the inductor.  The work done by the battery on the inductor is equivalent to the positive change in potential energy, $U$ of the inductor.
+
+\begin{equation}
+P = \frac{dW}{dt} =V_{L}I \hspace{.8in} \longrightarrow \hspace{.3in} W=U=\int P\,dt = \int V_{L}\,I\,dt
+\label{eq:indpower}
+\end{equation}
+
+The magnitude of the voltage across the inductor is given by,
+
+\begin{equation}
+V_{L} = L\frac{dI}{dt}
+\label{eq:vind}
+\end{equation}
+
+Substituting Eq.~\ref{eq:vind} into Eq.~\ref{eq:indpower},
+
+\begin{equation}
+U = \int L\frac{dI}{dt}\,I\,dt = \int_{0}^{I_{L}} LI \,dI
+\label{eq:indintenergy}
+\end{equation}
+
+The lower limit of integration is zero because when the switch connecting the inductor to the battery is first closed, there is no current flowing in the circuit.  The current will increase until the magnetic flux in the inductor is no longer changing, and there is a steady magnetic field in the inductor.  This final current is labeled $I_{L}$ in the upper limit of integration in Eq.~\ref{eq:indintenergy}.  Evaluating the integral, the energy stored in the inductor is given by,
+
+\[
+U = \frac{1}{2}LI_{L}^{2}
+\]
+
+The subscript on the current is normally dropped; it is understood that the current refers to the current flowing in the inductor.
+
+\begin{equation}
+U = \frac{1}{2}LI^{2}
+\label{eq:indenergy}
+\end{equation}
+
+Considering an inductor with a solenoidal type of coil, an expression for the stored energy in terms of the magnetic field may be obtained.  Substituting  Eq.~\ref{eq:sol_inductance} for the inductance and Eq.~\ref{eq:Isol} for the current into Eq.~\ref{eq:indenergy},
+
+\[
+U =  \frac{1}{2}\mu_{0}n^{2}\mathit{l}A_{loop} \left( \frac{B}{\mu_{0}n} \right)^{2} = \frac{1}{2\mu_{0}}\left( \mathit{l}A_{loop} \right) B^{2}
+\]
+
+Since the volume inside the inductor is its length times the cross-sectional area, $\mathit{l}A_{loop}$, the energy density, $u$=energy/volume, is then:
+
+\[
+u =  \frac{1}{2\mu_{0}} B^{2} 
+\]
+
+\subsubsection*{\bf Ideal circuits: Kirchhoff's laws}
+
+An ideal linear lumped element circuit consists of circuit elements (such as resistors, capacitors and inductors) connected by perfectly conducting wires.  Perfectly conducting wires have zero resistance, and allow current to flow freely without accumulating charge or energy.  The point of connection of two or more circuit elements is called a `node' or a `junction'.  Simple circuits are governed by Kirchhoff's laws; the node or junction rule, and the loop rule.  Kirchhoff's rules are:
+
+\begin{itemize}
+\item The sum of currents at a node is zero.  This means that the current flowing out of a node must equal the current flowing into a node (charge does not collect).  This rule is an expression of the conservation of charge.
+\item The sum of voltages around any closed path is zero.  This rule is an expression of the conservation of energy.
+\end{itemize}
+
+\end{flushleft}
+\end{document}

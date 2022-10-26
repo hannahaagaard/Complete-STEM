@@ -1,0 +1,366 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.5in
+\topmargin = -.5in
+\oddsidemargin = -0.2in
+%\evensidemargin = -0.5in
+%\pagestyle{empty}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+
+\begin{document}
+
+\begin{flushright} {\color{blue} RL and LC circuits} \end{flushright}
+
+\begin{flushleft}
+
+\subsubsection*{RL circuits, dissipation of energy}
+
+Consider a circuit with resistors and an inductor, such as that shown in Fig.~\ref{fig:rlcircuit}.  Initially, the switch is closed.  If it has been closed for a long time, the current flows freely through the inductor, and no current flows through the parallel resistor, $R$.  Once the initial `back emf' of the inductor has been overcome, current flows freely through the inductor (no longer opposed by induced current from changing flux).  The magnetic field in the inductor is then steady, and there is an associated stored magnetic field energy.  Since the inductor offers no resistance, {\it all} the current in the circuit flows through the inductor.
+
+Suppose at time $t=0$ the switch is then opened.  Now there is no connection of the circuit to the battery.  The current cannot change suddenly through an inductor, so it continues to flow, now going through the resistor, $R$ (CCW direction in Fig.~\ref{fig:rlcircuit}).  No current flows through $R_{0}$, because when the switch is open the loop containing $R_{0}$ is out of the circuit; there is no current path through $R_{0}$.  As the current passes through $R$, the energy dissipates.  The current decays as the energy dissipates until there is no more current.
+
+\begin{figure}[h]
+\centering
+% left bottom right top
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.4\columnwidth]{simplr3.pdf}
+\caption{\small A switch that has been closed for a long time is opened.  The energy stored in the inductor will then dissipate through the resistor, $R$.}
+\label{fig:rlcircuit}
+\end{figure}
+
+Let's examine the situation after the switch is opened more quantitatively.  The loop rule will be used to get an equation describing the behavior of the LR circuit.  The loop rule states that the sum of voltages around a closed loop is zero, and is an expression of the conservation of energy.
+
+\begin{eqnarray}
+\sum_{loop} V & = V_{L} + V_{R} = L\frac{dI}{dt} +IR = 0  \nonumber \\
+& \frac{dI}{dt} +\frac{R}{L}I = 0 
+\label{eq:LRdiffeq}
+\end{eqnarray}
+
+Equation~\ref{eq:LRdiffeq} is a homogenious equation.  To solve Eq..~\ref{eq:LRdiffeq}, write it so that all $I$ dependence is on one side of the equation and all $t$ dependence on the other side. 
+
+\[
+\frac{dI}{I}=-\frac{R}{L}dt
+\]
+
+Integrate:
+\begin{equation*}
+\begin{aligned}
+& \int \, \frac{dI}{I}=-\frac{R}{L}\int \, dt  \\
+& \ln{(I)} = -\frac{R}{L}t + \ln{(K)} \\
+& \ln{(I)}-\ln{(K)} = -\frac{R}{L}t  \\
+& \ln{\left(\frac{I}{K}\right)} = -\frac{R}{L}t \hspace{.9in} \longrightarrow \hspace{.5in} e^{\ln{\left(\frac{I}{K}\right)}} = e^{-\frac{R}{L}t} 
+\end{aligned}
+\end{equation*}
+
+The solution for the current (with unknown coefficient $K$) is then,
+\begin{equation}
+ I = K e^{-\frac{R}{L}t} 
+\label{eq:solhomo}
+\end{equation}
+
+Note that the arbitrary constant of integration was written as the natural log of a constant, $\ln{(K)}$, instead of a constant, $K$.  This is for convenience, and allowed, since the natural log of an arbitrary constant is still an arbitrary constant.  In either case, this constant must be determined using initial conditions.  The current at time $t=0$, call it $I_{0}$, is given by $I_{0}=\frac{V}{R_{0}}$, where $V$ is the battery voltage and $R_{0}$ is shown in Fig.~\ref{fig:rlcircuit}.  Setting $t=0$ in the expression for the current the gives the value for the arbitrary constant $K$.
+
+\begin{eqnarray*}
+ I & = & K e^{-\frac{R}{L}t} \hspace{.4in} \longrightarrow \hspace{.5in}  I_{0} = \frac{V}{R_{0}} = K e^{-\frac{R}{L}0} \nonumber \\
+K & = & I_{0} = \frac{V}{R_{0}}
+\end{eqnarray*}
+
+The solution for the current in the RL circuit is then,
+
+\begin{equation} 
+I = I_{0}\exp{ \left(-\frac{R}{L}\:t \right) }  = I_{0}e^{-\frac{R}{L} \: t}
+\label{eq:rl_current}
+\end{equation}
+
+This is an exponentially decaying function of the form:
+
+\begin{equation} 
+f = A_{0}\exp{ \left(-\frac{t}{\tau}\right) }  = A_{0}e^{-\frac{t}{\tau} }
+\label{eq:rl_current}
+\end{equation}
+
+where $A_{0}$ is the initial value of the function, and $\tau$ is called the `exponential time constant' or the `exponential decay constant'.   The value of such an exponential function initially at time $t=0$, is its initial value $A_{0}$.  Sometime later, at $t=\tau$ (one time constant) the function now has a value of $f=A_{0}e^{-1}=0.368\, A_{0}$, or 37\% of its initial value.  At an even later time, $t=2\tau$ (two time constants) the function now has a value of $f=A_{0}e^{-2}=0.135\, A_{0}$, or 14\% of its initial value.  This  decaying function is shown in Fig.~\ref{fig:expdecay}.
+
+\vspace{.1in}
+\begin{figure}[h]
+\centering
+% left bottom right top
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.5\columnwidth]{expdecay.png}
+\caption{\small This sketch was made using \textless https://www.desmos.com/calculator\textgreater.  It shows three exponentially decaying functions; the green curve shows $f_{green}=A_{0}e^{-\frac{t}{2}}$ with exponential time constant $\tau=2$, the red curve shows $f_{red}=A_{0}e^{-t}$ with exponential time constant $\tau=1$, and the blue curve shows $f_{blue}=A_{0}e^{-2t}$ with exponential time constant $\tau=\frac{1}{2}$.}
+\label{fig:expdecay}
+\end{figure}
+
+Notice that the larger the time constant, $\tau$, the slower the function value decreases from its initial value.
+
+
+\subsubsection*{RL circuits, storing energy}
+
+Now consider a circuit with resistors and an inductor, such as that shown in Fig.~\ref{fig:rlcircuit2}, but in a situation where the switch has been open for a very long time (so that there is initially no energy in the circuit).   
+
+\begin{figure}[h]
+\centering
+% left bottom right top
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.4\columnwidth]{simplr4.pdf}
+\caption{\small A switch that has been open for a long time is closed.  Energy builds up in the inductor.  The resistor $R_{1}$ is bypassed once the magnetic field in the inductor is no longer changing; then current flows freely through the inductor.  The inductor branch of the circuit `shorts out' $R_{1}$.}
+\label{fig:rlcircuit2}
+\end{figure}
+
+Suppose at time $t=0$ the switch is then closed.  The inductor and resistors are now connected to the battery.  The current cannot change suddenly through an inductor, so initially the current through the inductor is zero, $I=0$.   At $t=0$ just after the switch is closed, all of the current in the circuit flows through the resistor, $R_{1}$ (CW direction in Fig.~\ref{fig:rlcircuit2}).  The initial `back emf' of the inductor is overcome as time goes on, as the current from the battery is less and less opposed by induced current from the changing flux through the inductor.  Eventually, the magnetic field in the inductor is steady, and there is an associated stored magnetic field energy.  Since the inductor then offers no resistance, {\it all} the current in the circuit then flows through the inductor.
+
+Let's examine the situation after the switch is closed more quantitatively.  The loop rule will be used to get an equation describing the behavior of the LR circuit.  The loop rule states that the sum of voltages around a closed loop is zero, and is an expression of the conservation of energy.
+
+\begin{eqnarray}
+\sum_{loop} V & = V_{L} + V_{R} +V_{0}  = 0  \nonumber \\
+& L\frac{dI}{dt} +IR = V_{0} \nonumber \\
+& \frac{dI}{dt} +\frac{R}{L}I = \frac{V_{0}}{L} 
+\label{eq:LRdiffeq2}
+\end{eqnarray}
+
+Equation~\ref{eq:LRdiffeq2} is an inhomogeneous equation.  Its associated homogeneous equation is Eq.~\ref{eq:LRdiffeq}.  The general solution of Eq.~\ref{eq:LRdiffeq2} is the sum of a particular solution that solves Eq.~\ref{eq:LRdiffeq2} with the solution of the homogeneous equation Eq.~\ref{eq:LRdiffeq}.  Note that the solution of the homogeneous equation with {\it arbitrary coefficient(s)} is summed with the particular solution.  Any arbitrary coefficients in the solution of the homogeneous equation are specifically determined only after summation with the particular solution.  These are found by applying the initial conditions to the {\it complete} solution.  In this case, the solution to the homogeneous equation was found in the previous section, leaving the task of finding the particular solution of the inhomogeneous equation.  
+
+The `method of undetermined coefficients' may be used to guess the particular solution of an inhomogeneous differential equation.  It is effective when the expression on the right-hand-side (RHS) has certain functional forms; for example, a polynomial.  In the case of a polynomial, the guess for the particular solution should be a polynomial of the same degree, including all lower order terms.  Each term of the polynomial has an undetermined coefficient.  For example, if the RHS of a differential equation were the function $f=7t^{2}$, then the guess for the particular solution would be $At^{2}+Bt+C$.  The guessed solution is substituted into the differential equation, and if the coefficients of the guessed solution can be determined, then it is the particular solution.
+
+The RHS of Eq.~\ref{eq:LRdiffeq2} is a constant, so the guessed solution is also a constant, say $A$.  Plugging this into  Eq.~\ref{eq:LRdiffeq2}, and solving for $A$:
+\begin{eqnarray}
+& \frac{dA}{dt} +\frac{R}{L}A = \frac{V_{0}}{L} \nonumber \\
+& A = \frac{V_{0}}{R}
+\label{eq:findA}
+\end{eqnarray}
+
+Then, combining the general solution to the homogeneous equation (Eq.~\ref{eq:solhomo}) with the particular solution $I_{p}=\frac{V_{0}}{R}$ (Eq.~\ref{eq:findA}), the total solution is obtained:
+\begin{eqnarray} 
+I & = & I_{g} + I_{p}  \nonumber \\
+I & = & K\exp{ \left(-\frac{R}{L}\:t \right) } + \frac{V_{0}}{R}
+\label{eq:nokyet}
+\end{eqnarray}
+
+Since the differential equation Eq.~\ref{eq:LRdiffeq2} is a first order differential equation, there is only one arbitrary constant.  A second order differential equation would have two arbitrary constants, and so on.  Here the initial condition is that $I=0$ at $t=0$.  Substituting these into Eq.~\ref{eq:nokyet}, it can be seen that the constant $K$ in terms of known parameters must be $K=-V_{0}/R$.  Then the complete solution to Eq.~\ref{eq:LRdiffeq2} is given by,
+
+\begin{equation*} 
+I = \frac{V_{0}}{R} \left(  1- e^{ -\frac{R}{L}\:t  } \right)
+\end{equation*}
+
+A function of this form is plotted in Fig.~\ref{fig:expgrowth}.
+
+\vspace{.1in}
+\begin{figure}[h]
+\centering
+% left bottom right top
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.4\columnwidth]{expgrowth.png}
+\caption{\small This sketch was made using \textless https://www.desmos.com/calculator\textgreater.  It shows a plot of a function of the form $f=A_{0}\left(1-e^{-t}\right)$ with exponential time constant $\tau=1$.}
+\label{fig:expgrowth}
+\end{figure}
+
+\newpage
+\subsubsection*{Solving circuits with trial solutions}
+
+Consider the RL circuit that is just disconnected from the battery, as in Fig.~\ref{fig:rlcircuit}.  Take a short-cut to the solution of the ordinary homogeneous differential equation by direct substitution of the following trial solution into the differential equation,
+\begin{equation}
+ I = \tilde{A} e^{-st} 
+\label{eq:trailsol}
+\end{equation}
+where, in general, both $s$ and the coefficient $\tilde{A}$ may be complex.  Plugging this into Eq.~\ref{eq:LRdiffeq},
+\begin{eqnarray*}
+& s\tilde{A}e^{st}+\frac{R}{L}\tilde{A}e^{st}=0 \\
+& \left( s+\frac{R}{L} \right) \tilde{A}e^{st}=0
+\end{eqnarray*}
+Looking at the equation for $s$ in the parentheses, there is one solution (as expected for a first order differential equation); that is, $s=-R/L$.  In order to get $\tilde{A}$, the initial conditions must be applied.  Since at time $t=0$ the current is $I_{0}$, it must be that $\tilde{A}=I_{0}$ and is purely real.
+
+\[
+I=I_{0}e^{-\frac{R}{L}t}
+\]
+
+\subsubsection*{LC circuit}
+
+Now consider an $LC$ circuit with the capacitor initially charged, but no other voltage source.
+
+\begin{figure}[h]
+\centering
+% left bottom right top
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.4\columnwidth]{lcres.pdf}
+\caption{\small Sketch of an LC circuit, the capacitor is fully charged before connection to the inductor.}
+\label{fig:expgrowth}
+\end{figure}
+
+Applying the loop rule for the $LC$ circuit:
+\begin{eqnarray} \nonumber
+\begin{aligned}
+& \sum_{loop} V  = V_{L} + V_{C} = 0 \\
+& L\frac{dI}{dt} +\frac{q}{C} = 0  \hspace{.3in} \longleftrightarrow \hspace{.3in} \mbox{Differentiate this equation.}  
+\end{aligned}
+\end{eqnarray}
+
+\begin{equation}
+\hspace{-3in} \frac{d^{2}I}{dt^{2}} +\frac{1}{LC}I = 0
+\label{eq:LCdiffeq}
+\end{equation}
+
+Substitute the trial solution $I = \tilde{A} e^{-st} $ into Eq.~\ref{eq:LCdiffeq},
+\begin{eqnarray*}
+& s^{2}\tilde{A}e^{st}+\frac{1}{LC}\tilde{A}e^{st}=0 \\
+& \left( s^{2}+\frac{1}{LC} \right) \tilde{A}e^{st}=0
+\end{eqnarray*}
+
+Solve the characteristic equation for $s$,
+\begin{eqnarray*}
+& s^{2}+\frac{1}{LC} = 0 \\
+& s =\sqrt{-\frac{1}{LC}}
+\end{eqnarray*}
+
+Now the two solutions for $s$ are purely complex, $s=\pm i\sqrt{\frac{1}{RC}}$.  The total solution before applying any initial conditions is the sum of the two possible solutions,
+\begin{equation}
+I = \tilde{A_{1}}e^{i\omega t} + \tilde{A_{2}}e^{-i\omega t}
+\label{eq:icomplex}
+\end{equation}
+where $\omega=\sqrt{\frac{1}{LC}}$.  It is a little trickier to solve for the complex coefficients than finding the real coefficients $A$ and $B$ when a solution of real functions is assumed:
+\[
+I=A\cos{(\omega t)} + B\sin{(\omega t)}
+\]
+
+The solution in terms of the cosine and sine function is purely real.  The total solution with complex coefficients must end up to be purely real as well.  To see how this plays out, first use the trial solution $I=A\cos{(\omega t)} + B\sin{(\omega t)}$ and then the trial solution $I = \tilde{A_{1}}e^{i\omega t} + \tilde{A_{2}}e^{-i\omega t}$.
+
+In either case, two initial conditions are needed to find the two unknown coefficients.  For this example, 
+at time $t=0$, the charge on the capacitor is a maximum, $q=Q_{0}$.  That is one initial condition, but we need two initial conditions for a second order differential equation.  Initially, all the stored energy of the circuit is in the capacitor.  Since at $t=0$ there is no stored energy in the inductor, then the initial current in the circuit must be zero, $I(0)=0$.  Now we have two initial conditions.
+
+Since there is zero current  at $t=0$, we have $I(0)=0=A\cos{(0)} + B\sin{(0)}$; this forces the coefficient $A$ to be zero.  The voltage must be written in terms of the current in order to apply the other initial condition.  The voltage across the inductor must equal the voltage across the capacitor, so
+\begin{equation*}
+\begin{aligned}
+& V_{0}=\frac{Q_{0}}{C}=-L\frac{dI}{dt}=-LB\omega\cos{(\omega(0))} \\
+& B=-\frac{Q_{0}}{\omega LC}=-Q_{0}\omega
+\end{aligned} 
+\end{equation*}
+
+The solution is then,
+\[
+I=-Q_{0}\omega\sin{(\omega t)}
+\]
+
+Now let's try with the complex form for the solution.  Applying the initial condition for the current results in the following relation,
+
+\begin{equation}
+\begin{aligned}
+& I = 0 = \tilde{A_{1}}e^{i\omega (0)} + \tilde{A_{2}}e^{-i\omega (0)} = \tilde{A_{1}} + \tilde{A_{2}} \\
+& \tilde{A_{2}} =- \tilde{A_{1}}
+\label{eq:a1a2}
+\end{aligned} 
+\end{equation}
+
+Applying the initial condition for the voltage and using the result of Eq.~\ref{eq:a1a2} gives the following,
+
+\begin{equation*}
+\begin{aligned}
+& V_{0}=\frac{Q_{0}}{C}=-L\frac{dI}{dt}=-L\left( i\omega\tilde{A_{1}} - i\omega\tilde{A_{2}} \right) \\
+& -\frac{Q_{0}}{\omega LC}=\left( i\omega\tilde{A_{1}} + i\omega\tilde{A_{1}} \right) \\
+& \tilde{A_{1}} =  -\frac{Q_{0}}{2i\omega LC} = i\ \frac{Q_{0}\omega}{2}
+\end{aligned} 
+\end{equation*}
+
+Plugging the value of $\tilde{A_{1}}$ and $\tilde{A_{2}}$ into Eq.~\ref{eq:icomplex}, the solution is,
+
+\begin{eqnarray}
+I & = & i\ \frac{Q_{0}\omega}{2}e^{i\omega t} -  i\ \frac{Q_{0}\omega}{2}e^{-i\omega t} \nonumber \\
+I & = & i\ \frac{Q_{0}\omega}{2}\left[ \cos{(\omega t)} +i\sin{(\omega t)} \right] - i\ \frac{Q_{0}\omega}{2}\left[ \cos{(\omega t)} -i\sin{(\omega t)} \right] \nonumber \\
+I & = & 2 i\ \frac{Q_{0}\omega}{2} i \sin{(\omega t)} = -Q_{0}\omega \sin{(\omega t)} 
+\label{eq:compsol}
+\end{eqnarray}
+
+
+\iffalse
+\vspace{.2in}
+\subsubsection*{Solving circuits using Laplace transforms}
+
+Having an ordinary differential equations along with the initial conditions needed to find the arbitrary coefficients is called an {\it initial value problem}.  These IVPs may be solved using the Laplace transform method.  The Laplace transform of a function $f(t)$ is given by,
+
+\[
+F(s) =\mathcal{L} \{ f(t) \} =\int_{0}^{\infty} \, e^{-st}f(t)\, dt
+%\label{eq:laplace}
+\]
+
+The procedure using the Laplace transform technique is to (1) write the differential equation for the circuit in the time domain, (2) take the Laplace transform of the differential equation, and (3) take the inverse Laplace transform to get that solution in the time domain.  Apply this method to the first example in these notes - the differential equation for the circuit given by Eq.~\ref{eq:LRdiffeq} is repeated below.
+\[
+\frac{dI}{dt} +\frac{R}{L}I = 0
+\]
+
+This time solve it by taking the Laplace transform of both sides of the equation,
+
+\begin{equation}
+\begin{aligned}
+& \int_{0}^{\infty} \, e^{-st} \frac{dI}{dt} \, dt +\int_{0}^{\infty} \, e^{-st} \frac{R}{L}I \, dt= \int_{0}^{\infty} \, e^{-st} \, 0 \, dt \\
+& \int_{0}^{\infty} \, e^{-st} \frac{dI}{dt} \, dt +\frac{R}{L} \int_{0}^{\infty} \, e^{-st} I \, dt= 0 \\
+& \int_{0}^{\infty} \, e^{-st} \frac{dI}{dt} \, dt +\frac{R}{L} I(s) = 0 
+\label{eq:LRL}
+\end{aligned}
+\end{equation}
+
+The first integral in Eq.~\ref{eq:LRL} may be solved with the integration by parts.  Integration by parts has the following general form:
+\[
+\int_{0}^{\infty} u\, dv = uv \, \bigg|_{0}^{\infty} - \int_{0}^{\infty} v\, du
+\]
+
+For our case, let $u=e^{-st}$ and $dv=\frac{dI}{dt}dt$,  Then, 
+\begin{equation*}
+\begin{aligned}
+&\frac{du}{dt}=\frac{de^{-st}}{dt} = -se^{-st} \hspace{.5in} \longrightarrow \hspace{.5in} du = -se^{-st}dt \\
+&\frac{dv}{dt} = \frac{dI}{dt} \hspace{1.4in} \longrightarrow \hspace{.5in} v=I
+\end{aligned}
+\end{equation*}
+
+So, evaluating the first integral by parts using these choices,
+\[
+\int_{0}^{\infty}  e^{-st} \frac{dI}{dt} \, dt = Ie^{-st} \, \bigg|_{0}^{\infty} - (-s)\int_{0}^{\infty} Ie^{-st}dt
+\]
+
+This is,
+\[
+I(0)-Ie^{-s(\infty)}  + s\int_{0}^{\infty} Ie^{-st}dt = I(0) + s\int_{0}^{\infty} Ie^{-st}dt = I(0) + sI(s)
+\]
+
+Plug this result for the first integral back into Eq.~\ref{eq:LRL}, 
+\[
+I(0) + sI(s) + \frac{R}{L} I(s) = 0
+\]
+and solve for $I(s)$,
+\[
+I(s) = \frac{I(0)}{s+\frac{R}{L}}
+\]
+
+Finally, take the inverse Laplace transform of the result.  The integral form looks bad:
+\[
+I(t) = \frac{1}{2\pi i} \int_{a-i\infty}^{a+i\infty} \, e^{st}F(s)\, ds
+\]
+
+Well, we can look it up in a table, or give up for now.
+
+
+\fi
+
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+

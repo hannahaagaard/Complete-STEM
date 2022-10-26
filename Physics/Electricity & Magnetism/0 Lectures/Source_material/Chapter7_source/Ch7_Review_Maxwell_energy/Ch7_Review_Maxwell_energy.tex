@@ -1,0 +1,248 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.5ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{frcursive}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+% \frac{1}{4\pi \varepsilon_{0}}
+% \text{\small\slshape\cursive r}
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Review} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\color{myblue} \bf Review of Maxwell's equations}
+
+The theory of electrodynamics is beautifully given by Maxwell's equations.  In \underline{vacuum} the differential form of Maxwell's equations are given by:
+
+\begin{eqnarray}
+ \vec{\nabla} \cdot \vec{E} & = & \frac{\rho}{\varepsilon_{0}} \nonumber \\
+ \vec{\nabla} \cdot \vec{B} & = & 0 \nonumber \\
+ \vec{\nabla} \times \vec{E} & = & -\frac{\partial \vec{B}}{\partial t} \label{eq:curlE} \\
+\vec{\nabla} \times \vec{B} & = & \mu_{0}\vec{J}+\mu_{0}\varepsilon_{0}\frac{\partial \vec{E}}{\partial t} \label{eq:curlB} 
+\end{eqnarray}
+
+These equations differ from the static Maxwell's equations by the extra source terms on the RHS of Eq.~\ref{eq:curlE} and Eq.~\ref{eq:curlB}.  A changing magnetic field acts as a source that generates an electric field (Eq.~\ref{eq:curlE}) and a changing electric field acts as a source that generates a magnetic field (Eq..~\ref{eq:curlB}).
+
+Now for the integral forms - integrate Eq.~\ref{eq:curlE} over a surface to get Faraday's law:
+
+\begin{equation*}
+\int_{S} (\vec{\nabla} \times \vec{E}) \cdot d\vec{a}  =  -\frac{\partial \int \vec{B} \cdot d\vec{a} }{\partial t} = -\frac{\partial \Phi_{B} }{\partial t}
+\end{equation*}
+
+Apply the curl theorem:
+\begin{equation*}
+\oint \vec{E} \cdot d\vec{l}  =  -\frac{\partial \Phi_{B} }{\partial t} \hspace{2.in} \mbox{\color{myblue} Faraday's law!}
+\end{equation*}
+
+Integrate Eq.~\ref{eq:curlB} over a surface to get the Ampere-Maxwell law:
+\begin{eqnarray*}
+\int_{S} (\vec{\nabla} \times \vec{B}) \cdot d\vec{a}  & =  & \mu_{0}\int_{S} \vec{J} \cdot d\vec{a} + \mu_{0}\varepsilon_{0}\frac{\partial \int_{S} \vec{E} \cdot d\vec{a} }{\partial t} \\ 
+& = & \mu_{0}I_{enc} + \mu_{0}\varepsilon_{0}\frac{\partial \Phi_{E} }{\partial t}
+\end{eqnarray*}
+
+Apply the curl theorem:
+  \begin{equation*}
+\oint \vec{B} \cdot d\vec{l}  = \mu_{0}I_{enc} +\frac{\partial \Phi_{E} }{\partial t} \hspace{2.in} \mbox{\color{myblue} Ampere-Maxwell law!}
+\end{equation*}
+
+\subsubsection*{\color{myblue} \bf Electrostatic energy review}
+
+This section is a copy of what was in the earlier (Chapter 2) lectures.  It begins with the energy of a configuration of point charges, and moves on to a general expression for electrostatic energy due to a system of charges and the resulting electric fields.
+
+It takes work to move two charges from infinity into close proximity of each other, and that work results in stored energy of the system of charges.  For two point charges,
+
+ \[
+ W = \frac{1}{4\pi \varepsilon_{0}} \frac{q_{1}q_{2}}{\text{\small\slshape\cursive r}_{12}}
+ \] 
+
+When there are $n$ charges, the work needed to assemble each individual pair is summed to get the total stored energy,
+
+ \[
+ W = \left( \frac{1}{2} \right) \frac{1}{4\pi \varepsilon_{0}} \sum_{i}^{n} \sum_{j\ne i}^{n} \frac{q_{i}q_{j}}{\text{\small\slshape\cursive r}_{ij}}
+ \] 
+The factor of $\frac{1}{2}$ out front gets rid of the double counting ($q_{1}q_{2}$ is the same pair of charges as $q_{2}q_{1}$), and the specification $j \ne i$ eliminates terms such as $q_{1}q_{1}$ since a charge does not `feel' its own field.  Now rearrange this expression slightly,
+\[
+ W = \left( \frac{1}{2} \right)  \sum_{i}^{n} q_{i} \left( \sum_{j\ne i}^{n} \frac{1}{4\pi \varepsilon_{0}} \frac{q_{j}}{\text{\small\slshape\cursive r}_{ij}} \right)
+ \] 
+
+The term in parentheses is the potential at point $\vec{r}_{i}$ (the position of $q_{i}$) due to all the other charges.  So, we can write,
+\[
+ W = \left( \frac{1}{2} \right)  \sum_{i}^{n} q_{i} V(\vec{r}_{i})
+ \] 
+
+Going to a continuous distribution, the sum over $q$ becomes an integral of $\rho$ over the volume containing the charge,
+\begin{equation}
+ W = \frac{1}{2}   \int \rho V \, d\tau
+ \label{eq:intpot}
+ \end{equation} 
+
+It is desirable to get an expression for the energy entirely in terms of the field, $\vec{E}$.  The procedure for doing this is as follows:
+\begin{enumerate}
+\item Rewrite the source term ($\rho$) in Eq. \ref{eq:intpot} in terms of the field using Maxwell equation $\vec{\nabla} \cdot \vec{E} = \frac{\rho}{\varepsilon_{0}}$.
+\item Apply a product rule, then the one integral becomes two integrals.
+\item Use the divergence theorem to rewrite one of the integrals as a surface integral.
+\item If the limits are taken to infinity, the surface integral vanishes, and the remaining integral is expressed purely in terms of the field. 
+\end{enumerate}
+
+Replacing $\rho$ in Eq. \ref{eq:intpot},
+\begin{equation}
+ W = \frac{1}{2}   \int \varepsilon_{0} (\vec{\nabla} \cdot \vec{E}) V \, d\tau
+ \label{eq:intfield}
+ \end{equation} 
+ 
+\begin{equation*}
+\vec{\nabla} \cdot (f\vec{A})  =  f(\vec{\nabla} \cdot \vec{A}) + \vec{A} \cdot \vec{\nabla}f  \hspace{.5in} {\color{myblue} \longleftarrow \mbox{Use this product rule}} 
+\end{equation*}
+
+Demo of the product rule:\\
+
+\begin{equation*}
+\begin{aligned}
+ \vec{\nabla} \cdot (f\vec{A})  & = \left( \hat{x}\frac{\partial }{\partial x} + \hat{y}\frac{\partial }{\partial y} + \hat{z}\frac{\partial }{\partial z}\right)  \cdot \left( fA_{x}\hat{x} + fA_{y}\hat{y} + fA_{z}\hat{z} \right) \\
+& = \hat{x}\frac{\partial (fA_{x})}{\partial x} + \hat{y}\frac{\partial (fA_{y})}{\partial y} + \hat{z}\frac{\partial (fA_{z})}{\partial z} \\
+& = f\frac{\partial A_{x}}{\partial x} + A_{x}\frac{\partial f}{\partial x} + f\frac{\partial A_{y}}{\partial y} + A_{y}\frac{\partial f}{\partial y} + f\frac{\partial A_{z}}{\partial z} + A_{z}\frac{\partial f}{\partial z} \\
+& = f\left( \frac{\partial A_{x}}{\partial x} + \frac{\partial A_{y}}{\partial y} +\frac{\partial A_{z}}{\partial z} \right) 
++ A_{x}\frac{\partial f}{\partial x} + A_{y}\frac{\partial f}{\partial y} + A_{z}\frac{\partial f}{\partial z} \\
+& = f(\vec{\nabla} \cdot \vec{A}) + \vec{A} \cdot \vec{\nabla}f 
+\end{aligned}
+\end{equation*}
+
+
+Then, 
+\begin{equation}
+V(\vec{\nabla} \cdot \vec{E})  =  \vec{\nabla} \cdot (V\vec{E}) - \vec{E} \cdot \vec{\nabla}V
+\label{eq:product}
+\end{equation} 
+
+Plugging Eq. \ref{eq:product} into Eq. \ref{eq:intfield},
+\begin{equation*}
+\begin{aligned}
+W & = \frac{1}{2}\varepsilon_{0} \int \left[ \vec{\nabla} \cdot (V\vec{E}) - \vec{E} \cdot \vec{\nabla}V \right] d\tau \\
+& = \frac{1}{2}\varepsilon_{0} \int \vec{\nabla} \cdot (V\vec{E}) \, d\tau + \frac{1}{2}\varepsilon_{0}\int E^{2}  d\tau \hspace{.7in}  {\color{myblue} \longrightarrow \hspace{.1in} \mbox{Using} \hspace{.1in} \vec{E} =-\vec{\nabla}V} \\
+& = \frac{1}{2}\varepsilon_{0} \oint V\vec{E} \cdot d\vec{a} + \frac{1}{2}\varepsilon_{0}\int E^{2}  d\tau \hspace{1.in}  {\color{myblue} \longrightarrow \hspace{.1in} \mbox{Using the divergence theorem}}
+\end{aligned}
+\end{equation*}
+
+ As the volume gets infinitely large, the field and the potential drop to zero at the surface, which is now out at infinity.  Since the integrand of the surface integral goes to zero, the surface integral itself goes to zero.
+ 
+\subsubsection*{\color{myblue} \bf Magnetostatic energy review}
+
+The following derivation can be found in Chapter 7 of the textbook.
+
+The magnetostatic energy discussion starts with the expression for the energy needed to build up a field in an inductor.
+
+\begin{equation}
+W=\frac{1}{2}LI^{2}
+\label{eq:wind}
+\end{equation}
+
+Equation \ref{eq:wind} is an expression for the field energy stored in an inductor with a steady current flowing through the inductor.   When obtaining the expression for the energy of an electrostatic system, we began with the energy due to a few point charges and then generalized.  Here we will start with the energy of an inductor, and then generalize to find a more universal expression of the magnetostatic energy in terms of the field, $\vec{B}$, and the magnetic vector potential $\vec{A}$.
+
+First, let's get rid of $L$ in favor of an expression with the vector potential $\vec{A}$ using the definition of magnetic flux:
+
+\begin{equation*}
+\begin{aligned}
+& \Phi_{B}= LI = \int_{s} \vec{B} \cdot d\vec{a} = \int_{s} (\vec{\nabla} \times \vec{A} ) \cdot d\vec{a} \\
+& \int_{s} (\vec{\nabla} \times \vec{A} ) \cdot d\vec{a} = \oint \vec{A} \cdot d\vec{l} \hspace{.5in} {\color{myblue} \longrightarrow \hspace{.5in} \text{Using the curl theorem}}
+\end{aligned}
+\end{equation*}
+
+Then substituting into Eq.~\ref{eq:wind},
+
+\begin{equation*}
+W=\frac{1}{2} (LI) I = \frac{1}{2} I \oint \vec{A} \cdot d\vec{l} = \frac{1}{2} \oint (\vec{A} \cdot \vec{I} ) dl
+\end{equation*}
+
+Now generalize this result to be an integral over all space,
+
+\begin{equation}
+W =\frac{1}{2} \int_{V} (\vec{A} \cdot \vec{J} ) d\tau
+\label{eq:withJ}
+\end{equation}
+ 
+Equation \ref{eq:withJ} is to magnetostatics what equation \ref{eq:intpot} is to electrostatics; and so we follow the same procedure, and recast it into an expression with the magnetic field instead of the source $\vec{J}$.  That is:
+\begin{enumerate}
+\item Use the Maxwell equation $\vec{\nabla} \times \vec{B} = \mu_{0}\vec{J}$ to replace $\vec{J}$ in favor of $\vec{B}$.
+\item Use a product rule to re-write the triple product.  One term remains in a volume integral.  Using the divergence theorem, the other term becomes a surface integral. 
+\item Expanding the region of integration to include all space allows the surface integral to vanish.
+\end{enumerate}
+ 
+Using the Maxwell equation $\vec{\nabla} \times \vec{B} = \mu_{0}\vec{J}$ to eliminate $\vec{J}$, Eq.~\ref{eq:withJ} becomes:
+
+\begin{equation}
+\begin{rcases}
+W =\frac{1}{2} \int_{V} (\vec{A} \cdot \frac{1}{\mu_{0}}\vec{\nabla} \times \vec{B} ) d\tau
+\hspace{.5in}
+\end{rcases}
+\hspace{.2in} \text{enclose all currents}
+\label{eq:ABenergy}
+\end{equation}
+
+Now use product rule (6) on the front cover of the Griffith's textbook:
+
+\begin{eqnarray*}
+\vec{A} \cdot (\vec{\nabla} \times \vec{B}) & = & \vec{B} \cdot (\vec{\nabla} \times \vec{A}) - \vec{\nabla} \cdot (\vec{A} \times \vec{B}) \\
+& = & B^{2}-\vec{\nabla} \cdot (\vec{A} \times \vec{B})
+\end{eqnarray*}
+
+Using the above result, Eq.~\ref{eq:ABenergy} may be written,
+\begin{equation*}
+W =\frac{1}{2\mu_{0}} \left[ \hspace{.1in} \int_{V} B^{2} d\tau - \int_{V} \vec{\nabla} \cdot (\vec{A} \times \vec{B} ) \, d\tau \hspace{.1in} \right]
+\end{equation*}
+
+Applying the divergence theorem to the second integral:
+
+\begin{equation}
+W =\frac{1}{2\mu_{0}} \left[ \hspace{.1in} \int_{V} B^{2} d\tau - \oint_{S} \, (\vec{A} \times \vec{B} ) \cdot \, d\vec{a} \hspace{.1in} \right]
+\label{eq:Benergy}
+\end{equation}
+
+\begin{itemize}
+\item The first integral in Eq.~\ref{eq:Benergy} may be taken over any volume as long as it encloses all of the current.
+\item If the volume integral is extended to include all of space, then the contribution of the surface integral in Eq.~\ref{eq:Benergy} goes to zero, because $\vec{A}$ and $\vec{B}$ go to zero on a surface at infinity.  (Very far from all sources, fields and potentials go to zero.)
+\end{itemize}
+
+So, for that case where the volume of integration is extended to include all of space, the total energy can be found by summing up all the field energy!
+
+\begin{equation*}
+W =\frac{1}{2\mu_{0}} \int_{\text{all space}} B^{2} d\tau 
+\end{equation*}
+
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+

@@ -1,0 +1,349 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.5ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{frcursive}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+% \frac{1}{4\pi \varepsilon_{0}}
+% \text{\small\slshape\cursive r}
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 2, Lecture 3} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\bf It has potential}
+
+Previously it was stated that Coulomb's law and the principle of superposition are equivalent to the two electrostatic Maxwell's equations.  In math speak, this equation
+
+\begin{equation*}
+\begin{aligned}
+& \vec{E}=\frac{1}{4\pi \varepsilon_{0}} \int \frac{ \hat{\text{\small\slshape\cursive r}} }{\text{\small\slshape\cursive r}^{2}} dq \hspace{1.in} \mbox{\color{myblue} Coulomb's law + superposition} \\
+\end{aligned}
+\end{equation*}
+
+is equivalent to these equations.
+\begin{equation*}
+\begin{aligned}
+& \vec{\nabla} \cdot \vec{E} = \frac{\rho}{\varepsilon_{0}} \\
+& \oint \vec{E} \cdot d\vec{a} = \frac{q}{\varepsilon_{0}} 
+\end{aligned}
+\end{equation*}
+
+It was also previously demonstrated that Gauss' law is equivalent to Coulomb's law.  What about the curl equation?  The zeroness (zero-icity?) of the curl equation is a consequence of the fact that the electric field given by Coulomb's law depends only on the radial coordinate.  To see this, consider a general function in spherical coordinates,
+
+\[
+\vec{f} = f_{r}(r,\theta,\phi)\hat{r} + f_{\theta}(r,\theta,\phi)\hat{\theta} + f_{\phi}(r,\theta,\phi)\hat{\phi} 
+\]
+
+\vspace{.1in}
+The curl of $\vec{f}$ in spherical coordinates is
+\begin{equation*}
+\begin{aligned}
+& \vec{\nabla} \times \vec{f}  = \\
+& \frac{1}{ r\sin{(\theta)} } \left( \frac{\partial (\sin{(\theta)}f_{\phi}) }{\partial \theta}-\frac{\partial f_{\theta}}{\partial \phi} \right)\hat{r}
++\frac{1}{r} 
+\left( \frac{1}{\sin{(\theta)}}\frac{\partial f_{r} }{\partial \phi} -\frac{\partial (rf_{\phi}) }{\partial r} \right) \hat{\theta} 
+  + \frac{1}{r} \left( \frac{\partial (rf_{\theta}) }{\partial r}-\frac{\partial f_{r}}{\partial \theta} \right)\hat{\phi}
+\end{aligned}
+\end{equation*}
+
+\vspace{.2in}
+The electric field as given by coulomb's law depends only on the radial coordinate, so instead of a general function in spherical coordinates, we have a function like the following,
+\[
+\vec{f} = f_{r}(r)\hat{r} 
+\]
+which appears in only two of the curl terms.  Furthermore, since $f_{r}(r)$ has no angular dependence, the remaining two terms are also zero.
+
+\begin{equation*}
+\vec{\nabla} \times \vec{f}  = \frac{1}{r\sin{(\theta)}}\frac{\partial f_{r}(r) }{\partial \phi} \, \hat{\theta} 
+  - \frac{1}{r}  \frac{ \partial f_{r}(r) } { \partial \theta } \, \hat{\phi} = 0
+\end{equation*}
+
+Remember in the good old days when you learned that gravitational fields were conservative?  This was due to the $\frac{1}{r^{2}}$ dependence of the gravitational force.  A consequence of the field's conservative nature is that there is a potential associated with each location in the field.  A mass at a specific location has a specific potential energy.  That mass can give up its potential energy in exchange for kinetic energy (and vice vs.), because work is done when a force acts through a distance,
+\[
+W=\int \vec{F} \cdot d\vec{l}
+\]
+If a mass is moved all around in a gravitational field, but ends up where it started, no net work is done.  If a  mass moves from a specific location $A$ to another specific location $B$, the change in its potential energy is independent of the path it took when it moved from $A$ to $B$ (path independence).  Since the electric field also has a $\frac{1}{r^{2}}$ dependence, all that sort of stuff applies to electrostatic fields as well.
+
+To move this discussion into electrostatics land, integrate the curl of an electric field over a surface, and apply the curl theorem:
+\begin{eqnarray}
+\int \left( \vec{\nabla} \times \vec{E} \right) \cdot d\vec{a} & = & \int 0 \cdot d\vec{a} = 0 \nonumber \\
+\oint \vec{E} \cdot  d\vec{l} = 0  \label{eq:pathindep}
+\end{eqnarray}
+
+The force on a point charge is $\vec{F}=q\vec{E}$.  Multiply both sides of  Eq.~\ref{eq:pathindep} by the charge $q$ of a point charge, and it becomes an expression for the work done on a point charge in an electric field over a closed path (zero).
+
+\begin{equation}
+W = \oint q\vec{E} \cdot  d\vec{l} = \oint \vec{F} \cdot  d\vec{l} = 0 
+\label{eq:work}
+\end{equation}
+
+Since the curl of a gradient is zero, and the curl of the electrostatic field is also zero, the field may be  represented as the gradient of a scalar function (let's say $V$).  
+
+\begin{equation}
+\vec{E} = -\vec{\nabla} V
+\label{eq:epot}
+\end{equation}
+
+If both sides of Eq.~\ref{eq:epot} are multiplied by charge (a scalar), the we get the relationship between force and potential energy $U$.
+
+\begin{eqnarray*}
+q\vec{E} & = & -\vec{\nabla} (qV) \\
+\vec{F} & = & -\vec{\nabla} U 
+\end{eqnarray*}
+
+Let's take another look at the expression for the electric field:
+\begin{equation}
+\vec{E}=\frac{1}{4\pi \varepsilon_{0}} \int \frac{ \hat{\text{\small\slshape\cursive r}} }{\text{\small\slshape\cursive r}^{2}} dq 
+\label{eq:coulagain}
+\end{equation}
+
+It has already been shown (by you!) that
+\begin{equation}
+\vec{\nabla} \left( \frac{1}{\text{\small\slshape\cursive r}} \right) = -\frac{\hat{\text{\small\slshape\cursive r}}}{\text{\small\slshape\cursive r}^{2}}
+\label{eq:replacewgrad}
+\end{equation}
+where $\vec{\nabla}$ is operating on the unprimed coordinates in $\vec{\text{\small\slshape\cursive r}}=\vec{r}-\vec{r^{`}}$.  
+
+Plugging Eq.~\ref{eq:replacewgrad} into Eq.~\ref{eq:coulagain},
+\begin{equation*}
+\vec{E}=-\frac{1}{4\pi \varepsilon_{0}} \int  \vec{\nabla} \left( \frac{1}{\text{\small\slshape\cursive r}} \right) dq 
+\end{equation*}
+
+By convention, the primed position $\vec{r^{`}}$ in $\vec{\text{\small\slshape\cursive r}}=\vec{r}-\vec{r^{`}}$ represents the position of the charge, while the unprimed position $\vec{r}$ is the location of the observer.  The integral is a sum over charges, and is rewritten to be an integral over the positions of the charges; again represented with primed variables.  Therefore, $\vec{\nabla}$, which is an operator acting on unprimed position coordinates, may be pulled out of the integral.
+
+\begin{equation*}
+\vec{E}=-\vec{\nabla} \left( \frac{1}{4\pi \varepsilon_{0}} \int \frac{dq}{\text{\small\slshape\cursive r}}  \right)
+\end{equation*}
+
+Now we have an expression for the electrostatic potential,
+
+\begin{equation*}
+V = \frac{1}{4\pi \varepsilon_{0}} \int \frac{dq}{\text{\small\slshape\cursive r}}
+\end{equation*}
+
+Naturally this takes different forms for different geometries,
+\begin{eqnarray*}
+V & = &\frac{1}{4\pi \varepsilon_{0}} \int \frac{\lambda dl^{`}}{\text{\small\slshape\cursive r}} \\
+V & = & \frac{1}{4\pi \varepsilon_{0}} \int \frac{\sigma da^{`}}{\text{\small\slshape\cursive r}} \\
+V & = & \frac{1}{4\pi \varepsilon_{0}} \int \frac{\rho d\tau^{`}}{\text{\small\slshape\cursive r}} 
+\end{eqnarray*}
+
+\subsubsection*{Potential difference}
+
+The potential difference between points in space is given by the line integral of the electrostatic field. 
+
+\begin{equation}
+\Delta V = - \int \vec{E} \cdot  d\vec{l} 
+\label{eq:potdiff}
+\end{equation}
+
+\vspace{.2in}
+One way to see that this is true is to replace the field in the line integral with the gradient of the potential,
+
+\[
+- \int \vec{E} \cdot  d\vec{l} =  - \int \left( -\vec{\nabla}V \right) \cdot  d\vec{l} 
+\]
+
+We'll deal with this in Cartesian coordinates for convenience.  A differential displacement written in terms of components is,
+\[
+d\vec{l}=\hat{x} \, dx+\hat{y} \, dy+\hat{z} \, dz
+\]
+and
+\[
+\vec{\nabla}V = \frac{\partial V}{\partial x} \, \hat{x} + \frac{\partial V}{\partial y} \, \hat{y} +\frac{\partial V}{\partial z} \, \hat{z}
+\]
+so that
+\[
+\vec{\nabla}V \cdot d\vec{l} = \frac{\partial V}{\partial x} \, dx + \frac{\partial V}{\partial y} \, dy +\frac{\partial V}{\partial z} \, dz
+\]
+
+Then the integral can be written,
+\[
+- \int \vec{E} \cdot  d\vec{l} =  \left( \int \frac{\partial V}{\partial x} \, dx +  \int \frac{\partial V}{\partial y} \, dy + \int \frac{\partial V}{\partial z} \, dz \right) =   \int dV = \Delta V
+\]
+
+Please notice that Eq.\ref{eq:potdiff} is an expression for the potential {\it difference}.   Making this more explicit:
+\begin{equation*}
+\Delta V = V(B) - V(A) = - \int_{A}^{B} \vec{E} \cdot  d\vec{l} 
+\end{equation*}
+
+The work done by an electrostatic field on a charged particle results in a change of the particle's kinetic energy.  Writing the expression for work ($\Delta KE$) in terms of the electric field, the relation can then be cast in terms of the change in potential $\Delta V$.  The change in potential energy, $q\, \Delta V = \Delta PE =  \Delta U$ is the product of the charge and the change in potential.  Symbolically,
+\begin{eqnarray}
+W  = \Delta KE& = & \int q\vec{E} \cdot  d\vec{l} \nonumber \\
+ \Delta KE & = & -q\Delta V =  -\Delta U \label{eq:eV}
+\end{eqnarray}
+
+\subsubsection*{\bf Particle acceleration}
+
+This is a particularly useful expression for describing particle accelerators.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=.5cm 0cm 1cm 0cm, clip=true, width=0.6\columnwidth]{cockroft.pdf}
+\caption{View of accelerating column of old Fermilab Cockroft-Walton accelerator.  {\small \it Courtesy Fermilab Visual Media Services.}}
+\label{fig:cockcroft}
+\end{figure}
+
+Acceleration of a charged particle in a uniform electric field is the method used by the simplest particle accelerators.  This situation is analogous to a mass falling through a uniform gravitational field, picking up kinetic energy in exchange for the loss of potential energy.  As the charged particle `falls' through the field, it gains kinetic energy.  As can be understood from Eq.~\ref{eq:eV}, a natural unit for energy gain in this case is eV (electron volt).  For example, if an electron or a proton with a charge of magnitude $e$ experiences a one volt drop in potential energy, it must gain one electron volt [eV] of kinetic energy.  To convert [eV] to the SI unit of energy [Joules], multiply the change in voltage by the charge of the particle, i.e. $q\Delta V$.  The magnitude of the charge of an electron or proton is $1.6 \times 10^{-19}$ C.  Units of eV (or multiples such as MeV ($10^{6}$ eV), GeV  ($10^{9}$ eV), TeV  ($10^{12}$ eV)) are used for calculations pertaining to particle accelerators.  Figure~\ref{fig:cockcroft} shows an example of an accelerator that was used in the early days at Fermilab that provided a uniform electric field in an accelerating column (ringed cylinder in top left of photo).  The particles (H$^{-}$ ions) were injected into the column at potential -750 kV and accelerated through the uniform field in the column to ground potential (0 V).  So, the H$^{-}$ ions emerged with a kinetic energy of 750 keV.  Besides showing the accelerating column, Fig.~\ref{fig:cockcroft} also shows the cube containing the H$^{-}$ particle source and associated electronics, as well as the voltage multiplier stacks (legs) needed to reach -750 kV.
+
+\subsubsection*{\bf Potential difference in simple geometries}
+
+Getting back to the following equation for the potential difference, let's first consider the potential difference near a point charge.
+
+\begin{equation}
+\Delta V = V(B) - V(A) = - \int_{A}^{B} \vec{E} \cdot  d\vec{l} 
+\label{eq:potwlimits}
+\end{equation}
+
+Use the expression for the electric field due to a point charge to find the potential difference between an initial distance $r_{1}$ away from the charge, and a final distance $r_{2}$ from the charge.  For convenience the origin of the coordinate system is placed on the point charge.  Then $\vec{\text{\small\slshape\cursive r}}=\vec{r}$ since $\vec{r^{`}}=0$.
+\begin{eqnarray}
+\Delta V & = & V(r_{2}) - V(r_{1}) \nonumber \\
+& = & - \frac{1}{4\pi \varepsilon_{0}}\int_{r_{1}}^{r_{2}}  \frac{q}{r^{2}} \hat{r} \cdot  d\vec{r} 
+   = - \frac{q}{4\pi \varepsilon_{0}} \left( \left. -\frac{1}{r} \right\vert_{r_{1}}^{r_{2}} \right)  \nonumber \\
+   & = &  \frac{q}{4\pi \varepsilon_{0}} \left(\frac{1}{r_{2}}-\frac{1}{r_{1}} \right) 
+\label{eq:vsphere}
+\end{eqnarray}
+
+This result is positive if the observer gets closer to a positive charge ($r_{1} > r_{2}$, $q > 0$), or further from a negative charge (and vice vs.).  This is consistent with the convention that the potential near a positive charge is positive, and the potential near a negative charge is negative.  A reference potential of zero at locations infinitely far from the charge can be chosen for the case of a point charge or spherically symmetric distribution of charge, $V(\infty)=0$.  Letting $r_{1}\rightarrow \infty$ and $r_{2}\rightarrow r$ in  Eq.~\ref{eq:vsphere},
+
+\begin{eqnarray*}
+\Delta V & = & V(r) - V(\infty) = \frac{q}{4\pi \varepsilon_{0}} \left(\frac{1}{r}-\frac{1}{\infty} \right) \\
+V(r)  & = &  \frac{1}{4\pi \varepsilon_{0}}\frac{q}{r}
+\end{eqnarray*}
+
+Since an infinite line charge or cylinder of charge extends to infinity, one {\it cannot} choose the reference potential to be zero at infinity in this case.  The same is true for an infinite sheet of charge.  For these geometries, only a potential {\it difference} between points can be found; there is no potential associated with a single location.  Consider an infinite line charge with charge density $\lambda$; use  Eq.~\ref{eq:potwlimits} to find the potential difference when going from radius $s_{1}$ to radius $s_{2}$:
+\begin{eqnarray}
+\Delta V & = & V(s_{2}) - V(s_{1}) \nonumber \\
+& = & - \frac{1}{2\pi \varepsilon_{0}}\int_{s_{1}}^{s_{2}}  \frac{\lambda}{s} \hat{s} \cdot  d\vec{s} 
+   = - \frac{\lambda}{2\pi \varepsilon_{0}} \left( \left. \ln{(s)} \right\vert_{s_{1}}^{s_{2}} \right)  \nonumber \\
+   & = &  -\frac{\lambda}{2\pi \varepsilon_{0}} \left( \ln{ ( s_{2} ) } - \ln{ ( s_{1} ) } \right) 
+  =  -\frac{\lambda}{2\pi \varepsilon_{0}} \ln{ \left(\frac{ s_{2}}{ s_{1} } \right) } \nonumber \\
+   & = & \frac{\lambda}{2\pi \varepsilon_{0}} \ln{ \left(\frac{ s_{1}}{ s_{2} } \right) }
+\label{eq:vline}
+\end{eqnarray}
+absorbing the negative sign switched the numerator with the denominator in the argument of the ln function.
+
+Since the electric field due to an infinite sheet is a constant, $E=\frac{\sigma}{2\varepsilon_{0}}$, it comes out of the integral expression for the potential difference, and the result is simply the product of the field and the distance,
+
+\[
+\Delta V = V_{2}-V_{1} = -\frac{\sigma(l_{2}-l_{1})}{2\varepsilon_{0}} = -\frac{\sigma(\Delta l)}{2\varepsilon_{0}}
+\] 
+
+If the final location is further from a sheet with positive charge density, then the change in potential is negative, and vice vs.  Even though the electric field from an infinite sheet of charge is constant throughout space, the potential is not; it drops off linearly when moving away from a positive sheet of charge, and rises linearly when moving away from a negative sheet.
+
+\subsubsection*{\bf Energy of a system of charges}
+
+It takes work to move two charges from infinity into close proximity of each other, and that work results in stored energy of the system of charges.  For two point charges,
+
+ \[
+ W = \frac{1}{4\pi \varepsilon_{0}} \frac{q_{1}q_{2}}{\text{\small\slshape\cursive r}_{12}}
+ \] 
+
+When there are $n$ charges, the work needed to assemble each individual pair is summed to get the total stored energy,
+
+ \[
+ W = \left( \frac{1}{2} \right) \frac{1}{4\pi \varepsilon_{0}} \sum_{i}^{n} \sum_{j\ne i}^{n} \frac{q_{i}q_{j}}{\text{\small\slshape\cursive r}_{ij}}
+ \] 
+The factor of $\frac{1}{2}$ out front gets rid of the double counting ($q_{1}q_{2}$ is the same pair of charges as $q_{2}q_{1}$), and the specification $j \ne i$ eliminates terms such as $q_{1}q_{1}$ since a charge does not `feel' its own field.  Now rearrange this expression slightly,
+\[
+ W = \left( \frac{1}{2} \right)  \sum_{i}^{n} q_{i} \left( \sum_{j\ne i}^{n} \frac{1}{4\pi \varepsilon_{0}} \frac{q_{j}}{\text{\small\slshape\cursive r}_{ij}} \right)
+ \] 
+
+The term in parentheses is the potential at point $\vec{r}_{i}$ (the position of $q_{i}$) due to all the other charges.  So, we can write,
+\[
+ W = \left( \frac{1}{2} \right)  \sum_{i}^{n} q_{i} V(\vec{r}_{i})
+ \] 
+
+Going to a continuous distribution, the sum over $q$ becomes an integral of $\rho$ over the volume containing the charge,
+\begin{equation}
+ W = \frac{1}{2}   \int \rho V \, d\tau
+ \label{eq:intpot}
+ \end{equation} 
+
+It is desirable to get an expression for the energy entirely in terms of the field, $\vec{E}$.  The procedure for doing this is as follows:
+\begin{enumerate}
+\item Rewrite the source term ($\rho$) in Eq. \ref{eq:intpot} in terms of the field using Maxwell equation $\vec{\nabla} \cdot \vec{E} = \frac{\rho}{\varepsilon_{0}}$.
+\item Apply a product rule, then the one integral becomes two integrals.
+\item Use the divergence theorem to rewrite one of the integrals as a surface integral.
+\item If the limits are taken to infinity, the surface integral vanishes, and the remaining integral is expressed purely in terms of the field. 
+\end{enumerate}
+
+Replacing $\rho$ in Eq. \ref{eq:intpot},
+\begin{equation}
+ W = \frac{1}{2}   \int \varepsilon_{0} (\vec{\nabla} \cdot \vec{E}) V \, d\tau
+ \label{eq:intfield}
+ \end{equation} 
+ 
+\begin{equation*}
+\vec{\nabla} \cdot (f\vec{A})  =  f(\vec{\nabla} \cdot \vec{A}) + \vec{A} \cdot \vec{\nabla}f  \hspace{.5in} {\color{myblue} \longleftarrow \mbox{Use this product rule}} 
+\end{equation*}
+
+Demo of the product rule:\\
+
+\begin{equation*}
+\begin{aligned}
+ \vec{\nabla} \cdot (f\vec{A})  & = \left( \hat{x}\frac{\partial }{\partial x} + \hat{y}\frac{\partial }{\partial y} + \hat{z}\frac{\partial }{\partial z}\right)  \cdot \left( fA_{x}\hat{x} + fA_{y}\hat{y} + fA_{z}\hat{z} \right) \\
+& = \hat{x}\frac{\partial (fA_{x})}{\partial x} + \hat{y}\frac{\partial (fA_{y})}{\partial y} + \hat{z}\frac{\partial (fA_{z})}{\partial z} \\
+& = f\frac{\partial A_{x}}{\partial x} + A_{x}\frac{\partial f}{\partial x} + f\frac{\partial A_{y}}{\partial y} + A_{y}\frac{\partial f}{\partial y} + f\frac{\partial A_{z}}{\partial z} + A_{z}\frac{\partial f}{\partial z} \\
+& = f\left( \frac{\partial A_{x}}{\partial x} + \frac{\partial A_{y}}{\partial y} +\frac{\partial A_{z}}{\partial z} \right) 
++ A_{x}\frac{\partial f}{\partial x} + A_{y}\frac{\partial f}{\partial y} + A_{z}\frac{\partial f}{\partial z} \\
+& = f(\vec{\nabla} \cdot \vec{A}) + \vec{A} \cdot \vec{\nabla}f 
+\end{aligned}
+\end{equation*}
+
+
+Then, 
+\begin{equation}
+V(\vec{\nabla} \cdot \vec{E})  =  \vec{\nabla} \cdot (V\vec{E}) - \vec{E} \cdot \vec{\nabla}V
+\label{eq:product}
+\end{equation} 
+
+Plugging Eq. \ref{eq:product} into Eq. \ref{eq:intfield},
+\begin{equation*}
+\begin{aligned}
+W & = \frac{1}{2}\varepsilon_{0} \int \left[ \vec{\nabla} \cdot (V\vec{E}) - \vec{E} \cdot \vec{\nabla}V \right] d\tau \\
+& = \frac{1}{2}\varepsilon_{0} \int \vec{\nabla} \cdot (V\vec{E}) \, d\tau + \frac{1}{2}\varepsilon_{0}\int E^{2}  d\tau \hspace{.8in}  {\color{myblue} \longrightarrow \hspace{.1in} \mbox{Using} \hspace{.1in} \vec{E} =-\vec{\nabla}V} \\
+& = \frac{1}{2}\varepsilon_{0} \oint V\vec{E} \cdot d\vec{a} + \frac{1}{2}\varepsilon_{0}\int E^{2}  d\tau \hspace{1.in}  {\color{myblue} \longrightarrow \hspace{.1in} \mbox{Using the divergence theorem}}
+\end{aligned}
+\end{equation*}
+
+ As the volume gets infinitely large, the field and the potential drop to zero at the surface, which is now out at infinity.  Since the integrand of the surface integral goes to zero, the surface integral itself goes to zero.
+ 
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+

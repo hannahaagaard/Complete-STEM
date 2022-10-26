@@ -1,0 +1,318 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+\definecolor{grey}{RGB}{200, 200, 200}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 3, Lecture 1} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\bf Enter Poisson and Laplace}
+
+So far, we haven't mentioned the Laplacian operator, $\nabla^{2}$.  It pops up when we make a connection between charge density, $\rho$, and the electric potential $V$, namely in Poisson's equation:
+
+\[
+\nabla^{2}V=-\frac{\rho}{\varepsilon_{0}}
+\]
+
+To get this, use the electrostatic equations for the electric field.  The curl equation has no source term on the right-hand-side:
+
+\[
+\vec{\nabla} \times \vec{E} = 0
+\]
+
+Since it is known that the curl of a gradient is zero, it is fair to represent the electric field as the gradient of a scalar (let's say $V$).  This is, in general, the procedure for finding a valid functional form for the potential; the expression for the potential must always satisfy the sourceless Maxwell equation.
+
+\begin{equation}
+\vec{E} = -\vec{\nabla} V
+\label{eq:epot}
+\end{equation}
+
+Once a functional form for the potential has been determined, it can be substituted into the other Maxwell equation (the one with a source term) to relate the source of the field (charge density in this case) directly to the resulting potential.  So, subsituting Eq.~\ref{eq:epot} into the divergence equation:
+
+\begin{eqnarray*}
+ \vec{\nabla} \cdot \vec{E} & = & \frac{\rho}{\varepsilon_{0}} \\
+ \vec{\nabla} \cdot \left(-\vec{\nabla} V\right) & = & \frac{\rho}{\varepsilon_{0}} \\
+ \nabla^{2} V  & = & -\frac{\rho}{\varepsilon_{0}} \hspace{2.in} \mbox{\color{myblue} Poisson's equation!} 
+\end{eqnarray*}
+
+A certain region of space may have no charge density, $\rho=0$.  The charge may be at the boundaries of the space being considered, or further away than the region of space being considered.  The potential in that region of space is then described by Laplace's equation instead of Poisson's equation:
+
+\[
+\nabla^{2} V = 0 \hspace{3.in} \mbox{\color{myblue} Laplace's equation!} 
+\]
+
+\vspace{.2in}
+What is $\nabla^{2}$ anyway?  In Cartesian coordinates, this is shorthand for,
+\begin{eqnarray*}
+\vec{\nabla} \cdot \vec{\nabla} & = & \left(\hat{x}\frac{\partial}{\partial x} +\hat{y}\frac{\partial}{\partial y}+\hat{z}\frac{\partial}{\partial z}\right) \cdot \left(\hat{x}\frac{\partial}{\partial x} +\hat{y}\frac{\partial}{\partial y}+\hat{z}\frac{\partial}{\partial z}\right) \\
+& = & \frac{\partial}{\partial x}\left(\frac{\partial}{\partial x}\right) +\frac{\partial}{\partial y}\left(\frac{\partial}{\partial y}\right)+\frac{\partial}{\partial z} \left(\frac{\partial}{\partial z}\right) \\
+& = & \frac{\partial^{2}}{\partial x^{2}} +\frac{\partial^{2}}{\partial y^{2}}+\frac{\partial^{2}}{\partial z^{2}} 
+\end{eqnarray*}
+
+\subsubsection*{Smooth operator}
+
+When a region is described by the Laplacian, the extreme values of $V$ must occur at the boundaries, there are no local minima or maxima.  Related to this, the value of $V$ at any point is the average of those values of $V$ around that point.
+
+As in Griffiths, start building an understanding of this by considering the one-dimensional Laplace equation, with the potential depending only on on variable, $x$:
+
+\begin{equation*}
+\begin{aligned}
+& \frac{d^{2}V(x)}{dx^{2}} = \frac{d}{dx} \left( \frac{ dV(x) }{dx} \right) = 0 \hspace{.5in} \longrightarrow \hspace{.3in} \mbox{The first derivative must be a constant,} \, m \\
+&  \frac{dV(x)}{dx} = m \hspace{1.68in} \longrightarrow \hspace{.3in} \mbox{Solve for $V$} \\
+& V(x) = \int mdx \\
+& V(x) = mx + b   \hspace{1.45in} \longrightarrow \hspace{.3in} \mbox{$b$ is the arbitrary constant of  integration}
+\end{aligned}
+\end{equation*}
+
+The solution for $V(x)$ is the equation for a line with slope $m$ and intercept $b$.  Figure \ref{fig:line} shows a plot of $V(x)= 0.5\,x+2$ for the domain $0 \leq x \leq 16$.  Note that the minimum and maximum of the function $V(x)$ are at the boundaries ($x=0$ and $x=16$).  Further, any point on the line is an average of neighboring points.  Take, for example, $x=7$ and go $\pm 6$ in either direction:
+\begin{eqnarray*}
+\begin{aligned}
+& V(x) = \frac{1}{2}\left[ V(x+a) + V(x-a) \right] \\
+& V(10) = \frac{1}{2}\left[ V(10+6) + V(10-6) \right] \\
+& 7 = \frac{1}{2}\left[ 10 + 4 \right]
+\end{aligned}
+\end{eqnarray*}
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.3\columnwidth]{line.png}
+\caption{\small This is a plot of $V(x)=0.5 \,x+2$, for the domain of $0 \leq x \leq 16$.}
+\label{fig:line}
+\end{figure}
+
+The minimum distance between any two points is a straight line.  Poisson's equation, or Laplace's equation (for the situation when $\rho=0$) are equivalent to minimizing the electrostatic energy.  
+%See the appendix of these notes if you are interested that derivation.  
+The principle is similar to having a soap film stretched between diagonal lines that connect some corners of cube faces (see Fig.~\ref{fig:soapfilm}).  The film will be the one with the minimum possible surface area. 
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.4\columnwidth]{soap_film.png}
+\caption{\small Depiction of a soap film stretched over cube face diagonals.}
+\label{fig:soapfilm}
+\end{figure}
+ 
+\afterpage{\clearpage}
+
+An electrostatic system will naturally configure to minimize the energy, and this requires Laplace's equation be obeyed in the empty space between charge boundaries.  In these cases, the `method of relaxation' is a computational technique that may be used to find the spatial dependence of the potential in the bounded region.  A simple illustration of this method for a parallel plate capacitor follows.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.7\columnwidth]{capmesh.pdf}
+\caption{\small A capacitor with a mesh used to find the voltage between the plates using the iterative `method of relaxation'.  The new voltage for any meshpoint is an average of the voltage of the nearest neighbor points on the mesh.  For the meshpoint P shown, that average would be $V_{P}=\frac{1}{4}\left( V_{N}+V_{S}+V_{E}+V_{W} \right)$.}
+\label{fig:capmesh}
+\end{figure}
+
+Consider a capacitor with a grid between the plates such as the one shown in Fig.~\ref{fig:capmesh}. follows.    The plates are the boundaries, and the space in between is where we wish to find the potential.  A mesh is defined in this space, let's say a 4 x 8 grid with the mesh points at the intersections of the grid lines.  We wish to get accurate values for the voltages at the mesh points, say to within 1\% of the real values.  Initially, the voltage of each mesh point is set to zero, unless it lies on one of the capacitor plates.  The voltages of mesh points on the conducting plates are permanently fixed at the capacitor plate voltage.  An iterative proceedure is carried out that successively updates the values of the mesh points until the voltage is within the desired accuracy.  Consider the point $P$ of the mesh shown in Fig.~\ref{fig:capmesh}.  The initial voltage at point $P$ is $V_{P}=0$ since it does not lie on a capacitor plate.  An updated voltage for mesh point $P$ is obtained by averaging of the voltages of the nearest mesh point neighbors, labeled $V_{N}$, $V_{S}$,  $V_{E}$ and  $V_{W}$ in the figure.  
+
+Making this specific, suppose the top plate has a potential of +6 V and the bottom plate a potential of -6 V.  First of all,  For the simple case of a capacitor, the final voltage at the mesh points is known due to the symmetry of the conductors and the voltage of the plates.  The voltage must be zero at the midplane between the plates.  The equipotential line between the midplane (0 V) and the top plate (6 V) must be 3 V.  Now check out the how the `method of relaxation' works.  The voltage at a point P, next to, but not on the top plate after one iteration would be $\frac{1}{4}(+6+0+0+0) = 1.5$ V.  The new voltages for the other mesh points are calculated similarly.  Figure \ref{fig:viterate} shows the meshpoint values after 1, 3 and 6 iterations.  All points along a row have the same voltage as expected, since rows parallel to the plates are equipotentials lines.   As shown in Fig.~\ref{fig:v_at_P} it only takes 7 interations before the voltage at point P is within 1\% of 3 V (it is 2.977 V after 7 interations).
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.5\columnwidth]{viterate.pdf}
+\caption{\small Representation of a capacitor and mesh after 1, 3, and 6 interations using the `method of relaxation'.  The voltage values at the horizontal mesh lines is shown to the right of the lines.}
+\label{fig:viterate}
+\end{figure}
+
+\vspace{.3in}
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.4\columnwidth]{v_at_P.png}
+\caption{\small The voltage at a meshpoint P versus iteration number using $V_{P}=\frac{1}{4}\left( V_{N}+V_{S}+V_{E}+V_{W} \right)$ for a location between capacitor plates that would be at 3V.}
+\label{fig:v_at_P}
+\end{figure}
+
+\afterpage{\clearpage}
+
+\end{flushleft}
+\end{document}
+
+
+\newpage
+
+
+\iffalse
+\begin{figure}[h]
+\centering
+\vspace{-1.4in}
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.8\columnwidth]{squarecoax.pdf}
+\caption{\small .}
+\label{fig:sqcoax}
+\end{figure}
+\fi
+
+square co-ax\\
+
+
+
+{\color{grey} \hrulefill}\\
+Appendix (Poisson is a minimalist):\\
+
+Hamilton's principle: as a system moves from state $a$ to state $b$, it does so along the trajectory that makes the action integral an extremum.
+
+The action integral:
+\[
+S = \int_{a}^{b} 
+\]
+
+That's why there is no appendix
+
+
+{\color{grey} \hrulefill}\\
+
+\end{flushleft}
+\end{document}
+
+\newpage
+and similarly $\vec{\nabla} \times \vec{a}$ is the cross product of del with $\vec{a}$:
+\begin{eqnarray*}
+ \vec{\nabla} \times \vec{a} & = & \left| \begin{array}{ccc} 
+\hat{x} & \hat{y} & \hat{z} \\ 
+\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+a_{x} & a_{y} & a_{z}
+\end{array} \right| \\
+\\
+& = & \left( \frac{\partial a_{z}}{\partial y}-\frac{\partial a_{y}}{\partial z} \right)\hat{x} - \left( \frac{\partial a_{z}}{\partial x}-\frac{\partial a_{x}}{\partial z} \right)\hat{y} + \left( \frac{\partial a_{y}}{\partial x}-\frac{\partial a_{x}}{\partial y} \right)\hat{z}
+\end{eqnarray*}
+
+
+$\vec{\nabla} \cdot \vec{E}$ and $\vec{\nabla} \cdot \vec{B}$ ({\it \color{myblue} divergence}) $\longrightarrow$ scalar functions or scalars\\
+$\vec{\nabla} \times \vec{E}$ and $\vec{\nabla} \times \vec{B}$ ({\it \color{myblue} curl}) $\longrightarrow$ vector functions or vectors\\
+
+
+
+
+
+
+Get Gauss' law by integrating Eq.~\ref{eq:divE} over a volume in space:
+\begin{equation*}
+\int_{V} (\vec{\nabla} \cdot \vec{E}) \: d\tau  =  \frac{1}{\varepsilon_{0}} \int_{V} \rho \: d\tau
+\end{equation*}
+
+The integral of the charge density $\rho \: \left[ \frac{ \mbox{C} }{ \mbox{m}^{3} } \right]$ over a volume is just the total charge enclosed by that volume, $q_{enc}$.  The divergence theorem is used to recast the left hand side of the equation to a flux integral.  The divergence theorem states that the integral of the divergence of a vector over a volume is the same as the dot product of that vector with the area enclosing that volume (the flux through the area):
+
+\begin{equation*}
+\int_{V} (\vec{\nabla} \cdot \vec{v}) \: d\tau  =   \oint_{S} \vec{v} \cdot d\vec{a} 
+\end{equation*}
+
+
+
+In deriving the integral form of Maxwell's equations, we have run across line integrals, surface integrals, and volume integrals.  We'll do lots of these.
+\begin{eqnarray*}
+\int_{P} \vec{v} \cdot d\vec{l}   \hspace{.5in} & \mbox{closed path} \longrightarrow  & \hspace{.5in} \oint \vec{v} \cdot d\vec{l} \\ 
+\int_{S} \vec{v} \cdot d\vec{a}  \hspace{.5in} & \mbox{closed surface} \longrightarrow  & \hspace{.5in} \oint \vec{v} \cdot d\vec{a} \\
+\int_{V} v \: d\tau  \hspace{.6in} & &
+\end{eqnarray*}
+
+
+
+Notice that operating on a scalar function with $\vec{\nabla}$ is the multidimensional analog of taking the derivative (finding the slope) of a function in 1D.  So, we expect a similar meaning.  The following example is taken from Roel Snieder 'A Guided Tour of Mathematical Methods for the Physical Sciences':\\
+\vspace{.2in}
+Consider a function of $x$ and $y$, $f(x,y)$, at locations A, B, and C, as shown in Fig.~\ref{fig:grad}.
+
+
+The small change in the function, $\delta f$, between point A and point C is given by:
+\begin{eqnarray}
+\delta f & =  & f_{C}-f_{A} \nonumber \\ 
+            & =  &  (f_{C}-f_{B}) + (f_{B}-f_{A}) \nonumber \\
+            & = &  [f(x+\delta x, y+\delta y) - f(x+\delta x, y)] + [f(x+\delta x, y)-f(x, y)] \label{eq:df}
+\end{eqnarray}
+
+
+
+Substituting these into Eq.~\ref{eq:df}:
+
+\begin{equation*}
+\begin{aligned}
+\delta f & = \frac{\partial f(x,y)}{\partial x} \delta x + \frac{\partial f(x+\delta x,y)}{\partial y} \delta y \\
+            & = \frac{\partial f(x,y)}{\partial x} \delta x + \frac{\partial f(x,y)}{\partial y} \delta y + \frac{\partial^{2} f(x,y)}{\partial x\partial y} \delta x \delta y
+\end{aligned}
+\end{equation*}
+
+To leading order,
+
+\begin{equation*}
+\delta f  = \frac{\partial f(x,y)}{\partial x} \delta x + \frac{\partial f(x,y)}{\partial y} \delta y = \vec{\nabla}f \cdot \delta \vec{r}
+\end{equation*}
+
+$\vec{\nabla}$ has magnitude and direction.  $\delta f = \vec{\nabla}f \cdot \delta \vec{r}$ is maximum when $\vec{\nabla}f$ is parallel to $\delta r$, and minimum when $\delta r$ is directed along a contour of constant $f$.  The gradient, $\vec{\nabla}f$, points in the direction of the maximum increase of the function $f$.  The magnitude $|\nabla f|=\frac{df}{dr}$ gives the slope (rate of increase) along this maximal direction.  So, $\vec{\nabla}f$ is the multidimensional analog of the 1D slope.
+
+One more thing lifted from Snieder - What is the gradient of the potential energy?  (For the non-dissipative Newtonian case.)  Since energy is conserved, the total energy does not change with time:
+
+
+\begin{eqnarray}
+\frac{d}{dt}\left( \frac{1}{2}mv^{2} \right) & = & m \left( v_{x}\frac{dv_{x}}{dt} +  v_{y}\frac{dv_{y}}{dt} +  v_{z}\frac{dv_{z}}{dt} \right) \nonumber \\
+                  & = & \vec{v} \cdot m\frac{\vec{dv}}{dt} 
+\label{eq:keterm}
+\end{eqnarray}
+
+Write the time derivative of the potential energy in its explicit form,
+\begin{equation}
+\frac{dU(r)}{dt} = \lim_{\delta t \rightarrow 0} \frac{U(r(t+\delta t))-U(r(t))}{\delta t}
+\label{eq:potderiv}
+\end{equation}
+
+It is convenient to use the following:
+\[
+\delta r = r(t+\delta t) - r(t) \hspace{.5in} \longrightarrow \hspace{.5in}  r(t+\delta t) = r(t) + \delta r
+\] 
+
+Putting this into Eq.~\ref{eq:potderiv} and then using the Taylor expansion of $U(r(t)+\delta r)$:
+
+\[
+\lim_{\delta t \rightarrow 0} \frac{U(r(t)+\delta r)-U(r(t))}{\delta t}  = \lim_{\delta t \rightarrow 0} \frac{ \frac{\partial U(r(t))}{\partial r} \delta r}{\delta t}
+\]
+
+This is,
+\begin{eqnarray}
+\lim_{\delta t \rightarrow 0} \frac{ \frac{\partial U(r(t))}{\partial r} \delta r}{\delta t}
+  & = & \lim_{\delta t \rightarrow 0} \frac{ \vec{\nabla}U(r) \cdot \delta \vec{r}}{\delta t} \nonumber \\
+ & = & \vec{v} \cdot \vec{\nabla}U \label{eq:peterm}
+\end{eqnarray}
+
+Plugging Eq.~\ref{eq:keterm} and Eq.~\ref{eq:peterm} into Eq.~\ref{eq:energy}:
+\[
+\frac{dE}{dt} = \vec{v} \cdot \left(  m\frac{\vec{dv}}{dt}  + \vec{\nabla}U  \right) = 0
+\]
+
+
+
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+

@@ -1,0 +1,203 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{frcursive}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 2, Lecture 1} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\bf Electrostatics}
+
+In the past, you learned that if a point charge $q$ is located at the origin, it causes an electric field to fill space.  At some distance $r$ away, that field is given by:
+
+\begin{equation}
+\vec{E} =\frac{1}{4\pi \varepsilon_{0}}\frac{q}{r^{2}}\hat{r}
+\label{eq:coulomb}
+\end{equation}
+
+A negative point charge is a `sink', meaning that electric field lines terminate on negative charge.  A positive point charge is a `source', meaning that electric field lines emanate from positive charge.  The direction of an  electric field goes from positive to negative; so, at a given location in space $\vec{E}$ points from a region with greater positive charge to a region with lesser positive charge.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm .5cm 0cm 0cm, clip=true, width=0.4\columnwidth]{fielddirs.png}
+\caption{Convention for electric field direction.}
+\label{fig:scriptr}
+\end{figure}
+
+Also, you learned that superposition applies to electric fields.  If at some point $P$ the electric field due to a single charge $q_{1}$ would be $\vec{E}_{1}$, and the electric field due to a single charge $q_{2}$ would be $\vec{E}_{2}$, and so on - then if all charges are present, the field at $P$ is the simple vector sum of the fields due to each particle individually.
+
+\begin{equation}
+\vec{E}_{total} = \vec{E}_{1} + \vec{E}_{2} + \vec{E}_{3} + \vec{E}_{4} + \ldots
+\label{eq:superposition}
+\end{equation}
+
+Together, equations \ref{eq:coulomb} and \ref{eq:superposition} comprise electrostatics.  They are equivalent to the two Maxwell equations for the electric field:
+
+\begin{eqnarray}
+ \vec{\nabla} \cdot \vec{E} & = & \frac{\rho}{\varepsilon_{0}} \label{eq:divE}\\
+ \vec{\nabla} \times \vec{E} & = & 0 \nonumber 
+\end{eqnarray}
+
+Consider Eq.~\ref{eq:divE} for a single positive point charge.  Apply the divergence theorem to see that it is the same as the electric field expression stated by Coulomb's law.
+
+\begin{eqnarray}
+\int_{V} (\vec{\nabla} \cdot \vec{E}) \: d\tau & = & \frac{1}{\varepsilon_{0}} \int_{V} \rho \: d\tau \label{eq:volint} \\
+\oint \vec{E} \cdot d\vec{a} & = & \frac{q}{\varepsilon_{0}} \nonumber  
+\end{eqnarray}
+
+The volume integral on the left-hand side of Eq.~\ref{eq:volint} becomes a surface integral after application of the divergence theorem.  In general, an integral of the electric field dotted into a surface is called the `flux', $\Phi_{E}$. 
+
+\[
+\Phi_{E} = \int \vec{E} \cdot d\vec{a}
+\]
+
+Getting back to the point charge, the integral of the charge density over the volume on the right-hand side of Eq.~\ref{eq:volint} is the total charge contained in the space, and that is simply $q$ since there is only the one point charge.  As for the left-hand side (LHS), by symmetry $|E|$ is the same everywhere on the surface of a sphere centered on the charge.  So, in this case (being constant) it may be pulled out of the integral.  Since the charge is at the origin, and the field radiates outward from the charge, $\vec{E}$ is in the $\hat{r}$ direction.  The direction of a closed surface is always normal to the surface, pointing outward with respect to the enclosed volume.  In this case $d\vec{a}=\hat{r}da$.
+
+\begin{equation*}
+\begin{aligned}
+&  \oint \vec{E} \cdot d\vec{a} =  \frac{q}{\varepsilon_{0}} \\ 
+&   \oint E\hat{r} \cdot \hat{r} da =  \frac{q}{\varepsilon_{0}}  \\
+& E \oint da=  E4\pi r^{2} = \frac{q}{\varepsilon_{0}} \\
+& E = \frac{q}{4 \pi \varepsilon_{0} r^{2}}
+\end{aligned}
+\end{equation*}
+
+The full vector expression for the electric field due to a single point charge $q$ is:
+
+\[
+\vec{E} = \frac{q}{4 \pi \varepsilon_{0} r^{2}} \hat{r}
+\]
+
+To make this more general, position the charge $q$ somewhere besides the origin, say at $\vec{r^{'}}$, with the observer at $\vec{r}$ as before.  The strength of the field depends on the distance of the charge from the observation point, $\vec{\text{\small\slshape\cursive r}}=\vec{r}-\vec{r^{'}}$, not the location of the origin.
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.4\columnwidth]{scriptr.png}
+\caption{Sketch of position vectors.}
+\label{fig:scriptr}
+\end{figure}
+
+Allowing for the possibility of not locating a point charge at the origin, Coulomb's law is written:
+
+\[
+\vec{E} = \frac{q}{4 \pi \varepsilon_{0} \text{\small\slshape\cursive r}^{2}} \hat{\text{\small\slshape\cursive r}}
+\]
+
+This is handy if there is more than one point charge, they can't all be at the origin.  Superposition allows us to take this to a much deeper level.  If there are a finite number of point charges, simply add up their fields,
+
+\[
+\vec{E} = \frac{q}{4 \pi \varepsilon_{0}} \left( \frac{ q_{1}\hat{\text{\small\slshape\cursive r}}_{1} }{ \text{\small\slshape\cursive r}_{1}^{2} }  + \frac{ q_{2}\hat{\text{\small\slshape\cursive r}}_{2} }{ \text{\small\slshape\cursive r}_{2}^{2} } + \frac{ q_{3}\hat{\text{\small\slshape\cursive r}}_{3} }{ \text{\small\slshape\cursive r}_{3}^{2} } + \ldots \right)
+\]
+
+There may be too many charges to count.  In this case it is not practical to use a summation; but the field can  be obtained using an integration over the charge distribution instead.
+
+\begin{equation}
+\vec{E}=\frac{1}{4\pi \varepsilon_{0}} \int \frac{ \hat{\text{\small\slshape\cursive r}} }{\text{\small\slshape\cursive r}^{2}} dq
+\label{eq:intcoul}
+\end{equation}
+
+While Eq.~\ref{eq:intcoul} looks nice and simple, it can actually be a bit tricky to use.  First, it is a vector equation, so there may actually be three different equations to solve, one for each coordinate direction.  Sometimes, if the charge distribution has some symmetry (with respect to the observation point $P$) certain components of the vector equation may be zero, as seen by inspection.  Second, there is the difficulty of the $dq$.  Since the charge is spread out over space in some way, the integration should naturally be over space.  So it is necessary to convert $dq$ to have some dependence on differential length(s).  The easiest cases are those where the charge is uniformly distributed, either over a line, an area or a volume.
+
+Consider the one-dimensional (1D) case where a total charge, $Q$, is distributed uniformly along a line of length $L$.  The charge distribution can be described with a constant linear charge density, $\lambda$.  The total charge can be written in terms of $\lambda$ and the length of the line of charge:
+
+\[
+Q = \left( \frac{ \mbox{charge} }{ \mbox{length} } \right) \left( \mbox{total length} \right) = \lambda L
+\]
+
+If the line of charge is divided into infinitesimal lengths, $dl$, the charge in one of these small sections of length is $dq=\lambda dl$.  (Note: if the line of charge were along the x-axis, you would probably write  $\lambda dx$, since the element of length $dl$ is equivalent to $dx$.  If the line of charge were in the radial direction, you would write $\lambda dr$, and so forth.)  The total charge of a line of length $L$ may be found by integrating over the differential elements of charge.
+
+\[
+Q = \int_{L} dq = \int_{L} \lambda dl = \lambda \int_{L}  dl = \lambda L
+\]
+
+Similarly, if a charge $Q$ is uniformly distributed on an area $A$, the charge distribution may be described with a constant surface charge density, $\sigma$.  The total charge on the surface is given by:
+
+\[
+Q = \left( \frac{ \mbox{charge} }{ \mbox{area} } \right) \left( \mbox{total area} \right) = \sigma A
+\]
+
+The total charge may be found by summing up the differential charge elements, $dq=\sigma da$, over the area.  Note that the area, and hence the integral, is two-dimensional (2D).  In other words, $da=dl_{1}dl_{2}$, where $dl_{1}$ and $dl_{2}$ depend on the coordinate system and the location of the surface.  For example, if the area is a spherical shell of radius $R$, then $dl_{1}=R\sin{(\theta)}d\phi$ and $dl_{2}=Rd\theta$.  Anyway, in general,
+
+\[
+Q = \int_{A} dq = \int_{A} \sigma da = \sigma \int_{A}  da = \sigma A
+\]
+
+If a charge $Q$ is uniformly distributed through a volume, $V$, the charge distribution may be described with a constant volume charge density, $\rho$.  The total charge of the volume is given by:
+
+\[
+Q = \left( \frac{ \mbox{charge} }{ \mbox{volume} } \right) \left( \mbox{total volume} \right) = \rho V
+\]
+
+The total charge may be found by summing up the differential charge elements, $dq=\rho \, d\tau = \rho \, dl_{1}dl_{2}dl_{3}$, over the volume.  The expression for the 3D differential volume depends on the coordinate system.  For example, if the volume is a sphere of radius $R$, then $dl_{1}=R\sin{(\theta)}d\phi$, $dl_{2}=Rd\theta$, and $dl_{2}=dr$.
+
+\[
+Q = \int_{V} dq = \int_{V} \rho d\tau = \rho \int_{V}  d\tau = \rho V
+\]
+
+Putting this in table form:
+
+\begin{center}  
+\begin{tabular}{|l|l|l|}\hline
+Dimension & Differential Charge & Total Charge \\
+\hline\hline
+Length  &   $dq=\lambda \, dl_{1}$ & $Q=\lambda \, L$ \\
+Area  &  $dq=\sigma \, dl_{1}dl_{2}$ & $Q=\sigma \, A$ \\
+Volume & $dq=\rho \, dl_{1}dl_{2}dl_{3}$ & $Q=\rho \, V$\\
+\hline
+\end{tabular}
+\end{center}
+
+For uniform charge distributions in the 1D, 2D, and 3D cases, the direct integrals for calculating the electric field are as follows:
+
+\begin{eqnarray*}
+\vec{E} & =& \frac{1}{4\pi \varepsilon_{0}} \int_{P} \frac{\lambda}{\text{\small\slshape\cursive r}^{2}} \, \hat{\text{\small\slshape\cursive r}} dl^{`} \\
+\vec{E} & =& \frac{1}{4\pi \varepsilon_{0}} \int_{S} \frac{\sigma}{\text{\small\slshape\cursive r}^{2}} \, \hat{\text{\small\slshape\cursive r}} da^{`} \\
+\vec{E} & =& \frac{1}{4\pi \varepsilon_{0}} \int_{V} \frac{\rho}{\text{\small\slshape\cursive r}^{2}} \, \hat{\text{\small\slshape\cursive r}} d\tau 
+\end{eqnarray*}
+
+A 1D problem, namely finding the field due to a short line of charge, follows on the next page.  The solution is checked in the limits of the line of charge extending to infinity, and the line of charge shrinking to a point.
+
+%\frac{1}{\text{\small\slshape\cursive r}} 
+% \frac{1}{4\pi \varepsilon_{0}}
+% \text{\small\slshape\cursive r}
+
+\end{flushleft}
+\end{document}  
+
+
+
+
+
+
+
+

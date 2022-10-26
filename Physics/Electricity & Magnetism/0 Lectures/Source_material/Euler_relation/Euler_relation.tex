@@ -1,0 +1,178 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.8in
+\textwidth = 6.5in
+\topmargin = -.6in
+\oddsidemargin = -.04in
+%\evensidemargin = -0.5in
+\pagestyle{empty}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{empheq}
+\usepackage{frcursive}
+\usepackage{amsmath,amssymb}
+\usepackage{calligra}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
+
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+
+% script r
+\newcommand{\scriptr}[1]{\ensuremath{\mathcalligra{#1}}}
+
+%blue lines
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+\begin{document}
+\begin{flushleft}
+
+\subsection*{\color{myblue} Complex numbers}
+
+A complex number $\tilde{A}$, sometimes denoted by the presence of a tilde ($\sim$) is the sum of a real and imaginary number:
+
+\[
+\tilde{A} = a + ib
+\]
+
+Both $a$ and $b$ are real numbers, with $i$ imaginary.  In other words, $a=\text{Re}(\tilde{A})$ and $b=\text{Im}(\tilde{A})$, and the imaginary unit $i$ for complex numbers is defined in the following way,
+
+\begin{equation}
+i=\sqrt{-1}
+\label{eq:i}
+\end{equation}
+
+Equation \ref{eq:i} leads to other commonly used identities,
+\begin{equation*}
+\begin{aligned}
+& i^{2} = -1 \\
+& \frac{1}{i} = \frac{i}{i^{2}} = -i
+\end{aligned}
+\end{equation*}
+
+The complex conjugate of $\tilde{A}$ is denoted by $\tilde{A}^{*}$.  To obtain the complex conjugate of a complex number let $i \rightarrow -i$.  For example, if $\tilde{A}=a+ib$, then $\tilde{A}^{*}=a -ib$.  The magnitude of a complex number is defined as,
+
+\[
+|\tilde{A}| = \sqrt{AA^{*}}
+\]
+
+For example, if $\tilde{A} = a + ib$, then
+
+\[
+|\tilde{A}| = \sqrt{(a+ib)(a-ib)} = \sqrt{a^{2}-iab +iab -(i)^{2}b^{2}} = \sqrt{a^{2}+b^{2}}
+\]
+
+If a complex number has a complex denominator, the denominator can be rationalized in order to identify the real and imaginary parts of the complex number.  For example, suppose $\tilde{A}=\tilde{C}/\tilde{D}$; it may be multiplied by unity without changing its value,
+
+\[
+\tilde{A}=\frac{\tilde{C}}{\tilde{D}}\left( \frac{\tilde{D}^{*}}{\tilde{D}^{*}} \right) = \frac{\tilde{C}\tilde{D}^{*}}{|D|}
+\]
+
+Since $|D|$ is purely real, the denominator of $\tilde{A}$ is real, and then $\text{Re}(\tilde{A})=\frac{\text{Re}(CD^{*})}{|D|}$ and $\text{Im}(\tilde{A})=\frac{\text{Im}(CD^{*})}{|D|}$.  To be more specific, let $\tilde{A}=\frac{c_{R}+ic_{I}}{d_{R}+id_{I}}$, then rationalizing the denominator:
+
+\[
+\tilde{A}=\frac{c_{R}+ic_{I}}{d_{R}+id_{I}} \left( \frac{d_{R}-id_{I}}{d_{R}-id_{I}} \right) = \frac{c_{R}d_{R}-ic_{R}d_{I}+ic_{I}d_{R}+c_{I}d_{I} }{d_{R}^{2}+d_{I}^{2}}
+\]
+
+Now the real and imaginary parts can be identified:
+
+\begin{equation*}
+\begin{aligned}
+& Re(\tilde{A}) = \frac{ c_{R}d_{R}+c_{I}d_{I} }{ d_{R}^{2}+d_{I}^{2} } \\
+& Im(\tilde{A}) = \frac{ -c_{R}d_{I}+c_{I}d_{R} }{ d_{R}^{2}+d_{I}^{2} }
+\end{aligned}
+\end{equation*}
+
+A complex number may be represented as coordinates on a rectangular complex plane.  
+
+\begin{figure}[h]
+\centering
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.4\columnwidth]{complex_pic.png}
+\caption{\small A complex number $\tilde{A}$ represented in the complex plane.}
+\label{fig:complexplane}
+\end{figure}
+
+The real part of the complex number is the horizontal coordinate (along the real axis) and the imaginary part of the complex number is the vertical coordinate (along the imaginary axis).  If $\tilde{A}=a+ib$, then the coordinate pair $(a,b)$ is a rectrangular (`cartesian') representation of $\tilde{A}$.  There is also a `polar' representation, where $\tilde{A}$ is specified by its magnitude and phase $(r,\theta)$.
+
+\begin{equation*}
+\begin{aligned}
+& r = \sqrt{a^{2}+b^{2}} \\
+& \theta = \tan^{-1}{\left( \frac{b}{a} \right)}
+\end{aligned}
+\end{equation*}
+
+Or, going from the polar to rectangular representation,
+
+\begin{equation*}
+\begin{aligned}
+& a=r\cos{(\theta)} \\
+& b=r\sin{(\theta)}
+\end{aligned}
+\end{equation*}
+
+\subsection*{\color{myblue} Deriving Euler's formula}
+
+A function may also be complex.  In order to obtain the Euler relation, consider the function,
+\begin{equation}
+f=\cos{(\theta)} + i\sin{(\theta)}
+\label{eq:trig}
+\end{equation}
+
+Take the derivative of Eq.~\ref{eq:trig} with respect to $\theta$ as the starting point, 
+
+\begin{equation}
+\frac{df}{d\theta}=-\sin{(\theta)} + i\cos{(\theta)} = i\left[  i\sin{(\theta)} + \cos{(\theta)} \right] = if
+\label{eq:differentiated}
+\end{equation}
+
+Then putting $f$ on one side of the equation and $\theta$ on the other,
+\[
+\frac{df}{f} = id\theta
+\]
+
+Integrating,
+\begin{equation}
+\int \frac{df}{f} = i\int d\theta \hspace{.6in} \longrightarrow \hspace{.3in} ln{(f)} = i\theta + C
+\label{eq:integrated}
+\end{equation}
+
+The constant of integration, $C$, must be zero, by the following argument.  If $\theta=0$ in Eq.~\ref{eq:trig}, then  $f=1$.  Plugging this pair of independent and dependent variables, $\theta=0 \, \rightarrow f=1$ into Eq.~\ref{eq:integrated}, we see that $C$ must be zero for the equation to hold.  Now, using Eq.~\ref{eq:integrated}:
+
+\begin{equation}
+\begin{aligned}
+& \exp{(ln{(f)})} = \exp{(i\theta)} \\
+& f = \exp{(i\theta)}
+\label{eq:fagain}
+\end{aligned}
+\end{equation}
+
+Finally, combining Eq.~\ref{eq:trig} and Eq.~\ref{eq:fagain} results in Euler's relation:
+
+\tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation*}
+e^{(i\theta)} = \cos{(\theta)} + i\sin{(\theta)}
+  \end{empheq}
+
+
+\end{flushleft}
+\end{document}
+
+
+
+
+
+
+
+

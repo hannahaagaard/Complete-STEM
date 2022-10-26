@@ -1,0 +1,279 @@
+%%+++++++++++++++++++++++++++++++++++++%%
+%%         Final Version  6/14/95      %%
+%%+++++++++++++++++++++++++++++++++++++%%
+\documentclass[12pt]{article}
+\textheight = 8.6in
+\textwidth = 6.2in
+\topmargin = -.5in
+\oddsidemargin = 0.08in
+\evensidemargin = 0.08in
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\rfoot{\thepage}
+\setlength{\jot}{10.0 pt}
+\setlength{\parskip}{2.0ex}
+\setlength{\footskip}{65pt}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{empheq}
+\usepackage[most]{tcolorbox}
+\newtcbox{\mymath}[1][]{%
+    nobeforeafter, math upper, tcbox raise base,
+    enhanced, colframe=white!20!black ,
+    colback=blue!30!red!30!white, boxrule=1pt,
+    #1}
+\usepackage{xcolor}
+\definecolor{myblue}{RGB}{0, 0, 180}   %Numbers are integers from 0 to 255, smaller is closer to black
+
+
+\begin{document}
+
+\begin{flushright} {\color{blue} Chapter 2, Boundary Conditions} \end{flushright}
+\begin{flushleft}
+
+\subsubsection*{\bf Boundary Conditions (BC) for Electric fields}
+
+{\bf Some General Discussion to kick it off}
+
+An object with a volume charge density, $\rho$, does not have a discontinuity in the electric field at the boundary of the object, whereas an object with a surface charge density, $\sigma$, does have a field discontinuity. 
+
+Consider, for example, a sphere of radius $R$ with uniform charge density $\rho_{0}$.  Gauss' law says that the field inside the sphere is given by:
+\[
+\vec{E} = \frac{\rho_{0}r}{3\varepsilon_{0}} \, \hat{r} \hspace{2in} r<R
+\]
+While outside the sphere,
+\[
+\vec{E} = \frac{\rho_{0}R^{3}}{3\varepsilon_{0}r^{2}}  \, \hat{r} \hspace{2in} r>R
+\]
+At the boundary $r=R$ the above expressions for the field are the same; $\vec{E} = \frac{\rho_{0}R}{3\varepsilon_{0}} \, \hat{r}$.
+\vspace{.1in}
+
+\begin{figure}[h]
+\centering
+% L B R T
+\includegraphics*[trim=2cm 0cm 0cm 0cm, clip=true, width=0.5\columnwidth]{2Esphere_uniform.png}
+\caption{Sketch of the electric field versus radius for a uniformly charged sphere centered at the origin with radius $R=1$.  Note that there is no change in field amplitude at the edge of the sphere.  (Plotted with htpps://www.desmos.com/calculator)}
+\label{fig:uniformsphere}
+\end{figure} 
+
+On the other hand, a conducting sphere with surface charge density $\sigma$ and radius $R$ has no electric field inside; $E=0$ at $r<R$.
+
+While outside the sphere,
+\begin{equation}
+\vec{E} = \frac{ \sigma R^{2} }{\varepsilon_{0}r^{2}}  \, \hat{r} \hspace{2in} r>R
+\label{eq:condsphere}
+\end{equation}
+
+At the boundary $r=R$, there is a sudden change in the field amplitude as shown in Fig.\ref{fig:surfacecharge}.
+\vspace{.1in}
+
+\begin{figure}[h]
+\centering
+% L B R T
+\includegraphics*[trim=2cm 0cm 0cm 0cm, clip=true, width=0.5\columnwidth]{Esphere_surface.png}
+\caption{Sketch of the electric field versus radius for a conducting sphere centered at the origin with surface charge $\sigma$ and radius $R=1$.  Note that there is a discontinuity in field amplitude at the edge of the sphere.  (Plotted with htpps://www.desmos.com/calculator)}
+\label{fig:surfacecharge}
+\end{figure}
+
+\subsubsection*{\bf Derivation of Boundary Conditions}
+
+Electrostatic boundary conditions are the statement of how electric field components are related on either side of a boundary - that boundary being a surface with charge density $\sigma$.  The components of the field perpendicular to the surface, and the components of the field parallel to the surface are considered separately.  The Maxwell's equations for electrostatic fields are used to find the relationship between electric field components on either side of a boundary.
+
+\begin{eqnarray}
+\vec{\nabla} \cdot \vec{E} & = & \frac{\rho}{\varepsilon_{0}} \hspace{.8in}  {\color{myblue} \longrightarrow \hspace{.3in} \mbox{B.C. for $E_{\perp}$}} 
+\label{eq:dive}\\
+\vec{\nabla} \times \vec{E} &  = & 0 \hspace{.9in}  {\color{myblue} \longrightarrow \hspace{.3in} \mbox{B.C. for $E_{||}$}}
+\label{eq:curle}
+\end{eqnarray}
+
+\vspace{.2in}
+{\bf \color{myblue} BC for perpendicular components of the electrostatic field}
+
+The integral form of Eq.~\ref{eq:dive} (the divergence equation) is used to find the relationship between the perpendicular components of the field, $E_{\perp}$, on either side of a boundary (surface).  
+
+\begin{equation*}
+\oint_{S} \vec{E} \cdot d\vec{a} = \frac{q_{enc}}{\varepsilon_{0}} 
+\label{eq:gauss}
+\end{equation*}    
+
+Choose a pillbox straddling the surface, as shown in Fig.\ref{fig:pillbox}.  One end of the pillbox on one side of the boundary, and the other end of the pillbox on the other side.  The sides connecting the two ends are very short, so that the flux through these sides is negligible compared to the ends.
+\vspace{.2in}
+
+\begin{figure}[h]
+\centering
+% L B R T
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{Eperp_bc.pdf}
+\caption{Pillbox Gaussian surface straddling the boundary }
+\label{fig:pillbox}
+\end{figure}
+\vspace{.2in}
+
+Gauss' law for the pillbox shown in Fig.\ref{fig:pillbox} is as follows:
+
+\begin{equation*}
+\begin{aligned}
+& \oint_{S} \vec{E} \cdot d\vec{a} = \int_{end2} \vec{E} \cdot d\vec{a}+ \int_{end1} \vec{E} \cdot d\vec{a} = \frac{\sigma A}{\varepsilon_{0}} \\
+%& = E_{2_{\perp}} A - E_{1_{\perp}} A = 
+& (E_{2_{\perp}} - E_{1_{\perp}}) A  =\frac{\sigma A}{\varepsilon_{0}} 
+\end{aligned} 
+\end{equation*}
+
+where $A$ is the area of the ends of the pillbox, as well as the area of the enclosed surface.  Note that the sign difference of the terms is because $\vec{E}_{2_{\perp}}$ is parallel to $\hat{n}_{2}$, the unit vector for the area of endcap 2, while $\vec{E}_{1_{\perp}}$ is antiparallel to $\hat{n}_{1}$, the unit vector of endcap 1.  So, we have the boundary condition relating the perpendicular components of the electric field at a boundary:
+
+ \tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+E_{2_{\perp}} - E_{1_{\perp}} =\frac{\sigma }{\varepsilon_{0}}
+\label{eq:perp_bc}
+ \end{empheq}
+
+Equation \ref{eq:perp_bc} might seem a bit abstract, or even suspicious, so let's take a look at some specific cases; (1) the conducting sphere with surface charge density $\sigma$ previously discussed, (2) an infinite sheet with surface charge $\sigma$, and (3) an infinite charged sheet immersed in a uniform field $\vec{E}_{0}$.
+
+{\bf Conducting sphere}
+
+Let the inside of the conducting sphere be `side 1' of the boundary (surface of the sphere).  Inside the conducting sphere, the electric field is zero, $E_{1_{\perp}}=0$.  The field outside the surface of the conducting sphere `side 2', the field is given by Eq.~\ref{eq:condsphere}.  At the boundary $r=R$, this is:
+
+\begin{equation*}
+\vec{E}_{2_{\perp}} = \frac{ \sigma R^{2} }{\varepsilon_{0}r^{2}}  \, \hat{r} = \frac{ \sigma R^{2} }{\varepsilon_{0}R^{2}}  \, \hat{r} = \frac{\sigma}{\varepsilon_{0}} \hat{r}
+\end{equation*}
+
+Then, 
+
+\begin{equation*}
+E_{2_{\perp}} - E_{1_{\perp}} = \frac{\sigma}{\varepsilon_{0}} - 0 = \frac{\sigma}{\varepsilon_{0}}
+\end{equation*}
+
+{\bf Charged infinite sheet}
+
+A positively charged infinite sheet is depicted as a vertical line down the center of Fig.\ref{fig:sheet}.  The field lines (depicted with horizontal arrows) point away from the sheet on either side.
+
+\begin{figure}[h]
+\centering
+% L B R T
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.3\columnwidth]{sheet.pdf}
+\caption{\small Field lines of a positively charged infinite sheet, with a pillbox Gaussian surface.}
+\label{fig:sheet}
+\end{figure}
+
+It was found in the unit on Gauss' law that the field is given by,
+
+\begin{equation*}
+\vec{E} = \frac{ \sigma }{2\varepsilon_{0}} \, \hat{n}
+\end{equation*}
+
+where $\hat{n}$ is the direction pointing away from the sheet.  If the sheet lies in the $xz$ plane, then the field lines point in the $+\hat{y}$ direction on the right (side 2) of the sheet, and in the $-\hat{y}$ direction on the left (side 1) of the sheet.  Then,
+
+\begin{equation*}
+E_{2_{\perp}} - E_{1_{\perp}} = \frac{\sigma}{2\varepsilon_{0}} - \left( -\frac{\sigma}{2\varepsilon_{0}} \right) = \frac{\sigma}{\varepsilon_{0}}
+\end{equation*}
+
+Here $\Delta E = E_{2_{\perp}} - E_{1_{\perp}}$ is positive, as it must be, since the field on side 2 (as labeled) is more positive than it is on side 1.  If the labels had been reversed, then $\Delta E = E_{2_{\perp}} - E_{1_{\perp}}$ would have been negative; saying the field on side 2 is more negative than on side 1 - which would match the labeling.  The way the sides are labeled does not matter, but the sign of the result depends on the choice, as it must, for consistency.
+
+{\bf Charged infinite sheet in a uniform field}
+
+Now suppose the infinite sheet of the last example were immersed in a uniform field $E_{0} \,\hat{y}$.  By superposition, the field on the right side of the sheet (side 2) would be $E_{2_{\perp}} = E_{0} + \frac{\sigma}{2\varepsilon_{0}}$.  The field on the side 1 (left) would be $E_{1_{\perp}} = E_{0} - \frac{\sigma}{2\varepsilon_{0}}$.  Then,
+
+\begin{equation*}
+E_{2_{\perp}} - E_{1_{\perp}} = \left( E_{0} + \frac{\sigma}{2\varepsilon_{0}} \right) - \left( E_{0} -\frac{\sigma}{2\varepsilon_{0}} \right) = \frac{\sigma}{\varepsilon_{0}}
+\end{equation*}
+
+%  Parallel BC
+
+\vspace{.2in}
+{\bf \color{myblue} BC for parallel components of the electrostatic field}
+
+The integral form of Eq.~\ref{eq:curle} (the curl equation) is used to find the relationship between the parallel components of the field, $E_{||}$, on either side of a boundary (surface).  
+
+\begin{equation*}
+\oint \vec{E} \cdot d\vec{l} = 0
+\label{eq:loop}
+\end{equation*}    
+
+Choose a loop straddling the surface, as shown in Fig.\ref{fig:loop}.  One side of the loop is on side 2 and is parallel to the boundary, and another side of the loop is on the side 1 and is parallel to the boundary.  The perpendicular segments of the loop are very short, so that their contribution to the loop integral is negligible.     
+\vspace{.2in}
+
+\begin{figure}[h]
+\centering
+% L B R T
+\includegraphics*[trim=0cm 0cm 0cm 0cm, clip=true, width=0.6\columnwidth]{Epar_bc.pdf}
+\caption{Closed one-dimensional loop straddling a boundary.}
+\label{fig:loop}
+\end{figure}
+\vspace{.2in}
+
+Evaluating the line integral for the loop shown in Fig.\ref{fig:loop}:
+
+\begin{equation*}
+\begin{aligned}
+& \oint \vec{E} \cdot d\vec{l} = \int_{side2} \vec{E}_{2} \cdot d\vec{l}+ \int_{side1} \vec{E}_{1} \cdot d\vec{l} =  0 \\
+& (-E_{2_{||}} + E_{1_{||}})  \, L  = 0 
+\end{aligned} 
+\end{equation*}
+
+where $L$ is the length of the surface-parallel long sides of the loop.  Note that the sign difference of the terms is because $\vec{E}_{2_{||}}$ (the electric field on side 2) is antiparallel to the loop direction, while $\vec{E}_{1_{||}}$ (the electric field on side 1) is parallel to the loop direction.  So, we have the boundary condition relating the parallel components of the electric field at a boundary:
+
+ \tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+E_{2_{||}} = E_{1_{||}}
+\label{eq:par_bc}
+ \end{empheq}
+
+A boundary with a surface charge produces a discontinuity in the field perpendicular to the surface, but does not affect the field parallel to the surface.
+
+% Summary curl and div parallel and perp
+ 
+\vspace{.3in}
+{\bf \color{myblue} BC in terms of the potential}
+
+A boundary is very thin, $\Delta l \rightarrow 0$, where $\Delta l$ is the thickness of the boundary.  The change in potential is given by $\Delta V = - \int \vec{E} \cdot d\vec{l}$.  Since the distance traveled across the boundary is negligible, the potential does not change as the boundary is crossed, even if the electric field does change.  Therefore, the potential is continuous across a boundary:
+
+\tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+V_{2} = V_{1}
+\label{eq:pot_bc}
+ \end{empheq}
+
+The derivative of the potential is a different story, since it is related to the electric field:
+
+\begin{equation*}
+\vec{E} = -\vec{\nabla} V
+\label{eq:epot}
+\end{equation*}
+
+The gradient operator has three partial derivatives, one in each spatial direction.  There will be a term that is in the direction normal to the surface (in the $\hat{n}$ direction), having the same direction as $E_{\perp}$,
+
+\[
+E_{2_{\perp}} = - \hat{n} \frac{\partial V_{2}}{\partial n}
+\]
+
+The boundary condition for the components of the electric field perpendicular to the surface can be written in terms of the potential,
+
+\tcbset{highlight math style={,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation}
+\frac{\partial V_{2}}{\partial n} - \frac{\partial V_{1}}{\partial n} = -\frac{\sigma }{\varepsilon_{0}}
+\label{eq:perp_bc}
+ \end{empheq}
+
+\vspace{.3in}
+{\bf \color{myblue} Summary}
+
+Later on, we will want to get boundary conditions for magnetic field, boundary conditions in a useful form for  materials problems, and boundary conditions for electromagnetic fields.  In all of these cases, Maxwell's divergence equations (which in integral form have a flux integral) are used to find the boundary conditions for the perpendicular components of the fields, while Maxwell's curl equations (which in integral form have a line integral) are used to find the boundary conditions for the parallel components of the fields.  The flux through a closed surface is perpendicular to the surface, so a flux integral is just the thing to get at the perpendicular field component.  The line integral can be made to run parallel (and very close) to a surface, so it is ideal for selecting out the parallel component of the field.
+
+Re-capping the boundary conditions:
+
+\tcbset{highlight math style={colframe=myblue,colback=white}}
+\begin{empheq}[box=\tcbhighmath]{equation*}
+\begin{aligned}
+& E_{2_{\perp}} - E_{1_{\perp}} =\frac{\sigma }{\varepsilon_{0}} \\
+& E_{2_{||}} = E_{1_{||}} \\ 
+& V_{2} = V_{1} \\
+& \frac{\partial V_{2}}{\partial n} - \frac{\partial V_{1}}{\partial n} = -\frac{\sigma }{\varepsilon_{0}}
+\end{aligned}
+\label{eq:perp_bc}
+ \end{empheq}
+
+\end{flushleft}
+\end{document}
