@@ -1,5 +1,6 @@
--   Central Question: What are "decision systems" missing that make them generate inequality?
--   Thesis Statement: Interpretibility, Accountability, and Flexibility (with a need to talk about feasibility)
+[Paper link](https://docs.google.com/document/d/16FmNfpu750TW2R8w4cCcVPwLiAYjWfdTpj8k75o0MIw/edit)  
+- Central Question: What are "decision systems" missing that make them generate inequality?
+- Thesis Statement: Interpretibility, Accountability, and Flexibility (with a need to talk about feasibility)
 
 # Requirements
 - - - 
