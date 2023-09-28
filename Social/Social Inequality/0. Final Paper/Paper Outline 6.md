@@ -53,7 +53,7 @@ If you can't interpret a decision system's results and factors, it becomes much 
 - [[8. Racial Domination, Racial Progress|Racial Domination]]: I think this is where redlining was outlined pretty well so this should serve as an intro to redlining
 - [[6. The Meritocracy Myth|The Meritocracy Myth]]: Talk about how denials without reason can be ways of hiding discrimination and biased practices
 	- How moving into a neighborhood is still related to redlining (White flight)
-- [[17. Oppression|Oppresion]]: How systems like this can create barriers
+- [[17. Oppression|Oppression]]: How systems like this can create barriers
 - [[3. The Lottery|The Lottery]]: How without written meaning the importance can be lost with time and just "accepted"
 I vs F: ability to reason why a decision was made by a decision system vs needing to be able to handle anyone, an impossible task - from a software perspective, it is hard to make a system be able to process everything about everyone. Finite cutoffs beyond which they are unable to do something
 	redlining: direct, visible cause or factor in why or why not someone was able to move (I)
